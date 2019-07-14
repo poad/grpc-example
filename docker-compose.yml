@@ -1,0 +1,41 @@
+version: '3.7'
+services:
+  postgres:
+    build:
+      context: .
+      dockerfile: dockerfile/Dockerfile
+    container_name: postgres-grpc-example
+    environment: 
+      POSTGRES_PASSWORD: ""
+    ports:
+      - 5432:5432
+    networks:
+      - grpc-example-network
+  backend:
+    build:
+      context: ./rust-grpc-server
+      dockerfile: Dockerfile
+    container_name: rust-grpc-server
+    environment:
+      DATABASE_URL: "postgres://postgres@172.17.0.1/grpc_rust"
+      RUST_LOG: info
+    ports:
+      - 50051:50051
+    links:
+      - postgres
+    networks:
+      - grpc-example-network
+  frontend:
+    image: poad/java-grpc-example
+    container_name: java-grpc-example
+    environment:
+      GRPC_ENDPOINT: 172.17.0.1
+    ports:
+      - 8080:8080
+    networks:
+      - grpc-example-network
+networks:
+  grpc-example-network:
+  default:
+    external:
+      name: grpc-example-network
