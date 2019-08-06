@@ -12,7 +12,7 @@
     <java.version>11</java.version>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.source>${java.version}</maven.compiler.source>
-    <jib-maven-plugin.version>1.2.0</jib-maven-plugin.version>
+    <jib-maven-plugin.version>1.4.0</jib-maven-plugin.version>
   </properties>
 
   <repositories>
@@ -265,7 +265,7 @@
         <version>${jib-maven-plugin.version}</version>
         <configuration>
           <from>
-            <image>docker.io/poad/minimal-jdk:latest</image>
+            <image>docker.io/poad/minimal-openjdk-buildpack-deps:alpine-zulu</image>
           </from>
           <to>
             <image>docker.io/poad/java-grpc-example</image>
