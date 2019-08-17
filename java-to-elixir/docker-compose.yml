@@ -1,0 +1,44 @@
+version: '3.7'
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_DATABASE: test
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+      - ./mysql_ddl:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    networks:
+      - elixir-grpc-example-network
+  backend:
+    build:
+      context: ./grpc_server
+      dockerfile: Dockerfile
+    container_name: elixir-grpc-server
+    ports:
+      - 50050:50050
+      - 50051:50051
+      - 50052:50052
+    links:
+      - mysql
+    networks:
+      - elixir-grpc-example-network
+  frontend:
+    image: poad/java-elixir-grpc-example
+    container_name: java-elixir-grpc-example
+    environment:
+      GRPC_ENDPOINT: 172.17.0.1
+      HELLO_GRPC_ENDPOINT: 172.17.0.1
+      UUID_GRPC_ENDPOINT: 172.17.0.1
+    ports:
+      - 8080:8080
+    networks:
+      - elixir-grpc-example-network
+networks:
+  elixir-grpc-example-network:
+  default:
+    external:
+      name: elixir-grpc-example-network
