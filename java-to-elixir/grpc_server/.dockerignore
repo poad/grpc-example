@@ -1,0 +1,4 @@
+Dockerfile
+mix.lock
+_build
+deps
