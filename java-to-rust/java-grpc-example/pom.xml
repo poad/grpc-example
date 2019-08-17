@@ -12,7 +12,6 @@
     <java.version>11</java.version>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.source>${java.version}</maven.compiler.source>
-    <jib-maven-plugin.version>1.4.0</jib-maven-plugin.version>
   </properties>
 
   <repositories>
@@ -262,7 +261,6 @@
       <plugin>
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>jib-maven-plugin</artifactId>
-        <version>${jib-maven-plugin.version}</version>
         <configuration>
           <from>
             <image>docker.io/poad/minimal-openjdk-buildpack-deps:alpine-zulu</image>
@@ -279,25 +277,6 @@
           <allowInsecureRegistries>true</allowInsecureRegistries>
         </configuration>
       </plugin>
-
-<!--      <plugin>-->
-<!--        <groupId>org.apache.maven.plugins</groupId>-->
-<!--        <artifactId>maven-enforcer-plugin</artifactId>-->
-<!--        <executions>-->
-<!--          <execution>-->
-<!--            <id>enforce</id>-->
-<!--            <goals>-->
-<!--              <goal>enforce</goal>-->
-<!--            </goals>-->
-<!--            <configuration>-->
-<!--              <rules>-->
-<!--                <requireUpperBoundDeps/>-->
-<!--              </rules>-->
-<!--            </configuration>-->
-<!--          </execution>-->
-<!--        </executions>-->
-<!--      </plugin>-->
-
     </plugins>
   </build>
 
