@@ -1,0 +1,27 @@
+[package]
+name = "rust-api-server"
+version = "0.1.0"
+authors = ["Kenji Saito <ken-yo@mbr.nifty.com>"]
+edition = "2018"
+publish = false
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+grpcio = { version = "*", default-features = false, features = ["openssl", "protobuf-codec"] }
+grpcio-sys = "*"
+libc = "*"
+protobuf = "*"
+futures = "*"
+futures-cpupool = "*"
+prost = "*"
+bytes = "*"
+log = "*"
+env_logger = "*"
+ctrlc = "*"
+actix-web = "*"
+openssl = "*"
+openssl-sys = "*"
+serde = "*"
+serde_derive = "*"
+serde_json = "*"
