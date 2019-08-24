@@ -37,6 +37,11 @@ spring:
 spring:
   profiles: docker-compose
   datasource:
+    tomcat:
+      max-active: 100
+      initial-size: 10
+      test-on-borrow: true
+      validation-query: SELECT 1
     continue-on-error: true
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://172.17.0.1:3306/test
