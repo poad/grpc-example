@@ -15,6 +15,9 @@
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
+    <content url="file://$MODULE_DIR$/../proto">
+      <sourceFolder url="file://$MODULE_DIR$/../proto" type="java-resource" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: com.amazonaws:aws-xray-recorder-sdk-core:2.3.0" level="project" />
