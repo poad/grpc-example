@@ -29,7 +29,7 @@ mvn archetype:generate -B \
         -DarchetypeArtifactId=maven-archetype-quickstart \
         -DarchetypeVersion=1.1 \
         -DgroupId=com.github.poad.example \
-        -DartifactId=java-grpc-server \
+        -DartifactId=java-micronaut-grpc-server \
         -Dversion=1.0-SNAPSHOT \
         -Dpackage=com.github.poad.example.micronaut.grpc
 ```
@@ -37,8 +37,8 @@ mvn archetype:generate -B \
 ## Generate Code
 
 ```$bash
-protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-grpc-server/src/main/java --proto_path=./proto message.proto
-protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-grpc-server/src/main/java --proto_path=./proto hello.proto
+protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut-grpc-server/src/main/java --proto_path=./proto message.proto
+protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut-grpc-server/src/main/java --proto_path=./proto hello.proto
 ```
 
 ## MySQL
