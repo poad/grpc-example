@@ -38,7 +38,6 @@ com/github/poad/example/grpc/UUIDEntity$1.class
 com/github/poad/example/grpc/MessagesResponse.class
 com/github/poad/example/micronaut/grpc/entity/Message.class
 com/github/poad/example/grpc/UUIDGeneratorGrpc$UUIDGeneratorBlockingStub.class
-com/github/poad/example/grpc/UUIDGeneratorGrpc$1.class
 com/github/poad/example/grpc/UUIDGeneratorGrpc$UUIDGeneratorImplBase.class
 com/github/poad/example/grpc/UUIDGeneratorGrpc$UUIDGeneratorFileDescriptorSupplier.class
 com/github/poad/example/grpc/CountMessagesRequest.class
@@ -51,7 +50,6 @@ com/github/poad/example/grpc/UUIDGeneratorGrpc$UUIDGeneratorBaseDescriptorSuppli
 com/github/poad/example/grpc/HelloRequest$Builder.class
 com/github/poad/example/grpc/Hello.class
 com/github/poad/example/grpc/HelloReply$Builder.class
-com/github/poad/example/grpc/GreeterGrpc$1.class
 com/github/poad/example/micronaut/grpc/exception/NotFoundException.class
 com/github/poad/example/grpc/GetMessageRequest$1.class
 com/github/poad/example/grpc/GenerateUUIDRequestOrBuilder.class
@@ -87,5 +85,4 @@ com/github/poad/example/grpc/DeleteMessagesRequest$Builder.class
 com/github/poad/example/grpc/MessageCount$Builder.class
 com/github/poad/example/grpc/GreeterGrpc$GreeterFutureStub.class
 com/github/poad/example/grpc/MessengerGrpc$MessengerFutureStub.class
-com/github/poad/example/grpc/MessengerGrpc$1.class
 com/github/poad/example/grpc/MessageCountOrBuilder.class
