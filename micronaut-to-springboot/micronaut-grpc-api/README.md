@@ -1,4 +1,4 @@
-sdk i java 19.2.0-grl
+sdk i java 19.3.0-grl
 gu install native-image
 ./mvnw package
 native-image --no-server \

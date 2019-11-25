@@ -22,6 +22,14 @@
   </repositories>
   <dependencyManagement>
     <dependencies>
+      <!-- https://mvnrepository.com/artifact/io.netty/netty-bom -->
+      <dependency>
+        <groupId>io.netty</groupId>
+        <artifactId>netty-bom</artifactId>
+        <version>4.1.43.Final</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
       <dependency>
         <groupId>io.micronaut</groupId>
         <artifactId>micronaut-bom</artifactId>
@@ -73,14 +81,15 @@
       <artifactId>micronaut-http-server-netty</artifactId>
       <scope>compile</scope>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/io.grpc/grpc-api -->
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-all</artifactId>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.oracle.substratevm/svm -->
     <dependency>
       <groupId>com.oracle.substratevm</groupId>
       <artifactId>svm</artifactId>
+      <version>19.2.1</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
@@ -239,17 +248,14 @@
                   <path>
                     <groupId>io.micronaut</groupId>
                     <artifactId>micronaut-graal</artifactId>
-                    <version>${micronaut.version}</version>
                   </path>
                   <path>
                     <groupId>io.micronaut</groupId>
                     <artifactId>micronaut-inject-java</artifactId>
-                    <version>${micronaut.version}</version>
                   </path>
                   <path>
                     <groupId>io.micronaut</groupId>
                     <artifactId>micronaut-validation</artifactId>
-                    <version>${micronaut.version}</version>
                   </path>
             </annotationProcessorPaths>
           </configuration>
