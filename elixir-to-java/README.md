@@ -9,12 +9,12 @@ curl -s "https://get.sdkman.io" | bash
 
 ### Install OpenJDK
 ```$bash
-sdk i java 11.0.4-zulu
+sdk i java 11.0.5-zulu
 ```
 
 ### Install Apache Maven
 ```$bash
-sdk i maven 3.6.1
+sdk i maven 3.6.3
 ```
 
 ## create Java project

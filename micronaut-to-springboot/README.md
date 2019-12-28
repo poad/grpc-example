@@ -9,19 +9,19 @@ curl -s "https://get.sdkman.io" | bash
 
 ### Install OpenJDK
 ```$bash
-sdk i java 11.0.4-zulu
-sdk i java 8.0.222-zulu
-sdk i java 19.2.0-grl
+sdk i java 11.0.5-zulu
+sdk i java 8.0.232-zulu
+sdk i java 19.3.0.r11-grl
 ```
 
 ### Install Apache Maven
 ```$bash
-sdk i maven 3.6.1
+sdk i maven 3.6.3
 ```
 
 ## create Java project
 ```$bash
-sdk use java 19.2.0-grl
+sdk use java 19.3.0.r11-grl
 mn create-app micronaut-grpc-api --features graal-native-image --build maven
 
 mvn archetype:generate -B \
