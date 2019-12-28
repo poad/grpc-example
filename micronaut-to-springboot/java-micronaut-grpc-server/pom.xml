@@ -22,13 +22,6 @@
       <id>central</id>
       <url>http://central.maven.org/maven2/</url>
     </repository>
-
-    <!-- for grpc-spring-boot-starter -->
-    <repository>
-      <id>spring-plugin</id>
-      <name>Spring Plugins Repository</name>
-      <url>http://repo.spring.io/plugins-release/</url>
-    </repository>
   </repositories>
 
   <dependencyManagement>
@@ -84,7 +77,7 @@
       <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
-        <version>8.0.17</version>
+        <version>8.0.18</version>
       </dependency>
 
       <!-- https://mvnrepository.com/artifact/io.grpc/grpc-bom -->
@@ -109,7 +102,7 @@
       <dependency>
         <groupId>io.github.lognet</groupId>
         <artifactId>grpc-spring-boot-starter</artifactId>
-        <version>3.4.0</version>
+        <version>3.5.1</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -208,7 +201,7 @@
     <dependency>
       <groupId>org.powermock</groupId>
       <artifactId>powermock-api-mockito2</artifactId>
-      <version>2.0.2</version>
+      <version>2.0.4</version>
       <scope>test</scope>
     </dependency>
 
