@@ -3,22 +3,26 @@
 ## Install OpenJDK 11
 
 ### Install sdkman.io
-```$bash
-curl -s "https://get.sdkman.io" | bash
+
+```$sh
+curl -s "https://get.sdkman.io" | sh
 ```
 
 ### Install OpenJDK
-```$bash
+
+```$sh
 sdk i java 11.0.5-zulu
 ```
 
 ### Install Apache Maven
-```$bash
+
+```$sh
 sdk i maven 3.6.3
 ```
 
 ## create Java project
-```$bash
+
+```$sh
 mvn archetype:generate -B \
         -DarchetypeGroupId=org.apache.maven.archetypes \
         -DarchetypeArtifactId=maven-archetype-quickstart \
@@ -29,50 +33,61 @@ mvn archetype:generate -B \
         -Dpackage=com.github.poad.example.elixir.grpc
 ```
 
-```$bash
+```$sh
 brew install protobuf
 ```
 
 ## Install elixir
-https://elixir-lang.org/install.html
+
+<https://elixir-lang.org/install.html>
 
 ## create project
-```$bash
+
+```$sh
 mix phx.new elixir_api_server --no-ecto --no-html --no-webpack
 ```
 
 ## Install protobuf-elixir
-```$bash
+
+```$sh
 mix escript.install hex protobuf
 ```
 
 ## Generate Code
 
-```$bash
-protoc --elixir_out=plugins=grpc:./elixir_api_server/lib --java_out=./java-grpc-server/src/main/java --proto_path=./proto message.proto
-protoc --elixir_out=plugins=grpc:./elixir_api_server/lib --java_out=./java-grpc-server/src/main/java --proto_path=./proto hello.proto
+```$sh
+protoc --elixir_out=plugins=grpc:./elixir_api_server/lib --java_out=./java-grpc-elixir-server/src/main/java --proto_path=./proto message.proto
+protoc --elixir_out=plugins=grpc:./elixir_api_server/lib --java_out=./java-grpc-elixir-server/src/main/java --proto_path=./proto hello.proto
 ```
 
 ## MySQL
 
-```$bash
+```$sh
 docker run --name mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=test -it -d mysql:latest
 ```
 
-## Boot
-```$bash
-cd java-grpc-elixir-server
+## Run
+
+### docker-compose を使用しない場合
+
+```$sh
+cd java-grpc-elixir-server && \
 mvn spring-boot:run
-cd ../elixir_api_server
+```
+
+```$sh
+cd elixir_api_server && \
 mix phx.server
 ```
 
-## docker-compose を使用する場合
+### docker-compose を使用する場合
 
-```$bash
-cd java-grpc-elixir-server
-mvn clean install jib:dockerBuild
-cd ..
-docker-compose build
-docker-compose up -d
+```$sh
+cd java-grpc-elixir-server && \
+mvn clean install jib:dockerBuild && \
+cd .. && \
+docker-compose build && \
+docker-compose up -d mysql && \
+docker-compose up -d backend && \
+docker-compose up -d frontend
 ```

@@ -2,18 +2,22 @@ package micronaut.grpc.api.model;
 
 public class MessageModel {
     private final String id;
-    private final String mesasge;
+    private final String message;
 
-    public MessageModel(String id, String mesasge) {
+    public MessageModel() {
+        this(null, null);
+    }
+
+    public MessageModel(String id, String message) {
         this.id = id;
-        this.mesasge = mesasge;
+        this.message = message;
     }
 
     public String getId() {
         return id;
     }
 
-    public String getMesasge() {
-        return mesasge;
+    public String getMessage() {
+        return message;
     }
 }

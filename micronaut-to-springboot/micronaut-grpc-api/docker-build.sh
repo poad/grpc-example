@@ -1,6 +1,6 @@
 #!/bin/sh
 cd ..
-docker build --rm -m 6g . -f micronaut-grpc-api/Dockerfile -t micronaut-grpc-api && \
+docker build --rm -m 6g . -f micronaut-grpc-api/Dockerfile.native -t micronaut-grpc-api && \
 echo && \
 echo && \
 echo "To run the docker container execute:" && \

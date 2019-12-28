@@ -3,22 +3,26 @@
 ## Install OpenJDK 11
 
 ### Install sdkman.io
-```$bash
-curl -s "https://get.sdkman.io" | bash
+
+```$sh
+curl -s "https://get.sdkman.io" | sh
 ```
 
 ### Install OpenJDK
-```$bash
+
+```$sh
 sdk i java 11.0.5-zulu
 ```
 
 ### Install Apache Maven
-```$bash
+
+```$sh
 sdk i maven 3.6.3
 ```
 
 ## create Java project
-```$bash
+
+```$sh
 mvn archetype:generate -B \
         -DarchetypeGroupId=org.apache.maven.archetypes \
         -DarchetypeArtifactId=maven-archetype-quickstart \
@@ -30,49 +34,77 @@ mvn archetype:generate -B \
 ```
 
 ## Install elixir
-https://elixir-lang.org/install.html
+
+<https://elixir-lang.org/install.html>
 
 ## create project
-```$bash
+
+```$sh
 mix new grpc_server
 ```
 
 ## Install protobuf-elixir
-```$bash
+
+```$sh
 mix escript.install hex protobuf
 ```
 
 ## Generate Code
 
-```$bash
+```$sh
 protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java/src/main/java --proto_path=./proto message.proto
 protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java/src/main/java --proto_path=./proto hello.proto
 ```
 
-## MySQL
+## Run
 
-```$bash
+### docker-compose を使用しない場合
+
+#### MySQL
+
+```$sh
 docker run --name mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=test -it -d mysql:latest
 ```
 
-## migrate
-```$bash
-mix deps.get
-mix ecto.migrate
+#### migrate
+
+```$sh
+cd grpc_server && \
+mix deps.get && \
+mix ecto.migrate && \
+cd ..
 ```
 
-## Boot
-```$bash
+#### Boot
+
+```$sh
+cd grpc_server && \
 mix grpc.server
 ```
 
-## docker-compose を使用する場合
+```$sh
+cd elixir-grpc-java && \
+mvn spring-boot:run
+```
 
-```$bash
-cd elixir-grpc-java
-mvn clean install jib:dockerBuild
-cd ..
-docker-compose build
-docker-compose up -d
-docker exec -it -e MIX_ENV=prod elixir-grpc-server mix ecto.migrate
+### docker-compose を使用する場合
+
+```$sh
+cd elixir-grpc-java && \
+mvn clean install jib:dockerBuild && \
+cd .. && \
+docker-compose build && \
+docker-compose up -d mysql && \
+docker exec -it -e MIX_ENV=prod elixir-grpc-server mix ecto.migrate && \
+docker-compose up -d backend && \
+docker-compose up -d frontend
+```
+
+## その他
+
+mix を使ったパッケージのアップデート
+
+```$sh
+cd grpc_server && \
+mix deps.update --all mix.ex
 ```

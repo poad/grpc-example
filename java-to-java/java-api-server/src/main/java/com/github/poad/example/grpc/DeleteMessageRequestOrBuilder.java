@@ -9,10 +9,12 @@ public interface DeleteMessageRequestOrBuilder extends
 
   /**
    * <code>.message.UUIDEntity id = 1;</code>
+   * @return Whether the id field is set.
    */
   boolean hasId();
   /**
    * <code>.message.UUIDEntity id = 1;</code>
+   * @return The id.
    */
   com.github.poad.example.grpc.UUIDEntity getId();
   /**

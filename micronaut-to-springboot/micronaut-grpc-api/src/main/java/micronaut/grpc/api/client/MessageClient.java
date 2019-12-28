@@ -5,7 +5,6 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import micronaut.grpc.api.model.MessageModel;
 
-import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
@@ -13,7 +12,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Named
 @Singleton
 public class MessageClient {
     private final UUIDGeneratorGrpc.UUIDGeneratorBlockingStub uuidService;

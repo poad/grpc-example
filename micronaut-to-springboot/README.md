@@ -3,25 +3,26 @@
 ## Install OpenJDK 11
 
 ### Install sdkman.io
+
 ```$bash
 curl -s "https://get.sdkman.io" | bash
 ```
 
 ### Install OpenJDK
+
 ```$bash
 sdk i java 11.0.5-zulu
-sdk i java 8.0.232-zulu
-sdk i java 19.3.0.r11-grl
 ```
 
 ### Install Apache Maven
+
 ```$bash
 sdk i maven 3.6.3
 ```
 
 ## create Java project
+
 ```$bash
-sdk use java 19.3.0.r11-grl
 mn create-app micronaut-grpc-api --features graal-native-image --build maven
 
 mvn archetype:generate -B \
@@ -44,20 +45,17 @@ protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut
 ## MySQL
 
 ```$bash
-docker run --name mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=test -v "$(pwd)/mysql_ddl":/docker-entrypoint-initdb.d -it -d mysql:latest```
+docker run --name mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=test -v "$(pwd)/mysql_ddl":/docker-entrypoint-initdb.d -it -d mysql:latest
 ```
 
 ## docker-compose を使用する場合
 
 ```$bash
-cd micronaut-grpc-api
-./docker_build.sh
+cd java-micronaut-grpc-server && \
+mvn clean install jib:dockerBuild && \
 cd ..
-cd java-grpc-server
-mvn clean install jib:dockerBuild
-cd ..
-docker-compose build
-docker-compose up -d mysql
-docker-compose up -d backend
+docker-compose build && \
+docker-compose up -d mysql && \
+docker-compose up -d backend && \
 docker-compose up -d frontend
 ```

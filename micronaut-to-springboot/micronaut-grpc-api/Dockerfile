@@ -1,23 +1,16 @@
-FROM oracle/graalvm-ce:19.3.0-java11 as graalvm
+FROM mcr.microsoft.com/java/jdk:11u5-zulu-ubuntu AS build
 
-RUN gu install native-image
-COPY micronaut-grpc-api /home/app/micronaut-grpc-api
-COPY proto /home/app/proto
-WORKDIR /home/app/micronaut-grpc-api
+COPY micronaut-grpc-api /root/micronaut-grpc-api
+COPY proto /root/proto
+WORKDIR /root/micronaut-grpc-api
 RUN mkdir -p /tmp/condig
 RUN ./mvnw package
-RUN native-image --no-server \
-                #  --allow-incomplete-classpath \
-                 -H:+ReportExceptionStackTraces \
-                 -H:+TraceClassInitialization \
-                 --initialize-at-run-time=io.netty.handler.codec.http2.Http2CodecUtil \
-                 --initialize-at-run-time=io.netty.handler.ssl.JettyAlpnSslEngine$ServerEngine \
-                 -H:ConfigurationFileDirectories=/tmp/condig \
-                 -cp target/micronaut-grpc-api-0.1.jar
 
-FROM ubuntu:bionic
+FROM mcr.microsoft.com/java/jre-headless:11u5-zulu-alpine
 EXPOSE 8080
 
-COPY --from=graalvm /home/app/micronaut-grpc-api/micronaut-grpc-api .
-COPY --from=graalvm /tmp/condig .
-ENTRYPOINT ["./micronaut-grpc-api"]
+RUN mkdir -p /app
+WORKDIR /app
+COPY --from=build /root/micronaut-grpc-api/target/micronaut-grpc-api-0.1.jar .
+COPY --from=build /tmp/condig .
+ENTRYPOINT ["java", "-jar", "micronaut-grpc-api-0.1.jar"]

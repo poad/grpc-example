@@ -1,2 +1,6 @@
 server:
   port: ${port:8080}
+logging:
+  level:
+    root: warn
+    com.github.poad.example.grpc.client: info

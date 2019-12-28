@@ -10,8 +10,13 @@
 
   <properties>
     <java.version>11</java.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.source>${java.version}</maven.compiler.source>
+    <spring.boot.version>2.2.2.RELEASE</spring.boot.version>
+    <grpc.version>1.26.0</grpc.version>
+    <protobuf.version>3.11.1</protobuf.version>
+    <jib.plugin.version>1.8.0</jib.plugin.version>
   </properties>
 
   <repositories>
@@ -26,22 +31,40 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>RELEASE</version>
+        <version>${spring.boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+      <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-bom -->
+      <dependency>
+        <groupId>com.amazonaws</groupId>
+        <artifactId>aws-xray-recorder-sdk-bom</artifactId>
+        <version>2.4.0</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- https://mvnrepository.com/artifact/org.junit/junit-bom -->
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>RELEASE</version>
+        <version>5.5.2</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
+
+      <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+      <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>8.0.18</version>
+      </dependency>
+
       <!-- https://mvnrepository.com/artifact/io.grpc/grpc-bom -->
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-bom</artifactId>
-        <version>RELEASE</version>
+        <version>${grpc.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -50,26 +73,17 @@
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-bom</artifactId>
-        <version>RELEASE</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
-
-      <dependency>
-        <groupId>org.junit.vintage</groupId>
-        <artifactId>junit-vintage-engine</artifactId>
-        <version>RELEASE</version>
+        <version>3.11.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
 
       <!-- https://mvnrepository.com/artifact/org.lognet/grpc-spring-boot-starter -->
       <dependency>
-        <groupId>org.lognet</groupId>
+        <groupId>io.github.lognet</groupId>
         <artifactId>grpc-spring-boot-starter</artifactId>
-        <version>2.5.1</version>
+        <version>3.5.1</version>
       </dependency>
-
     </dependencies>
   </dependencyManagement>
 
@@ -109,13 +123,48 @@
           <artifactId>hibernate-core</artifactId>
         </exclusion>
         <exclusion>
-          <groupId>javax.transaction</groupId>
-          <artifactId>javax.transaction-api</artifactId>
+          <groupId>jakarta.transaction</groupId>
+          <artifactId>jakarta.transaction-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>jakarta.persistence</groupId>
+          <artifactId>jakarta.persistence-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>jakarta.activation</groupId>
+          <artifactId>jakarta.activation-api</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-orm</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>org.springframework</groupId>
+          <artifactId>spring-tx</artifactId>
         </exclusion>
       </exclusions>
     </dependency>
+
     <dependency>
-      <groupId>org.lognet</groupId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-jmx</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.micrometer</groupId>
+      <artifactId>micrometer-registry-cloudwatch</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.github.lognet</groupId>
       <artifactId>grpc-spring-boot-starter</artifactId>
       <exclusions>
         <exclusion>
@@ -185,7 +234,7 @@
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>2.2.2.RELEASE</version>
+          <version>${spring.boot.version}</version>
         </plugin>
 
         <plugin>
@@ -234,14 +283,33 @@
       </plugin>
 
       <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.0.0</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <source>${basedir}/gen/main/java</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
         <groupId>org.xolstice.maven.plugins</groupId>
         <artifactId>protobuf-maven-plugin</artifactId>
         <configuration>
           <protoSourceRoot>${basedir}/../proto</protoSourceRoot>
           <outputDirectory>${basedir}/gen/main/java</outputDirectory>
-          <protocArtifact>com.google.protobuf:protoc:3.11.2:exe:${os.detected.classifier}</protocArtifact>
+          <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
           <pluginId>grpc-java</pluginId>
-          <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.26.0:exe:${os.detected.classifier}</pluginArtifact>
+          <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
         </configuration>
         <executions>
           <execution>
@@ -256,20 +324,21 @@
       <plugin>
         <groupId>com.google.cloud.tools</groupId>
         <artifactId>jib-maven-plugin</artifactId>
+        <version>${jib.plugin.version}</version>
         <configuration>
           <from>
-            <image>docker.io/poad/minimal-openjdk-buildpack-deps:alpine-zulu</image>
+            <image>mcr.microsoft.com/java/jre-headless:11u5-zulu-alpine</image>
           </from>
           <to>
-            <image>docker.io/poad/java-grpc-example</image>
-            <credHelper>osxkeychain</credHelper>
+            <image>poad/java-grpc-example</image>
           </to>
           <container>
             <ports>
               <port>8080</port>
             </ports>
+            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
           </container>
-          <allowInsecureRegistries>true</allowInsecureRegistries>
+          <!-- <allowInsecureRegistries>true</allowInsecureRegistries> -->
         </configuration>
       </plugin>
     </plugins>

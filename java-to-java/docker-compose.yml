@@ -16,8 +16,6 @@ services:
   backend:
     image: poad/java-grpc-service-example
     container_name: java-grpc-service-example
-    environment:
-      GRPC_ENDPOINT: 172.17.0.1
     depends_on:
       - mysql
     ports:
@@ -30,7 +28,7 @@ services:
     image: poad/java-grpc-api-example
     container_name: java-grpc-api-example
     environment:
-      GRPC_ENDPOINT: 172.17.0.1
+      GRPC_ENDPOINT: backend
     depends_on:
       - backend
     ports:

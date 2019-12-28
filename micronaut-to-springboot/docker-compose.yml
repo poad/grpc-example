@@ -14,10 +14,8 @@ services:
     networks:
       - java-to-java-grpc-example-network
   backend:
-    image: poad/java-grpc-service-example
+    image: poad/java-micronaut-grpc-server
     container_name: java-grpc-service-example
-    environment:
-      GRPC_ENDPOINT: 172.17.0.1
     depends_on:
       - mysql
     ports:
@@ -27,10 +25,12 @@ services:
     networks:
       - java-to-java-grpc-example-network
   frontend:
-    image: poad/java-grpc-api-example
-    container_name: java-grpc-api-example
+    build:
+      context: .
+      dockerfile: micronaut-grpc-api/Dockerfile
+    container_name: micronaut-grpc-api
     environment:
-      GRPC_ENDPOINT: 172.17.0.1
+      GRPC_ENDPOINT: backend
     depends_on:
       - backend
     ports:

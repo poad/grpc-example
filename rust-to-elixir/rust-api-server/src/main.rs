@@ -20,6 +20,5 @@ fn main() {
     })
     .bind("0.0.0.0:8080")
     .expect("Can not bind to port 8080")
-    .run()
-    .unwrap();
+    .run();
 }

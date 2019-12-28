@@ -1,3 +1,8 @@
 spring:
   application:
     name: cloud-grpc-server
+logging:
+  level:
+    root: warn
+    com.github.poad.example.elixir.grpc.App: info
+    com.github.poad.example.elixir.grpc.client: info

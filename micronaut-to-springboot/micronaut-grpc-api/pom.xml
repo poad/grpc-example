@@ -13,6 +13,8 @@
     <exec.mainClass>micronaut.grpc.api.Application</exec.mainClass>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+    <grpc.version>1.26.0</grpc.version>
+    <protobuf.version>3.11.1</protobuf.version>
   </properties>
   <repositories>
     <repository>
@@ -26,7 +28,7 @@
       <dependency>
         <groupId>io.netty</groupId>
         <artifactId>netty-bom</artifactId>
-        <version>4.1.43.Final</version>
+        <version>4.1.44.Final</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -41,7 +43,7 @@
       <dependency>
         <groupId>io.grpc</groupId>
         <artifactId>grpc-bom</artifactId>
-        <version>RELEASE</version>
+        <version>${grpc.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -49,7 +51,7 @@
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-bom</artifactId>
-        <version>RELEASE</version>
+        <version>${protobuf.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -166,9 +168,9 @@
         <configuration>
           <protoSourceRoot>${basedir}/../proto</protoSourceRoot>
           <outputDirectory>${basedir}/gen/main/java</outputDirectory>
-          <protocArtifact>com.google.protobuf:protoc:3.11.2:exe:${os.detected.classifier}</protocArtifact>
+          <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
           <pluginId>grpc-java</pluginId>
-          <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.26.0:exe:${os.detected.classifier}</pluginArtifact>
+          <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
         </configuration>
         <executions>
           <execution>
@@ -186,9 +188,9 @@
         <configuration>
           <protoSourceRoot>${basedir}/../proto</protoSourceRoot>
           <outputDirectory>${basedir}/gen/main/java</outputDirectory>
-          <protocArtifact>com.google.protobuf:protoc:3.11.2:exe:${os.detected.classifier}</protocArtifact>
+          <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}</protocArtifact>
           <pluginId>grpc-java</pluginId>
-          <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.26.0:exe:${os.detected.classifier}</pluginArtifact>
+          <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}</pluginArtifact>
         </configuration>
         <executions>
           <execution>
@@ -245,18 +247,21 @@
               <arg>-parameters</arg>
             </compilerArgs>
             <annotationProcessorPaths>
-                  <path>
-                    <groupId>io.micronaut</groupId>
-                    <artifactId>micronaut-graal</artifactId>
-                  </path>
-                  <path>
-                    <groupId>io.micronaut</groupId>
-                    <artifactId>micronaut-inject-java</artifactId>
-                  </path>
-                  <path>
-                    <groupId>io.micronaut</groupId>
-                    <artifactId>micronaut-validation</artifactId>
-                  </path>
+              <path>
+                <groupId>io.micronaut</groupId>
+                <artifactId>micronaut-graal</artifactId>
+                <version>${micronaut.version}</version>
+              </path>
+              <path>
+                <groupId>io.micronaut</groupId>
+                <artifactId>micronaut-inject-java</artifactId>
+                <version>${micronaut.version}</version>
+              </path>
+              <path>
+                <groupId>io.micronaut</groupId>
+                <artifactId>micronaut-validation</artifactId>
+                <version>${micronaut.version}</version>
+              </path>
             </annotationProcessorPaths>
           </configuration>
           <executions>

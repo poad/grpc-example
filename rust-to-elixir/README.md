@@ -1,61 +1,77 @@
 # elixir-grpc-example
 
-```$bash
+```$sh
 brew install protobuf
 ```
 
-```$bash
+```$sh
 cargo install protobuf-codegen
 cargo install grpcio-compiler
 ```
 
-```$bash
+```$sh
 cargo new rust-api-server
 ```
 
 ## Install elixir
-https://elixir-lang.org/install.html
+
+<https://elixir-lang.org/install.html>
 
 ## create project
-```$bash
+
+```$sh
 mix new grpc_server
 ```
 
 ## Install protobuf-elixir
-```$bash
+
+```$sh
 mix escript.install hex protobuf
 ```
 
 ## Generate Code
 
-```$bash
-protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto message.proto
+```$sh
+protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto message.proto && \
 protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto hello.proto
 ```
 
-## MySQL
+## docker-compose を使用しない場合
 
-```$bash
+### MySQL
+
+```$sh
 docker run --name mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=test -it -d mysql:latest
 ```
 
-## migrate
-```$bash
-mix deps.get
-mix ecto.migrate
+### migrate
+
+```$sh
+cd grpc_server && \
+mix deps.get && \
+mix deps.update --all && \
+mix ecto.migrate && \
+cd ..
 ```
 
-## Boot
-```$bash
+### Boot
+
+```$sh
+cd grpc_server && \
 mix grpc.server
-cd ../rust-api-server
+```
+
+```$sh
+cd rust-api-server
 cargo run
 ```
 
 ## docker-compose を使用する場合
 
-```$bash
-docker-compose build
-docker-compose up -d
-docker exec -it -e MIX_ENV=prod elixir-grpc-server mix ecto.migrate
+```$sh
+docker-compose build && \
+docker-compose up -d mysql && \
+docker exec -it -e MIX_ENV=prod elixir-grpc-server mix ecto.migrate && \
+docker-compose up -d backend && \
+docker-compose up -d frontend
 ```

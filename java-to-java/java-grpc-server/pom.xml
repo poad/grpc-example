@@ -15,6 +15,8 @@
     <java.version>11</java.version>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven.compiler.source>${java.version}</maven.compiler.source>
+    <grpc.version>1.26.0</grpc.version>
+    <protobuf.version>3.11.1</protobuf.version>
   </properties>
 
   <repositories>
@@ -325,7 +327,7 @@
         <artifactId>jib-maven-plugin</artifactId>
         <configuration>
           <from>
-            <image>docker.io/poad/minimal-openjdk-buildpack-deps:alpine-zulu</image>
+            <image>mcr.microsoft.com/java/jre-headless:11u5-zulu-alpine</image>
           </from>
           <to>
             <image>docker.io/poad/java-grpc-service-example</image>

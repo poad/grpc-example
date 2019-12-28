@@ -97,12 +97,14 @@ private static final long serialVersionUID = 0L;
   private com.github.poad.example.grpc.UUIDEntity id_;
   /**
    * <code>.message.UUIDEntity id = 1;</code>
+   * @return Whether the id field is set.
    */
   public boolean hasId() {
     return id_ != null;
   }
   /**
    * <code>.message.UUIDEntity id = 1;</code>
+   * @return The id.
    */
   public com.github.poad.example.grpc.UUIDEntity getId() {
     return id_ == null ? com.github.poad.example.grpc.UUIDEntity.getDefaultInstance() : id_;
@@ -434,12 +436,14 @@ private static final long serialVersionUID = 0L;
         com.github.poad.example.grpc.UUIDEntity, com.github.poad.example.grpc.UUIDEntity.Builder, com.github.poad.example.grpc.UUIDEntityOrBuilder> idBuilder_;
     /**
      * <code>.message.UUIDEntity id = 1;</code>
+     * @return Whether the id field is set.
      */
     public boolean hasId() {
       return idBuilder_ != null || id_ != null;
     }
     /**
      * <code>.message.UUIDEntity id = 1;</code>
+     * @return The id.
      */
     public com.github.poad.example.grpc.UUIDEntity getId() {
       if (idBuilder_ == null) {

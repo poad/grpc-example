@@ -18,7 +18,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.23.0)",
+    value = "by gRPC proto compiler (version 1.26.0)",
     comments = "Source: message.proto")
 public final class UUIDGeneratorGrpc {
 
@@ -62,7 +62,14 @@ public final class UUIDGeneratorGrpc {
    * Creates a new async stub that supports all call types for the service
    */
   public static UUIDGeneratorStub newStub(io.grpc.Channel channel) {
-    return new UUIDGeneratorStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<UUIDGeneratorStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<UUIDGeneratorStub>() {
+        @java.lang.Override
+        public UUIDGeneratorStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new UUIDGeneratorStub(channel, callOptions);
+        }
+      };
+    return UUIDGeneratorStub.newStub(factory, channel);
   }
 
   /**
@@ -70,7 +77,14 @@ public final class UUIDGeneratorGrpc {
    */
   public static UUIDGeneratorBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new UUIDGeneratorBlockingStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<UUIDGeneratorBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<UUIDGeneratorBlockingStub>() {
+        @java.lang.Override
+        public UUIDGeneratorBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new UUIDGeneratorBlockingStub(channel, callOptions);
+        }
+      };
+    return UUIDGeneratorBlockingStub.newStub(factory, channel);
   }
 
   /**
@@ -78,7 +92,14 @@ public final class UUIDGeneratorGrpc {
    */
   public static UUIDGeneratorFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new UUIDGeneratorFutureStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<UUIDGeneratorFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<UUIDGeneratorFutureStub>() {
+        @java.lang.Override
+        public UUIDGeneratorFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new UUIDGeneratorFutureStub(channel, callOptions);
+        }
+      };
+    return UUIDGeneratorFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -107,19 +128,15 @@ public final class UUIDGeneratorGrpc {
 
   /**
    */
-  public static final class UUIDGeneratorStub extends io.grpc.stub.AbstractStub<UUIDGeneratorStub> {
-    private UUIDGeneratorStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private UUIDGeneratorStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class UUIDGeneratorStub extends io.grpc.stub.AbstractAsyncStub<UUIDGeneratorStub> {
+    private UUIDGeneratorStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected UUIDGeneratorStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected UUIDGeneratorStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new UUIDGeneratorStub(channel, callOptions);
     }
 
@@ -134,19 +151,15 @@ public final class UUIDGeneratorGrpc {
 
   /**
    */
-  public static final class UUIDGeneratorBlockingStub extends io.grpc.stub.AbstractStub<UUIDGeneratorBlockingStub> {
-    private UUIDGeneratorBlockingStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private UUIDGeneratorBlockingStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class UUIDGeneratorBlockingStub extends io.grpc.stub.AbstractBlockingStub<UUIDGeneratorBlockingStub> {
+    private UUIDGeneratorBlockingStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected UUIDGeneratorBlockingStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected UUIDGeneratorBlockingStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new UUIDGeneratorBlockingStub(channel, callOptions);
     }
 
@@ -160,19 +173,15 @@ public final class UUIDGeneratorGrpc {
 
   /**
    */
-  public static final class UUIDGeneratorFutureStub extends io.grpc.stub.AbstractStub<UUIDGeneratorFutureStub> {
-    private UUIDGeneratorFutureStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private UUIDGeneratorFutureStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class UUIDGeneratorFutureStub extends io.grpc.stub.AbstractFutureStub<UUIDGeneratorFutureStub> {
+    private UUIDGeneratorFutureStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected UUIDGeneratorFutureStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected UUIDGeneratorFutureStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new UUIDGeneratorFutureStub(channel, callOptions);
     }
 

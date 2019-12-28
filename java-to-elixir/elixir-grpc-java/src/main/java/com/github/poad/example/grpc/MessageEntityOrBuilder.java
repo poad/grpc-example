@@ -9,10 +9,12 @@ public interface MessageEntityOrBuilder extends
 
   /**
    * <code>.message.UUIDEntity id = 1;</code>
+   * @return Whether the id field is set.
    */
   boolean hasId();
   /**
    * <code>.message.UUIDEntity id = 1;</code>
+   * @return The id.
    */
   com.github.poad.example.grpc.UUIDEntity getId();
   /**
@@ -22,10 +24,12 @@ public interface MessageEntityOrBuilder extends
 
   /**
    * <code>string message = 2;</code>
+   * @return The message.
    */
   java.lang.String getMessage();
   /**
    * <code>string message = 2;</code>
+   * @return The bytes for message.
    */
   com.google.protobuf.ByteString
       getMessageBytes();
