@@ -32,11 +32,14 @@ services:
       dockerfile: Dockerfile
     container_name: rust-api-server
     environment:
-      GRPC_ENDPOINT: 172.17.0.1
-      HELLO_GRPC_ENDPOINT: 172.17.0.1
-      UUID_GRPC_ENDPOINT: 172.17.0.1
+      GRPC_ENDPOINT: backend
+      HELLO_GRPC_ENDPOINT: backend
+      UUID_GRPC_ENDPOINT: backend
+      RUST_BACKTRACE: full
     ports:
       - 8080:8080
+    links:
+      - backend  
     networks:
       - elixir-grpc-example-network
 networks:

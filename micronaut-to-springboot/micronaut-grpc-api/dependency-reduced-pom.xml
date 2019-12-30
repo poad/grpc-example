@@ -149,9 +149,9 @@
         <configuration>
           <protoSourceRoot>${basedir}/../proto</protoSourceRoot>
           <outputDirectory>${basedir}/gen/main/java</outputDirectory>
-          <protocArtifact>com.google.protobuf:protoc:3.9.1:exe:${os.detected.classifier}</protocArtifact>
+          <protocArtifact>com.google.protobuf:protoc:3.11.2:exe:${os.detected.classifier}</protocArtifact>
           <pluginId>grpc-java</pluginId>
-          <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.23.0:exe:${os.detected.classifier}</pluginArtifact>
+          <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.26.0:exe:${os.detected.classifier}</pluginArtifact>
         </configuration>
       </plugin>
       <plugin>
@@ -168,9 +168,9 @@
         <configuration>
           <protoSourceRoot>${basedir}/../proto</protoSourceRoot>
           <outputDirectory>${basedir}/gen/main/java</outputDirectory>
-          <protocArtifact>com.google.protobuf:protoc:3.9.1:exe:${os.detected.classifier}</protocArtifact>
+          <protocArtifact>com.google.protobuf:protoc:3.11.2:exe:${os.detected.classifier}</protocArtifact>
           <pluginId>grpc-java</pluginId>
-          <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.23.0:exe:${os.detected.classifier}</pluginArtifact>
+          <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.26.0:exe:${os.detected.classifier}</pluginArtifact>
         </configuration>
       </plugin>
     </plugins>
@@ -297,7 +297,7 @@
     </dependencies>
   </dependencyManagement>
   <properties>
-    <micronaut.version>1.2.6</micronaut.version>
+    <micronaut.version>1.2.8</micronaut.version>
     <maven.compiler.target>${jdk.version}</maven.compiler.target>
     <exec.mainClass>micronaut.grpc.api.Application</exec.mainClass>
     <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>

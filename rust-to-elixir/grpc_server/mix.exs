@@ -23,9 +23,10 @@ defmodule GrpcServer.MixProject do
   defp deps do
     [
       {:grpc, github: "elixir-grpc/grpc"},
-      {:protobuf, github: "tony612/protobuf-elixir", override: true},
-      {:ecto_sql, ">= 3.1.6"},
-      {:myxql, ">= 0.2.6"},
+      {:protobuf, ">= 0.7.0"},
+      {:google_protos, "~> 0.1"},
+      {:ecto_sql, ">= 3.3.1"},
+      {:myxql, ">= 0.3.0"},
       {:ex_doc, "~> 0.19", only: :dev, runtime: false},
       {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
     ]

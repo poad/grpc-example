@@ -44,7 +44,7 @@ spring:
       validation-query: SELECT 1
     continue-on-error: true
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://172.17.0.1:3306/test
+    url: jdbc:mysql://mysql:3306/test
     username: root
     password: ""
     type: org.apache.tomcat.jdbc.pool.DataSource

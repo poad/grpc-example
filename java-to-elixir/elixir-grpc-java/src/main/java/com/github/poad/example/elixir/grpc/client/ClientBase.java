@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.TimeUnit;
 
 public abstract class ClientBase {
-    private static final Logger logger = LoggerFactory.getLogger(ClientBase.class);
+    private static final Logger logger = LoggerFactory.getLogger(ClientBase.class.getPackageName());
 
     protected final ManagedChannel channel;
 

@@ -18,6 +18,7 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public <S extends MessageEntity> S save(S s) {
         return (S) client.putMessage(s);
     }

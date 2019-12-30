@@ -42,7 +42,8 @@ public class App extends SpringBootServletInitializer implements HealthIndicator
 
     @Bean(name={"uuid"})
     public EndpointConfig uuidGRpcEndpoint() {
-        String endpoint = System.getProperty("UUID_GRPC_ENDPOINT", "127.0.0.1");
+        Map<String, String> env = System.getenv();
+        String endpoint = env.getOrDefault("UUID_GRPC_ENDPOINT", "127.0.0.1");
         int port = Optional.ofNullable(System.getenv("UUID_GRPC_ENDPOINT_PORT"))
                 .map(Integer::valueOf).orElse(50052);
         return new EndpointConfig(endpoint, port);

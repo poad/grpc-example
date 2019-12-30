@@ -9,6 +9,8 @@ defmodule ElixirApiServerWeb.MessageModel do
     else
       endpoint
     end
+    Logger.info("connect to #{endpoint}:50051")
+
     {:ok, channel} = GRPC.Stub.connect("#{endpoint}:50051")
     request = Message.GetMessagesRequest.new()
     {:ok, reply} = channel |> Message.Messenger.Stub.list_messages(request)
@@ -22,6 +24,8 @@ defmodule ElixirApiServerWeb.MessageModel do
     else
       endpoint
     end
+    Logger.info("connect to #{endpoint}:50051")
+
     {:ok, channel} = GRPC.Stub.connect("#{endpoint}:50051")
     request = Message.GetMessageRequest.new(id: Message.UUIDEntity.new(value: id))
     {:ok, reply} = channel |> Message.Messenger.Stub.get_message(request)
@@ -35,6 +39,8 @@ defmodule ElixirApiServerWeb.MessageModel do
     else
       endpoint
     end
+    Logger.info("connect to #{endpoint}:50051")
+
     {:ok, channel} = GRPC.Stub.connect("#{endpoint}:50051")
     request = Message.GenerateUUIDRequest.new()
     {:ok, reply} = channel |> Message.UUIDGenerator.Stub.generate_uuid(request)
@@ -51,6 +57,8 @@ defmodule ElixirApiServerWeb.MessageModel do
     else
       endpoint
     end
+    Logger.info("connect to #{endpoint}:50051")
+
     uuid = Message.UUIDEntity.new(value: id)
     {:ok, channel} = GRPC.Stub.connect("#{endpoint}:50051")
     {:ok, _reply} = channel |> Message.Messenger.Stub.get_message(Message.GetMessageRequest.new(id: uuid))
@@ -66,6 +74,8 @@ defmodule ElixirApiServerWeb.MessageModel do
     else
       endpoint
     end
+    Logger.info("connect to #{endpoint}:50051")
+
     {:ok, channel} = GRPC.Stub.connect("#{endpoint}:50051")
     request = Message.DeleteMessageRequest.new(id: Message.UUIDEntity.new(value: id))
     {:ok, _reply} = channel |> Message.Messenger.Stub.delete_message(request)
@@ -78,6 +88,8 @@ defmodule ElixirApiServerWeb.MessageModel do
     else
       endpoint
     end
+    Logger.info("connect to #{endpoint}:50051")
+
     {:ok, channel} = GRPC.Stub.connect("#{endpoint}:50051")
     request = Message.DeleteMessagesRequest.new()
     {:ok, _reply} = channel |> Message.Messenger.Stub.delete_messages(request)

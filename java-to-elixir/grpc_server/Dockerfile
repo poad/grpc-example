@@ -14,6 +14,7 @@ WORKDIR /root/app
 RUN mix local.hex --force \
  && mix local.rebar --force \
  && mix deps.get \
+ && mix deps.update --all \
  && MIX_ENV=prod mix compile
 
 ENV MIX_ENV=prod

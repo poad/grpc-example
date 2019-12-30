@@ -9,17 +9,17 @@ publish = false
 
 [dependencies]
 grpcio = { version = "*", default-features = false, features = ["openssl", "protobuf-codec"] }
-grpcio-sys = "*"
+#grpcio-sys = "*"
 libc = "*"
 protobuf = "*"
-futures = "*"
+futures = "^0.1"
 futures-cpupool = "*"
 prost = "*"
 bytes = "*"
 log = "*"
 env_logger = "*"
 ctrlc = "*"
-actix-web = "*"
+actix-web = "^1.0"
 openssl = "*"
 openssl-sys = "*"
 serde = "*"

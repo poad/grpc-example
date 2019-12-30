@@ -89,6 +89,7 @@ private static final long serialVersionUID = 0L;
   private long count_;
   /**
    * <code>int64 count = 1;</code>
+   * @return The count.
    */
   public long getCount() {
     return count_;
@@ -400,12 +401,15 @@ private static final long serialVersionUID = 0L;
     private long count_ ;
     /**
      * <code>int64 count = 1;</code>
+     * @return The count.
      */
     public long getCount() {
       return count_;
     }
     /**
      * <code>int64 count = 1;</code>
+     * @param value The count to set.
+     * @return This builder for chaining.
      */
     public Builder setCount(long value) {
       
@@ -415,6 +419,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>int64 count = 1;</code>
+     * @return This builder for chaining.
      */
     public Builder clearCount() {
       

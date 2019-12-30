@@ -17,7 +17,7 @@ services:
       dockerfile: Dockerfile
     container_name: rust-grpc-server
     environment:
-      DATABASE_URL: "postgres://postgres@172.17.0.1/grpc_rust"
+      DATABASE_URL: "postgres://postgres@postgres/grpc_rust"
       RUST_LOG: info
     ports:
       - 50051:50051
@@ -29,9 +29,12 @@ services:
     image: poad/java-grpc-example
     container_name: java-grpc-example
     environment:
-      GRPC_ENDPOINT: 172.17.0.1
+      GRPC_ENDPOINT: backend
+      RUST_BACKTRACE: full
     ports:
       - 8080:8080
+    links:
+      - backend  
     networks:
       - grpc-example-network
 networks:

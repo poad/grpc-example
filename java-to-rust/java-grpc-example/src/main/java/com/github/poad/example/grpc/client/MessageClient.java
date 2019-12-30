@@ -2,7 +2,8 @@ package com.github.poad.example.grpc.client;
 
 import com.github.poad.example.grpc.*;
 import com.github.poad.example.grpc.client.config.EndpointConfig;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -14,12 +15,15 @@ import java.util.concurrent.TimeUnit;
 @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
 @Component
 public class MessageClient extends ClientBase {
+    private static final Logger logger = LogManager.getLogger(MessageClient.class.getPackageName());
+
     private final MessengerGrpc.MessengerBlockingStub messageService;
     private final UUIDGeneratorGrpc.UUIDGeneratorBlockingStub uuidService;
 
-    public MessageClient(@Autowired EndpointConfig config) {
+    public MessageClient(EndpointConfig config) {
         super(config.getHost(), config.getPort());
 
+        logger.info("gRPC Server: " + config.getHost() + " [" + config.getPort() + "]");
         messageService = MessengerGrpc.newBlockingStub(channel);
         uuidService = UUIDGeneratorGrpc.newBlockingStub(channel);
 

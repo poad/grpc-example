@@ -32,17 +32,16 @@ defmodule ElixirApiServer.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.4.9"},
+      {:phoenix, "~> 1.4.11"},
       {:phoenix_pubsub, "~> 1.1"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:cowboy, github: "elixir-grpc/cowboy", override: true},
-      {:cowlib, github: "elixir-grpc/cowlib", override: true},
-#      {:cowboy, "~> 2.5", override: true},
-#      {:cowlib, "~> 2.7.3", override: true},
+#      {:cowboy, github: "elixir-grpc/cowboy", override: true},
+#      {:cowlib, github: "elixir-grpc/cowlib", override: true},
       {:grpc, github: "elixir-grpc/grpc"},
-      {:protobuf, github: "tony612/protobuf-elixir", override: true},
+      {:protobuf, "~> 0.7.0"},
+      {:google_protos, "~> 0.1"},
     ]
   end
 end

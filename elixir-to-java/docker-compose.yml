@@ -16,8 +16,6 @@ services:
   backend:
     image: poad/java-grpc-elixir-service-example
     container_name: java-grpc-elixir-service-example
-    environment:
-      GRPC_ENDPOINT: 172.17.0.1
     depends_on:
       - mysql
     ports:
@@ -32,9 +30,11 @@ services:
       dockerfile: Dockerfile
     container_name: elixir_api_server
     environment:
-      GRPC_ENDPOINT: 172.17.0.1
+      GRPC_ENDPOINT: backend
     ports:
       - 8000:8000
+    links:
+      - backend
     networks:
       - elixir-grpc-example-network
 networks:

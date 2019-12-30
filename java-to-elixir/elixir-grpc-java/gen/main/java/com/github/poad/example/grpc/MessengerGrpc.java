@@ -18,7 +18,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.22.1)",
+    value = "by gRPC proto compiler (version 1.26.0)",
     comments = "Source: message.proto")
 public final class MessengerGrpc {
 
@@ -41,22 +41,21 @@ public final class MessengerGrpc {
     if ((getGetMessageMethod = MessengerGrpc.getGetMessageMethod) == null) {
       synchronized (MessengerGrpc.class) {
         if ((getGetMessageMethod = MessengerGrpc.getGetMessageMethod) == null) {
-          MessengerGrpc.getGetMessageMethod = getGetMessageMethod = 
+          MessengerGrpc.getGetMessageMethod = getGetMessageMethod =
               io.grpc.MethodDescriptor.<com.github.poad.example.grpc.GetMessageRequest, com.github.poad.example.grpc.MessageEntity>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "message.Messenger", "GetMessage"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "GetMessage"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.GetMessageRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.MessageEntity.getDefaultInstance()))
-                  .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("GetMessage"))
-                  .build();
-          }
+              .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("GetMessage"))
+              .build();
         }
-     }
-     return getGetMessageMethod;
+      }
+    }
+    return getGetMessageMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.github.poad.example.grpc.GetMessagesRequest,
@@ -73,22 +72,21 @@ public final class MessengerGrpc {
     if ((getListMessagesMethod = MessengerGrpc.getListMessagesMethod) == null) {
       synchronized (MessengerGrpc.class) {
         if ((getListMessagesMethod = MessengerGrpc.getListMessagesMethod) == null) {
-          MessengerGrpc.getListMessagesMethod = getListMessagesMethod = 
+          MessengerGrpc.getListMessagesMethod = getListMessagesMethod =
               io.grpc.MethodDescriptor.<com.github.poad.example.grpc.GetMessagesRequest, com.github.poad.example.grpc.MessagesResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "message.Messenger", "ListMessages"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "ListMessages"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.GetMessagesRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.MessagesResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("ListMessages"))
-                  .build();
-          }
+              .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("ListMessages"))
+              .build();
         }
-     }
-     return getListMessagesMethod;
+      }
+    }
+    return getListMessagesMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.github.poad.example.grpc.MessageEntity,
@@ -105,22 +103,21 @@ public final class MessengerGrpc {
     if ((getPutMessageMethod = MessengerGrpc.getPutMessageMethod) == null) {
       synchronized (MessengerGrpc.class) {
         if ((getPutMessageMethod = MessengerGrpc.getPutMessageMethod) == null) {
-          MessengerGrpc.getPutMessageMethod = getPutMessageMethod = 
+          MessengerGrpc.getPutMessageMethod = getPutMessageMethod =
               io.grpc.MethodDescriptor.<com.github.poad.example.grpc.MessageEntity, com.github.poad.example.grpc.MessageEntity>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "message.Messenger", "PutMessage"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "PutMessage"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.MessageEntity.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.MessageEntity.getDefaultInstance()))
-                  .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("PutMessage"))
-                  .build();
-          }
+              .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("PutMessage"))
+              .build();
         }
-     }
-     return getPutMessageMethod;
+      }
+    }
+    return getPutMessageMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.github.poad.example.grpc.DeleteMessageRequest,
@@ -137,22 +134,21 @@ public final class MessengerGrpc {
     if ((getDeleteMessageMethod = MessengerGrpc.getDeleteMessageMethod) == null) {
       synchronized (MessengerGrpc.class) {
         if ((getDeleteMessageMethod = MessengerGrpc.getDeleteMessageMethod) == null) {
-          MessengerGrpc.getDeleteMessageMethod = getDeleteMessageMethod = 
+          MessengerGrpc.getDeleteMessageMethod = getDeleteMessageMethod =
               io.grpc.MethodDescriptor.<com.github.poad.example.grpc.DeleteMessageRequest, com.github.poad.example.grpc.MessageEntity>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "message.Messenger", "DeleteMessage"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeleteMessage"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.DeleteMessageRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.MessageEntity.getDefaultInstance()))
-                  .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("DeleteMessage"))
-                  .build();
-          }
+              .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("DeleteMessage"))
+              .build();
         }
-     }
-     return getDeleteMessageMethod;
+      }
+    }
+    return getDeleteMessageMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.github.poad.example.grpc.DeleteMessagesRequest,
@@ -169,22 +165,21 @@ public final class MessengerGrpc {
     if ((getDeleteMessagesMethod = MessengerGrpc.getDeleteMessagesMethod) == null) {
       synchronized (MessengerGrpc.class) {
         if ((getDeleteMessagesMethod = MessengerGrpc.getDeleteMessagesMethod) == null) {
-          MessengerGrpc.getDeleteMessagesMethod = getDeleteMessagesMethod = 
+          MessengerGrpc.getDeleteMessagesMethod = getDeleteMessagesMethod =
               io.grpc.MethodDescriptor.<com.github.poad.example.grpc.DeleteMessagesRequest, com.github.poad.example.grpc.DeleteMessagesResponse>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "message.Messenger", "DeleteMessages"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "DeleteMessages"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.DeleteMessagesRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.DeleteMessagesResponse.getDefaultInstance()))
-                  .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("DeleteMessages"))
-                  .build();
-          }
+              .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("DeleteMessages"))
+              .build();
         }
-     }
-     return getDeleteMessagesMethod;
+      }
+    }
+    return getDeleteMessagesMethod;
   }
 
   private static volatile io.grpc.MethodDescriptor<com.github.poad.example.grpc.CountMessagesRequest,
@@ -201,29 +196,35 @@ public final class MessengerGrpc {
     if ((getCountMessagesMethod = MessengerGrpc.getCountMessagesMethod) == null) {
       synchronized (MessengerGrpc.class) {
         if ((getCountMessagesMethod = MessengerGrpc.getCountMessagesMethod) == null) {
-          MessengerGrpc.getCountMessagesMethod = getCountMessagesMethod = 
+          MessengerGrpc.getCountMessagesMethod = getCountMessagesMethod =
               io.grpc.MethodDescriptor.<com.github.poad.example.grpc.CountMessagesRequest, com.github.poad.example.grpc.MessageCount>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
-              .setFullMethodName(generateFullMethodName(
-                  "message.Messenger", "CountMessages"))
+              .setFullMethodName(generateFullMethodName(SERVICE_NAME, "CountMessages"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.CountMessagesRequest.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
                   com.github.poad.example.grpc.MessageCount.getDefaultInstance()))
-                  .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("CountMessages"))
-                  .build();
-          }
+              .setSchemaDescriptor(new MessengerMethodDescriptorSupplier("CountMessages"))
+              .build();
         }
-     }
-     return getCountMessagesMethod;
+      }
+    }
+    return getCountMessagesMethod;
   }
 
   /**
    * Creates a new async stub that supports all call types for the service
    */
   public static MessengerStub newStub(io.grpc.Channel channel) {
-    return new MessengerStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<MessengerStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<MessengerStub>() {
+        @java.lang.Override
+        public MessengerStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new MessengerStub(channel, callOptions);
+        }
+      };
+    return MessengerStub.newStub(factory, channel);
   }
 
   /**
@@ -231,7 +232,14 @@ public final class MessengerGrpc {
    */
   public static MessengerBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new MessengerBlockingStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<MessengerBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<MessengerBlockingStub>() {
+        @java.lang.Override
+        public MessengerBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new MessengerBlockingStub(channel, callOptions);
+        }
+      };
+    return MessengerBlockingStub.newStub(factory, channel);
   }
 
   /**
@@ -239,7 +247,14 @@ public final class MessengerGrpc {
    */
   public static MessengerFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new MessengerFutureStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<MessengerFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<MessengerFutureStub>() {
+        @java.lang.Override
+        public MessengerFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new MessengerFutureStub(channel, callOptions);
+        }
+      };
+    return MessengerFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -338,19 +353,15 @@ public final class MessengerGrpc {
 
   /**
    */
-  public static final class MessengerStub extends io.grpc.stub.AbstractStub<MessengerStub> {
-    private MessengerStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private MessengerStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class MessengerStub extends io.grpc.stub.AbstractAsyncStub<MessengerStub> {
+    private MessengerStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected MessengerStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected MessengerStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new MessengerStub(channel, callOptions);
     }
 
@@ -405,19 +416,15 @@ public final class MessengerGrpc {
 
   /**
    */
-  public static final class MessengerBlockingStub extends io.grpc.stub.AbstractStub<MessengerBlockingStub> {
-    private MessengerBlockingStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private MessengerBlockingStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class MessengerBlockingStub extends io.grpc.stub.AbstractBlockingStub<MessengerBlockingStub> {
+    private MessengerBlockingStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected MessengerBlockingStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected MessengerBlockingStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new MessengerBlockingStub(channel, callOptions);
     }
 
@@ -466,19 +473,15 @@ public final class MessengerGrpc {
 
   /**
    */
-  public static final class MessengerFutureStub extends io.grpc.stub.AbstractStub<MessengerFutureStub> {
-    private MessengerFutureStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private MessengerFutureStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class MessengerFutureStub extends io.grpc.stub.AbstractFutureStub<MessengerFutureStub> {
+    private MessengerFutureStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected MessengerFutureStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected MessengerFutureStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new MessengerFutureStub(channel, callOptions);
     }
 

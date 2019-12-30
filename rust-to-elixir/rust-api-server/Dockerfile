@@ -1,39 +1,26 @@
-FROM rust:slim
+FROM buildpack-deps:stable-curl AS download
 
-RUN apt update -qq \
- && apt full-upgrade -qqy \
- && apt install -qqy --no-install-recommends \
-         autoconf \
-         automake \
-         libtool \
-         curl \
-         make \
-         pkg-config \
-         g++ \
-         unzip \
-         git \
-         cmake \
-         golang \
-         libssl-dev
+WORKDIR /tmp
 
-RUN git clone https://github.com/google/protobuf.git \
- && cd protobuf \
- && git checkout v3.8.0 \
- && git submodule update --init --recursive \
- && ./autogen.sh \
- && ./configure --prefix=/usr \
- && make \
- && make check \
- && make install \
- && ldconfig
+RUN curl -sSLo /tmp/llvm-snapshot.gpg.key https://apt.llvm.org/llvm-snapshot.gpg.key
+
+FROM poad/docker-programming-lang-envs:rust-protocol-buffers AS build
+
+WORKDIR /root
 
 COPY src /root/rust-api-server/src
 COPY Cargo.lock /root/rust-api-server/Cargo.lock
 COPY Cargo.toml /root/rust-api-server/Cargo.toml
-#COPY .env /root/rust-api-server/.env
 
 WORKDIR /root/rust-api-server/
 
 RUN cargo build --release
+
+FROM rust:slim
+
+
+COPY --from=build /root/rust-api-server/target/release/rust-api-server /root/rust-api-server/target/release/rust-api-server
+
+WORKDIR /root
 
 CMD ["/root/rust-api-server/target/release/rust-api-server"]

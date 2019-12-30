@@ -20,6 +20,13 @@ private static final long serialVersionUID = 0L;
   }
 
   @java.lang.Override
+  @SuppressWarnings({"unused"})
+  protected java.lang.Object newInstance(
+      UnusedPrivateParameter unused) {
+    return new MessageEntity();
+  }
+
+  @java.lang.Override
   public final com.google.protobuf.UnknownFieldSet
   getUnknownFields() {
     return this.unknownFields;
@@ -32,7 +39,6 @@ private static final long serialVersionUID = 0L;
     if (extensionRegistry == null) {
       throw new java.lang.NullPointerException();
     }
-    int mutable_bitField0_ = 0;
     com.google.protobuf.UnknownFieldSet.Builder unknownFields =
         com.google.protobuf.UnknownFieldSet.newBuilder();
     try {
@@ -98,12 +104,14 @@ private static final long serialVersionUID = 0L;
   private com.github.poad.example.grpc.UUIDEntity id_;
   /**
    * <code>.message.UUIDEntity id = 1;</code>
+   * @return Whether the id field is set.
    */
   public boolean hasId() {
     return id_ != null;
   }
   /**
    * <code>.message.UUIDEntity id = 1;</code>
+   * @return The id.
    */
   public com.github.poad.example.grpc.UUIDEntity getId() {
     return id_ == null ? com.github.poad.example.grpc.UUIDEntity.getDefaultInstance() : id_;
@@ -119,6 +127,7 @@ private static final long serialVersionUID = 0L;
   private volatile java.lang.Object message_;
   /**
    * <code>string message = 2;</code>
+   * @return The message.
    */
   public java.lang.String getMessage() {
     java.lang.Object ref = message_;
@@ -134,6 +143,7 @@ private static final long serialVersionUID = 0L;
   }
   /**
    * <code>string message = 2;</code>
+   * @return The bytes for message.
    */
   public com.google.protobuf.ByteString
       getMessageBytes() {
@@ -486,12 +496,14 @@ private static final long serialVersionUID = 0L;
         com.github.poad.example.grpc.UUIDEntity, com.github.poad.example.grpc.UUIDEntity.Builder, com.github.poad.example.grpc.UUIDEntityOrBuilder> idBuilder_;
     /**
      * <code>.message.UUIDEntity id = 1;</code>
+     * @return Whether the id field is set.
      */
     public boolean hasId() {
       return idBuilder_ != null || id_ != null;
     }
     /**
      * <code>.message.UUIDEntity id = 1;</code>
+     * @return The id.
      */
     public com.github.poad.example.grpc.UUIDEntity getId() {
       if (idBuilder_ == null) {
@@ -601,6 +613,7 @@ private static final long serialVersionUID = 0L;
     private java.lang.Object message_ = "";
     /**
      * <code>string message = 2;</code>
+     * @return The message.
      */
     public java.lang.String getMessage() {
       java.lang.Object ref = message_;
@@ -616,6 +629,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>string message = 2;</code>
+     * @return The bytes for message.
      */
     public com.google.protobuf.ByteString
         getMessageBytes() {
@@ -632,6 +646,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>string message = 2;</code>
+     * @param value The message to set.
+     * @return This builder for chaining.
      */
     public Builder setMessage(
         java.lang.String value) {
@@ -645,6 +661,7 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>string message = 2;</code>
+     * @return This builder for chaining.
      */
     public Builder clearMessage() {
       
@@ -654,6 +671,8 @@ private static final long serialVersionUID = 0L;
     }
     /**
      * <code>string message = 2;</code>
+     * @param value The bytes for message to set.
+     * @return This builder for chaining.
      */
     public Builder setMessageBytes(
         com.google.protobuf.ByteString value) {

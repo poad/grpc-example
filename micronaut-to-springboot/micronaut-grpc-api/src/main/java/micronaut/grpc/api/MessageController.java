@@ -15,8 +15,12 @@ import java.util.List;
 @Controller("/message")
 public class MessageController {
 
-    @Inject
     private MessageClient client;
+
+    @Inject
+    public MessageController(MessageClient client) {
+        this.client = client;
+    }
 
     @Get
     public List<MessageModel> list() {
@@ -30,12 +34,12 @@ public class MessageController {
 
     @Post(consumes = MediaType.APPLICATION_JSON)
     public MessageModel create(@Body @NotNull MessageModel message) {
-        return client.create(message.getMesasge());
+        return client.create(message.getMessage());
     }
 
     @Put(value = "/{id}", consumes = MediaType.APPLICATION_JSON)
     public MessageModel update(String id, @Body @NotNull MessageModel message) {
-        return client.update(id, message.getMesasge());
+        return client.update(id, message.getMessage());
     }
 
     @Delete(value = "/{id}")
