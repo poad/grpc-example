@@ -285,7 +285,7 @@
             <image>mcr.microsoft.com/java/jre-headless:11u5-zulu-alpine</image>
           </from>
           <to>
-            <image>docker.io/poad/java-grpc-api-example</image>
+            <image>poad/java-grpc-api-example</image>
             <credHelper>osxkeychain</credHelper>
           </to>
           <container>
