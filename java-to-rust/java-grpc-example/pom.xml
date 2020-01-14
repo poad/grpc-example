@@ -327,7 +327,7 @@
         <version>${jib.plugin.version}</version>
         <configuration>
           <from>
-            <image>mcr.microsoft.com/java/jre-headless:11u5-zulu-alpine</image>
+            <image>mcr.microsoft.com/java/jre-headless:11u6-zulu-alpine</image>
           </from>
           <to>
             <image>poad/java-grpc-example</image>
