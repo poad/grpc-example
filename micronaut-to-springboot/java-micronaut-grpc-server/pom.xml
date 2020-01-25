@@ -17,6 +17,10 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <grpc.version>1.26.0</grpc.version>
     <protobuf.version>3.11.1</protobuf.version>
+    <spring.boot.version>2.2.4.RELEASE</spring.boot.version>
+    <x-ray.version>2.4.0</x-ray.version>
+    <junit.version>5.6.0</junit.version>
+    <spring.boot.grpc.version>3.5.1</spring.boot.grpc.version>
   </properties>
 
   <repositories>
@@ -31,7 +35,7 @@
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-dependencies</artifactId>
-        <version>2.2.2.RELEASE</version>
+        <version>${spring.boot.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -40,7 +44,7 @@
       <dependency>
         <groupId>com.amazonaws</groupId>
         <artifactId>aws-xray-recorder-sdk-bom</artifactId>
-        <version>2.4.0</version>
+        <version>${x-ray.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -48,7 +52,7 @@
       <dependency>
         <groupId>org.junit</groupId>
         <artifactId>junit-bom</artifactId>
-        <version>5.5.2</version>
+        <version>${junit.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -73,7 +77,7 @@
       <dependency>
         <groupId>com.google.protobuf</groupId>
         <artifactId>protobuf-bom</artifactId>
-        <version>3.11.1</version>
+        <version>${protobuf.version}</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -82,7 +86,7 @@
       <dependency>
         <groupId>io.github.lognet</groupId>
         <artifactId>grpc-spring-boot-starter</artifactId>
-        <version>3.5.1</version>
+        <version>${spring.boot.grpc.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -305,7 +309,7 @@
         <artifactId>jib-maven-plugin</artifactId>
         <configuration>
           <from>
-            <image>mcr.microsoft.com/java/jre-headless:11u6-zulu-alpine</image>
+            <image>mcr.microsoft.com/java/jre-headless:11-zulu-alpine</image>
           </from>
           <to>
             <image>poad/java-micronaut-grpc-server</image>
