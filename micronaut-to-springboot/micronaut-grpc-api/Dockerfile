@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/java/jdk:11u6-zulu-ubuntu AS build
+FROM mcr.microsoft.com/java/jdk:11-zulu-ubuntu AS build
 
 COPY micronaut-grpc-api /root/micronaut-grpc-api
 COPY proto /root/proto
@@ -6,7 +6,7 @@ WORKDIR /root/micronaut-grpc-api
 RUN mkdir -p /tmp/condig
 RUN ./mvnw package
 
-FROM mcr.microsoft.com/java/jre-headless:11u6-zulu-alpine
+FROM mcr.microsoft.com/java/jre-headless:11-zulu-alpine
 EXPOSE 8080
 
 RUN mkdir -p /app
