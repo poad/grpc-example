@@ -15,7 +15,7 @@ RUN native-image --no-server \
                  -H:ConfigurationFileDirectories=/tmp/condig \
                  -cp target/micronaut-grpc-api-0.1.jar
 
-FROM ubuntu:bionic
+FROM ubuntu:focal
 EXPOSE 8080
 
 COPY --from=graalvm /home/app/micronaut-grpc-api/micronaut-grpc-api .
