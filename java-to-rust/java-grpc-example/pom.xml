@@ -17,7 +17,7 @@
     <protobuf.version>3.11.4</protobuf.version>
     <jib.plugin.version>2.2.0</jib.plugin.version>
     <protobuf.version>3.11.4</protobuf.version>
-    <spring.boot.version>2.2.7.RELEASE</spring.boot.version>
+    <spring.boot.version>2.3.0.RELEASE</spring.boot.version>
     <x-ray.version>2.4.0</x-ray.version>
     <junit.version>5.6.2</junit.version>
     <spring.boot.grpc.version>3.5.3</spring.boot.grpc.version>
@@ -102,6 +102,12 @@
         </exclusion>
       </exclusions>
     </dependency>
+
+    <dependency>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+    </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-log4j2</artifactId>
