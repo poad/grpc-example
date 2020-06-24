@@ -91,7 +91,7 @@ mvn spring-boot:run
 
 ```$sh
 cd elixir-grpc-java && \
-mvn clean install jib:dockerBuild && \
+mvn clean install spring-boot:build-image && \
 cd .. && \
 docker-compose build && \
 docker-compose up -d mysql && \

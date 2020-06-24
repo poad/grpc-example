@@ -52,7 +52,7 @@ docker run --name mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_
 
 ```$bash
 cd java-micronaut-grpc-server && \
-mvn clean install jib:dockerBuild && \
+mvn clean install spring-boot:build-image && \
 cd ..
 docker-compose build && \
 docker-compose up -d mysql && \

@@ -23,7 +23,7 @@ protoc --rust_out=./rust-grpc-server/src/ --grpc_out=./rust-grpc-server/src/ --p
 
 ```$
 cd java-grpc-example && \
-./mvnw jib:dockerBuild && \
+./mvnw spring-boot:build-image && \
 cd .. && \
 docker-compose build
 ```

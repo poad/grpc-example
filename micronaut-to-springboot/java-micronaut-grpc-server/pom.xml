@@ -307,32 +307,10 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-
-      <plugin>
-        <groupId>com.google.cloud.tools</groupId>
-        <artifactId>jib-maven-plugin</artifactId>
         <configuration>
-          <from>
-            <image>mcr.microsoft.com/java/jre-headless:11-zulu-alpine</image>
-          </from>
-          <to>
-            <image>poad/java-micronaut-grpc-server</image>
-            <credHelper>osxkeychain</credHelper>
-          </to>
-          <container>
-            <useCurrentTimestamp>true</useCurrentTimestamp>
-            <ports>
-              <port>8089</port>
-            </ports>
-            <!-- springのプロファイルとかはここで渡す -->
-            <jvmFlags>
-              <jvmFlag>-Dadd-opens=java.base/java.lang=ALL-UNNAMED</jvmFlag>
-              <jvmFlag>-Dadd-opens=java.base/java.lang.invoke=ALL-UNNAMED</jvmFlag>
-              <jvmFlag>-Dspring.profiles.active=docker-compose</jvmFlag>
-            </jvmFlags>
-          </container>
-          <allowInsecureRegistries>true</allowInsecureRegistries>
+          <image>
+            <name>poad/java-micronaut-grpc-server</name>
+          </image>
         </configuration>
       </plugin>
     </plugins>
