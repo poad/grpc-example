@@ -33,6 +33,7 @@ services:
       GRPC_ENDPOINT: backend
       HELLO_GRPC_ENDPOINT: backend
       UUID_GRPC_ENDPOINT: backend
+      SPRING_PROFILES_ACTIVE: docker-compose
     ports:
       - 8080:8080
     links:

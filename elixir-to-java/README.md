@@ -84,7 +84,7 @@ mix phx.server
 
 ```$sh
 cd java-grpc-elixir-server && \
-mvn clean install jib:dockerBuild && \
+mvn clean install spring-boot:build-image && \
 cd .. && \
 docker-compose build && \
 docker-compose up -d mysql && \

@@ -73,10 +73,10 @@ mvn spring-boot:run
 
 ```$sh
 cd java-api-server && \
-mvn clean install jib:dockerBuild && \
+mvn clean install spring-boot:build-image && \
 cd .. && \
 cd java-grpc-server && \
-mvn clean install jib:dockerBuild && \
+mvn clean install spring-boot:build-image && \
 cd .. && \
 docker-compose build && \
 docker-compose up -d mysql && \

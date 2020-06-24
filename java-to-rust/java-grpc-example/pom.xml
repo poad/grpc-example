@@ -15,8 +15,6 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <grpc.version>1.30.0</grpc.version>
     <protobuf.version>3.12.2</protobuf.version>
-    <jib.plugin.version>2.4.0</jib.plugin.version>
-    <protobuf.version>3.12.2</protobuf.version>
     <spring.boot.version>2.3.1.RELEASE</spring.boot.version>
     <x-ray.version>2.4.0</x-ray.version>
     <junit.version>5.6.2</junit.version>
@@ -276,11 +274,6 @@
       </plugin>
 
       <plugin>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-maven-plugin</artifactId>
-      </plugin>
-
-      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
@@ -332,23 +325,12 @@
       </plugin>
 
       <plugin>
-        <groupId>com.google.cloud.tools</groupId>
-        <artifactId>jib-maven-plugin</artifactId>
-        <version>${jib.plugin.version}</version>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
         <configuration>
-          <from>
-            <image>mcr.microsoft.com/java/jre-headless:11-zulu-alpine</image>
-          </from>
-          <to>
-            <image>poad/java-grpc-example</image>
-          </to>
-          <container>
-            <ports>
-              <port>8080</port>
-            </ports>
-            <creationTime>USE_CURRENT_TIMESTAMP</creationTime>
-          </container>
-          <!-- <allowInsecureRegistries>true</allowInsecureRegistries> -->
+          <image>
+            <name>poad/java-grpc-example</name>
+          </image>
         </configuration>
       </plugin>
     </plugins>

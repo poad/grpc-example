@@ -16,6 +16,8 @@ services:
   backend:
     image: poad/java-grpc-service-example
     container_name: java-grpc-service-example
+    entrypoint: 
+      SPRING_PROFILES_ACTIVE: docker-compose
     depends_on:
       - mysql
     ports:
