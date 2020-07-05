@@ -4,7 +4,7 @@ WORKDIR /tmp
 
 RUN curl -sSLo /tmp/llvm-snapshot.gpg.key https://apt.llvm.org/llvm-snapshot.gpg.key
 
-FROM poad/docker-programming-lang-envs:rust-protocol-buffers AS build
+FROM poad/docker-programming-lang-envs:grpc AS build
 
 WORKDIR /root
 
