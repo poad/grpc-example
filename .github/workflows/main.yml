@@ -1,0 +1,74 @@
+name: Build test
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: poad/docker-grpc:slim
+    strategy:
+      matrix:
+        targets: [
+          # {
+          #   dir: 'elixir-to-java',
+          #   gen: [
+          #     'protoc --elixir_out=plugins=grpc:./elixir_api_server/lib --java_out=./java-grpc-elixir-server/src/main/java --proto_path=./proto message.proto',
+          #     'protoc --elixir_out=plugins=grpc:./elixir_api_server/lib --java_out=./java-grpc-elixir-server/src/main/java --proto_path=./proto hello.proto'
+          #   ],
+          #   build: [ 'cd java-grpc-elixir-server && mvn clean install spring-boot:build-image', 'docker-compose build' ]
+          # },
+          # {
+          #   dir: 'java-to-elixir',
+          #   gen: [
+          #     'protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java/src/main/java --proto_path=./proto message.proto',
+          #     'protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java/src/main/java --proto_path=./proto hello.proto'
+          #   ],
+          #   build: [ 'cd elixir-grpc-java && mvn clean install spring-boot:build-image', 'docker-compose build' ]
+          # },
+          # {
+          #   dir: 'java-to-java',
+          #   gen: [
+          #     'protoc --java_out=./java-api-server/src/main/java --java_out=./java-grpc-server/src/main/java --proto_path=./proto message.proto'
+          #     'protoc --java_out=./java-api-server/src/main/java --java_out=./java-grpc-server/src/main/java --proto_path=./proto hello.proto'
+          #   ],
+          #   build: [ 'cd java-api-server && mvn clean install spring-boot:build-image', 'cd java-grpc-server && mvn clean install spring-boot:build-image' ]
+          # },
+          {
+            dir: 'java-to-rust',
+            gen: [
+              'protoc --rust_out=./rust-grpc-server/src/ --grpc_out=./rust-grpc-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --java_out=./ java-grpc-example/src/main/java --proto_path=./proto message.proto',
+              'protoc --rust_out=./rust-grpc-server/src/ --grpc_out=./rust-grpc-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --java_out=./java-grpc-example/src/main/java --proto_path=./proto hello.proto'
+            ],
+            build: [ 'cd java-grpc-example && ./mvnw spring-boot:build-image', 'docker-compose build' ]
+          },
+          # {
+          #   dir: 'micronaut-to-springboot',
+          #   gen: [
+          #     'protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut-grpc-server/src/main/java --proto_path=./proto message.proto',
+          #     'protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut-grpc-server/src/main/java --proto_path=./proto hello.proto'
+          #   ],
+          #   build: [ 'cd java-micronaut-grpc-server && mvn spring-boot:build-image', 'docker-compose build' ]
+          # },
+          {
+            dir: 'rust-to-elixir',
+            gen: [
+              'protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto message.proto',
+              'protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto hello.proto'
+            ],
+            build: [ 'docker-compose build', 'echo ""' ]
+          }
+        ]
+    steps:
+    - uses: actions/checkout@master
+    - run: |
+        CUR=$(pwd) && \
+        cd ${{ matrix.targets.dir }} && \
+        ${{ matrix.targets.gen[0] }} && \
+        ${{ matrix.targets.gen[1] }} && \
+        ${{ matrix.targets.build[0] }} && \
+        cd .. && \
+        ${{ matrix.targets.build[1] }} && \
+        cd ${CUR}

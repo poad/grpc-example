@@ -11,7 +11,7 @@ curl -s "https://get.sdkman.io" | sh
 ### Install OpenJDK
 
 ```$sh
-sdk i java 11.0.5-zulu
+sdk i java 11.0.7-zulu
 ```
 
 ### Install Apache Maven
