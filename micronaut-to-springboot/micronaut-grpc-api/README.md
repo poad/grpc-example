@@ -1,6 +1,6 @@
 # How to build
 
-sdk i java 19.3.0.r11-grl
+sdk i java 20.1.0.r11-grl
 gu install native-image
 ./mvnw package
 native-image --no-server \

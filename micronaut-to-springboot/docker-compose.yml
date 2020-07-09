@@ -1,4 +1,4 @@
-version: '3.7'
+version: '3.8'
 services:
   mysql:
     image: mysql:latest
@@ -16,7 +16,7 @@ services:
   backend:
     image: poad/java-micronaut-grpc-server
     container_name: java-grpc-service-example
-    entrypoint:
+    environment:
       SPRING_PROFILES_ACTIVE: docker-compose
     depends_on:
       - mysql

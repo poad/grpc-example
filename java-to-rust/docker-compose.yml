@@ -25,6 +25,7 @@ services:
       - postgres
     networks:
       - grpc-example-network
+
   frontend:
     image: poad/java-grpc-example
     container_name: java-grpc-example
