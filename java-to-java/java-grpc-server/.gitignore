@@ -99,3 +99,5 @@ fabric.properties
 
 /java-grpc-server.iml
 /target/
+
+!.mvn/wrapper/maven-wrapper.jar

@@ -16,17 +16,9 @@
     <grpc.version>1.30.0</grpc.version>
     <protobuf.version>3.12.2</protobuf.version>
     <spring.boot.version>2.3.1.RELEASE</spring.boot.version>
-    <x-ray.version>2.4.0</x-ray.version>
     <junit.version>5.6.2</junit.version>
     <spring.boot.grpc.version>3.5.5</spring.boot.grpc.version>
   </properties>
-
-  <repositories>
-    <repository>
-      <id>central</id>
-      <url>http://central.maven.org/maven2/</url>
-    </repository>
-  </repositories>
 
   <dependencyManagement>
     <dependencies>
@@ -38,14 +30,6 @@
         <scope>import</scope>
       </dependency>
 
-      <!-- https://mvnrepository.com/artifact/com.amazonaws/aws-xray-recorder-sdk-bom -->
-      <dependency>
-        <groupId>com.amazonaws</groupId>
-        <artifactId>aws-xray-recorder-sdk-bom</artifactId>
-        <version>${x-ray.version}</version>
-        <type>pom</type>
-        <scope>import</scope>
-      </dependency>
       <!-- https://mvnrepository.com/artifact/org.junit/junit-bom -->
       <dependency>
         <groupId>org.junit</groupId>
@@ -232,6 +216,12 @@
   <build>
     <pluginManagement>
       <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${spring.boot.version}</version>
+        </plugin>
+
         <plugin>
           <groupId>kr.motd.maven</groupId>
           <artifactId>os-maven-plugin</artifactId>

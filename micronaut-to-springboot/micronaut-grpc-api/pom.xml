@@ -13,22 +13,17 @@
     <exec.mainClass>micronaut.grpc.api.Application</exec.mainClass>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-    <grpc.version>1.30.0</grpc.version>
+    <grpc.version>1.30.2</grpc.version>
     <protobuf.version>3.12.2</protobuf.version>
   </properties>
-  <repositories>
-    <repository>
-      <id>jcenter.bintray.com</id>
-      <url>https://jcenter.bintray.com</url>
-    </repository>
-  </repositories>
+
   <dependencyManagement>
     <dependencies>
       <!-- https://mvnrepository.com/artifact/io.netty/netty-bom -->
       <dependency>
         <groupId>io.netty</groupId>
         <artifactId>netty-bom</artifactId>
-        <version>4.1.50.Final</version>
+        <version>4.1.51.Final</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -86,6 +81,12 @@
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-all</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>io.grpc</groupId>
+          <artifactId>grpc-rls</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <!-- https://mvnrepository.com/artifact/com.oracle.substratevm/svm -->
     <dependency>
@@ -247,11 +248,11 @@
               <arg>-parameters</arg>
             </compilerArgs>
             <annotationProcessorPaths>
-              <path>
+              <!-- <path>
                 <groupId>io.micronaut</groupId>
                 <artifactId>micronaut-graal</artifactId>
                 <version>${micronaut.version}</version>
-              </path>
+              </path> -->
               <path>
                 <groupId>io.micronaut</groupId>
                 <artifactId>micronaut-inject-java</artifactId>

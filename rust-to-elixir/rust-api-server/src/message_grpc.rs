@@ -52,7 +52,7 @@ impl UuidGeneratorClient {
     pub fn generate_uuid_async(&self, req: &super::message::GenerateUUIDRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::message::UUIDEntity>> {
         self.generate_uuid_async_opt(req, ::grpcio::CallOption::default())
     }
-    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Item = (), Error = ()> + Send + 'static {
+    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Output = ()> + Send + 'static {
         self.client.spawn(f)
     }
 }
@@ -63,7 +63,7 @@ pub trait UuidGenerator {
 
 pub fn create_uuid_generator<S: UuidGenerator + Send + Clone + 'static>(s: S) -> ::grpcio::Service {
     let mut builder = ::grpcio::ServiceBuilder::new();
-    let mut instance = s.clone();
+    let mut instance = s;
     builder = builder.add_unary_handler(&METHOD_UUID_GENERATOR_GENERATE_UUID, move |ctx, req, resp| {
         instance.generate_uuid(ctx, req, resp)
     });
@@ -219,7 +219,7 @@ impl MessengerClient {
     pub fn count_messages_async(&self, req: &super::message::CountMessagesRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::message::MessageCount>> {
         self.count_messages_async_opt(req, ::grpcio::CallOption::default())
     }
-    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Item = (), Error = ()> + Send + 'static {
+    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Output = ()> + Send + 'static {
         self.client.spawn(f)
     }
 }
@@ -255,7 +255,7 @@ pub fn create_messenger<S: Messenger + Send + Clone + 'static>(s: S) -> ::grpcio
     builder = builder.add_unary_handler(&METHOD_MESSENGER_DELETE_MESSAGES, move |ctx, req, resp| {
         instance.delete_messages(ctx, req, resp)
     });
-    let mut instance = s.clone();
+    let mut instance = s;
     builder = builder.add_unary_handler(&METHOD_MESSENGER_COUNT_MESSAGES, move |ctx, req, resp| {
         instance.count_messages(ctx, req, resp)
     });

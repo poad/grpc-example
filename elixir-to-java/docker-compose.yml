@@ -13,10 +13,11 @@ services:
       - 3306:3306
     networks:
       - elixir-grpc-example-network
+
   backend:
     image: poad/java-grpc-elixir-service-example
     container_name: java-grpc-elixir-service-example
-    entrypoint:
+    environment:
       SPRING_PROFILES_ACTIVE: docker-compose
     depends_on:
       - mysql
@@ -26,6 +27,7 @@ services:
       - mysql
     networks:
       - elixir-grpc-example-network
+
   frontend:
     build:
       context: ./elixir_api_server
@@ -39,6 +41,7 @@ services:
       - backend
     networks:
       - elixir-grpc-example-network
+      
 networks:
   elixir-grpc-example-network:
   default:

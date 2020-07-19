@@ -14,8 +14,8 @@ mod message_grpc;
 
 use std::sync::Arc;
 
-use futures::sync::oneshot;
-use futures::Future;
+use futures::channel::oneshot;
+use futures::{TryFutureExt, FutureExt};
 use grpcio::{Environment, RpcContext, ServerBuilder, UnarySink};
 
 use hello_grpc::{Greeter};
@@ -25,7 +25,8 @@ use message_grpc::*;
 use message::*;
 
 use self::rust_grpc_server::*;
-use futures::sync::oneshot::{Sender, Receiver};
+use futures::channel::oneshot::{Sender, Receiver};
+use futures::executor::block_on;
 
 #[derive(Clone)]
 struct GreeterService;
@@ -40,12 +41,13 @@ impl Greeter for GreeterService {
     fn say_hello(&mut self, ctx: RpcContext<'_>, req: HelloRequest, sink: UnarySink<HelloReply>) {
         let msg = format!("Hello {}", req.get_name());
         let mut resp = HelloReply::new();
-        resp.set_message(msg);
+        resp.set_message(msg.clone());
 
         let f = sink
             .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e));
-        ctx.spawn(f)
+            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
+            .map(move |_| println!("Responded {{ {:?} }}", msg));
+        ctx.spawn(f);
     }
 }
 
@@ -56,11 +58,12 @@ impl UuidGenerator for UuidService {
 
         let mut resp = UUIDEntity::new();
         let uuid = generate_uuid(&connection);
-        resp.value = uuid;
+        resp.value = uuid.clone();
 
         let f = sink
             .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e));
+            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
+            .map(move |_| println!("Responded {{ {:?} }}", uuid));
         ctx.spawn(f)
     }
 }
@@ -79,7 +82,8 @@ impl Messenger for MessageService {
 
         let f = sink
             .success(entity)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e));
+            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
+            .map(move |_| println!("Responded {{ {:?} }}", message.content));
         ctx.spawn(f)
     }
 
@@ -103,7 +107,8 @@ impl Messenger for MessageService {
         );
         let f = sink
             .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e));
+            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
+            .map(move |resp| println!("Responded {{ {:?} }}", resp));
         ctx.spawn(f)
     }
 
@@ -128,7 +133,8 @@ impl Messenger for MessageService {
 
         let f = sink
             .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e));
+            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
+            .map(move |resp| println!("Responded {{ {:?} }}", resp));
         ctx.spawn(f)
     }
 
@@ -149,7 +155,8 @@ impl Messenger for MessageService {
 
         let f = sink
             .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e));
+            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
+            .map(move |resp| println!("Responded {{ {:?} }}", resp));
         ctx.spawn(f)
     }
 
@@ -161,7 +168,8 @@ impl Messenger for MessageService {
 
         let f = sink
             .success(DeleteMessagesResponse::new())
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e));
+            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
+            .map(move |resp| println!("Responded {{ {:?} }}", resp));
         ctx.spawn(f)
     }
 
@@ -176,7 +184,8 @@ impl Messenger for MessageService {
 
         let f = sink
             .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e));
+            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
+            .map(move |resp| println!("Responded {{ {:?} }}", resp));
         ctx.spawn(f)
     }
 }
@@ -195,7 +204,7 @@ fn main() {
         .unwrap();
     env_logger::init();
     server.start();
-    for &(ref host, port) in server.bind_addrs() {
+    for (ref host, port) in server.bind_addrs() {
         info!("listening on {}:{}", host, port);
     }
 
@@ -206,6 +215,6 @@ fn main() {
 //        let _ = io::stdin().read(&mut [0]).unwrap();
 //        tx.send(())
 //    });
-    let _ = rx.wait();
-    let _ = server.shutdown().wait();
+    let _ = block_on(rx);
+    let _ = block_on(server.shutdown());
 }

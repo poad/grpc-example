@@ -4,7 +4,7 @@ COPY micronaut-grpc-api /root/micronaut-grpc-api
 COPY proto /root/proto
 WORKDIR /root/micronaut-grpc-api
 RUN mkdir -p /tmp/condig
-RUN ./mvnw package
+RUN ./mvnw install package
 
 FROM mcr.microsoft.com/java/jre-headless:11-zulu-alpine
 EXPOSE 8080

@@ -4,12 +4,11 @@ WORKDIR /tmp
 
 RUN curl -sSLo /tmp/llvm-snapshot.gpg.key https://apt.llvm.org/llvm-snapshot.gpg.key
 
-FROM poad/docker-grpc:slim AS build
+FROM poad/docker-grpc:debian-buster AS build
 
 WORKDIR /root
 
 COPY src /root/rust-api-server/src
-COPY Cargo.lock /root/rust-api-server/Cargo.lock
 COPY Cargo.toml /root/rust-api-server/Cargo.toml
 
 WORKDIR /root/rust-api-server/

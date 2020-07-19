@@ -41,7 +41,7 @@ pub mod handlers {
     use std::env;
     use std::sync::Arc;
 
-    pub fn hello(req: web::Query<Hello>) -> impl Responder {
+    pub async fn hello(req: web::Query<Hello>) -> impl Responder {
         let env = Arc::new(EnvBuilder::new().build());
         let host = env::var("HELLO_GRPC_ENDPOINT").unwrap_or("127.0.0.1".to_owned());
         let ch = ChannelBuilder::new(env).connect(format!("{}:{}", host, 50050).as_str());
@@ -57,7 +57,7 @@ pub mod handlers {
             .body(serde_json::to_string(&HelloResponse { message }).expect("serialize failed"))
     }
 
-    pub fn get_massage(req: web::Path<(String,)>) -> impl Responder {
+    pub async fn get_massage(req: web::Path<(String,)>) -> impl Responder {
         let env = Arc::new(EnvBuilder::new().build());
         let host = env::var("GRPC_ENDPOINT").unwrap_or("127.0.0.1".to_owned());
         let ch = ChannelBuilder::new(env).connect(format!("{}:{}", host, 50051).as_str());
@@ -80,7 +80,7 @@ pub mod handlers {
         )
     }
 
-    pub fn get_massages() -> impl Responder {
+    pub async fn get_massages() -> impl Responder {
         let env = Arc::new(EnvBuilder::new().build());
         let host = env::var("GRPC_ENDPOINT").unwrap_or("127.0.0.1".to_owned());
         let ch = ChannelBuilder::new(env).connect(format!("{}:{}", host, 50051).as_str());
@@ -99,7 +99,7 @@ pub mod handlers {
         HttpResponse::Ok().body(serde_json::to_string(&messages).expect("serialize failed"))
     }
 
-    pub fn create_message(req: web::Json<Message>) -> impl Responder {
+    pub async fn create_message(req: web::Json<Message>) -> impl Responder {
         let env = Arc::new(EnvBuilder::new().build());
         let host = env::var("UUID_GRPC_ENDPOINT").unwrap_or("127.0.0.1".to_owned());
         let uuid_ch = ChannelBuilder::new(env).connect(format!("{}:{}", host, 50052).as_str());
@@ -132,7 +132,7 @@ pub mod handlers {
         )
     }
 
-    pub fn update_message(req: web::Json<Message>, path: web::Path<(String,)>) -> impl Responder {
+    pub async fn update_message(req: web::Json<Message>, path: web::Path<(String,)>) -> impl Responder {
         let env = Arc::new(EnvBuilder::new().build());
         let host = env::var("GRPC_ENDPOINT").unwrap_or("127.0.0.1".to_owned());
         let ch = ChannelBuilder::new(env).connect(format!("{}:{}", host, 50051).as_str());
@@ -160,7 +160,7 @@ pub mod handlers {
         )
     }
 
-    pub fn delete_message(req: web::Path<(String,)>) -> impl Responder {
+    pub async fn delete_message(req: web::Path<(String,)>) -> impl Responder {
         let env = Arc::new(EnvBuilder::new().build());
         let host = env::var("GRPC_ENDPOINT").unwrap_or("127.0.0.1".to_owned());
         let ch = ChannelBuilder::new(env).connect(format!("{}:{}", host, 50051).as_str());
@@ -183,7 +183,7 @@ pub mod handlers {
         )
     }
 
-    pub fn delete_messages() -> impl Responder {
+    pub async fn delete_messages() -> impl Responder {
         let env = Arc::new(EnvBuilder::new().build());
         let host = env::var("GRPC_ENDPOINT").unwrap_or("127.0.0.1".to_owned());
         let ch = ChannelBuilder::new(env).connect(format!("{}:{}", host, 50051).as_str());
