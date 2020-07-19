@@ -8,10 +8,10 @@ publish = false
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-grpcio = { version = "*", default-features = false, features = ["openssl", "protobuf-codec"] }
-#grpcio-sys = "*"
+grpcio = { version = "*", default-features = false, features = ["protobuf-codec"] }
+grpcio-sys = "*"
 libc = "*"
-protobuf = "*"
+protobuf = "^2.*"
 futures = "*"
 futures-cpupool = "*"
 prost = "*"

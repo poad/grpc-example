@@ -8,7 +8,7 @@ edition = "2018"
 [dependencies]
 grpcio = { version = "*", default-features = false, features = ["protobuf-codec"] }
 libc = "*"
-protobuf = "*"
+protobuf = "^2.*"
 futures = "*"
 futures-cpupool = "*"
 prost = "*"

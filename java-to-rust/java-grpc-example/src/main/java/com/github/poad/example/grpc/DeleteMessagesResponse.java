@@ -6,7 +6,7 @@ package com.github.poad.example.grpc;
 /**
  * Protobuf type {@code message.DeleteMessagesResponse}
  */
-public  final class DeleteMessagesResponse extends
+public final class DeleteMessagesResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:message.DeleteMessagesResponse)
     DeleteMessagesResponseOrBuilder {
