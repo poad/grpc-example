@@ -18,7 +18,7 @@ import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.23.0)",
+    value = "by gRPC proto compiler (version 1.31.0)",
     comments = "Source: message.proto")
 public final class MessengerGrpc {
 
@@ -217,7 +217,14 @@ public final class MessengerGrpc {
    * Creates a new async stub that supports all call types for the service
    */
   public static MessengerStub newStub(io.grpc.Channel channel) {
-    return new MessengerStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<MessengerStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<MessengerStub>() {
+        @java.lang.Override
+        public MessengerStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new MessengerStub(channel, callOptions);
+        }
+      };
+    return MessengerStub.newStub(factory, channel);
   }
 
   /**
@@ -225,7 +232,14 @@ public final class MessengerGrpc {
    */
   public static MessengerBlockingStub newBlockingStub(
       io.grpc.Channel channel) {
-    return new MessengerBlockingStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<MessengerBlockingStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<MessengerBlockingStub>() {
+        @java.lang.Override
+        public MessengerBlockingStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new MessengerBlockingStub(channel, callOptions);
+        }
+      };
+    return MessengerBlockingStub.newStub(factory, channel);
   }
 
   /**
@@ -233,7 +247,14 @@ public final class MessengerGrpc {
    */
   public static MessengerFutureStub newFutureStub(
       io.grpc.Channel channel) {
-    return new MessengerFutureStub(channel);
+    io.grpc.stub.AbstractStub.StubFactory<MessengerFutureStub> factory =
+      new io.grpc.stub.AbstractStub.StubFactory<MessengerFutureStub>() {
+        @java.lang.Override
+        public MessengerFutureStub newStub(io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
+          return new MessengerFutureStub(channel, callOptions);
+        }
+      };
+    return MessengerFutureStub.newStub(factory, channel);
   }
 
   /**
@@ -332,19 +353,15 @@ public final class MessengerGrpc {
 
   /**
    */
-  public static final class MessengerStub extends io.grpc.stub.AbstractStub<MessengerStub> {
-    private MessengerStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private MessengerStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class MessengerStub extends io.grpc.stub.AbstractAsyncStub<MessengerStub> {
+    private MessengerStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected MessengerStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected MessengerStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new MessengerStub(channel, callOptions);
     }
 
@@ -399,19 +416,15 @@ public final class MessengerGrpc {
 
   /**
    */
-  public static final class MessengerBlockingStub extends io.grpc.stub.AbstractStub<MessengerBlockingStub> {
-    private MessengerBlockingStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private MessengerBlockingStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class MessengerBlockingStub extends io.grpc.stub.AbstractBlockingStub<MessengerBlockingStub> {
+    private MessengerBlockingStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected MessengerBlockingStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected MessengerBlockingStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new MessengerBlockingStub(channel, callOptions);
     }
 
@@ -460,19 +473,15 @@ public final class MessengerGrpc {
 
   /**
    */
-  public static final class MessengerFutureStub extends io.grpc.stub.AbstractStub<MessengerFutureStub> {
-    private MessengerFutureStub(io.grpc.Channel channel) {
-      super(channel);
-    }
-
-    private MessengerFutureStub(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+  public static final class MessengerFutureStub extends io.grpc.stub.AbstractFutureStub<MessengerFutureStub> {
+    private MessengerFutureStub(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       super(channel, callOptions);
     }
 
     @java.lang.Override
-    protected MessengerFutureStub build(io.grpc.Channel channel,
-        io.grpc.CallOptions callOptions) {
+    protected MessengerFutureStub build(
+        io.grpc.Channel channel, io.grpc.CallOptions callOptions) {
       return new MessengerFutureStub(channel, callOptions);
     }
 
