@@ -4,7 +4,7 @@
   <artifactId>micronaut-grpc-api</artifactId>
   <version>0.1</version>
   <properties>
-    <micronaut.version>2.0.1</micronaut.version>
+    <micronaut.version>2.0.2</micronaut.version>
     <jdk.version>11</jdk.version>
     <maven.compiler.target>${jdk.version}</maven.compiler.target>
     <maven.compiler.source>${jdk.version}</maven.compiler.source>
@@ -13,7 +13,7 @@
     <exec.mainClass>micronaut.grpc.api.Application</exec.mainClass>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-    <grpc.version>1.31.1</grpc.version>
+    <grpc.version>1.32.1</grpc.version>
     <protobuf.version>3.13.0</protobuf.version>
   </properties>
 
@@ -38,7 +38,7 @@
       <dependency>
         <groupId>io.netty</groupId>
         <artifactId>netty-bom</artifactId>
-        <version>4.1.51.Final</version>
+        <version>4.1.52.Final</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>

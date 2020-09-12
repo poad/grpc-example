@@ -64,7 +64,8 @@ pub mod handlers {
         let client = MessengerClient::new(ch);
         let mut request = GetMessageRequest::new();
         let mut id = UUIDEntity::new();
-        id.set_value(req.0.to_string());
+        let id_value = req.0;
+        id.set_value(id_value.0.clone());
         request.set_id(id);
         let message = client
             .get_message(request.borrow())
@@ -73,7 +74,7 @@ pub mod handlers {
             .to_string();
         HttpResponse::Ok().body(
             serde_json::to_string(&Message {
-                id: Some(req.0.clone()),
+                id: Some(id_value.0),
                 message,
             })
             .expect("serialize failed"),
@@ -132,7 +133,10 @@ pub mod handlers {
         )
     }
 
-    pub async fn update_message(req: web::Json<Message>, path: web::Path<(String,)>) -> impl Responder {
+    pub async fn update_message(
+        req: web::Json<Message>,
+        path: web::Path<(String,)>,
+    ) -> impl Responder {
         let env = Arc::new(EnvBuilder::new().build());
         let host = env::var("GRPC_ENDPOINT").unwrap_or("127.0.0.1".to_owned());
         let ch = ChannelBuilder::new(env).connect(format!("{}:{}", host, 50051).as_str());
@@ -141,7 +145,8 @@ pub mod handlers {
         let mut request = MessageEntity::new();
         let message = &req.message;
         let mut id = UUIDEntity::new();
-        id.set_value(path.0.to_string());
+        let id_value = path.0;
+        id.set_value(id_value.0.clone());
 
         request.set_id(id.borrow().to_owned());
         request.set_message(message.to_string());
@@ -168,7 +173,8 @@ pub mod handlers {
 
         let mut request = DeleteMessageRequest::new();
         let mut id = UUIDEntity::new();
-        id.set_value(req.0.to_string());
+        let id_value = req.0;
+        id.set_value(id_value.0);
         request.set_id(id);
         let message = client
             .delete_message(request.borrow())
@@ -196,5 +202,4 @@ pub mod handlers {
 
         HttpResponse::Ok().finish()
     }
-
 }
