@@ -15,9 +15,9 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <grpc.version>1.32.1</grpc.version>
     <protobuf.version>3.13.0</protobuf.version>
-    <spring.boot.version>2.3.3.RELEASE</spring.boot.version>
-    <junit.version>5.6.2</junit.version>
-    <spring.boot.grpc.version>3.5.7</spring.boot.grpc.version>
+    <spring.boot.version>2.3.4.RELEASE</spring.boot.version>
+    <junit.version>5.7.0</junit.version>
+    <spring.boot.grpc.version>4.0.0</spring.boot.grpc.version>
   </properties>
 
   <dependencyManagement>
