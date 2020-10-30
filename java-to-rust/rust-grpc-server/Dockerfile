@@ -27,11 +27,11 @@ WORKDIR /tmp
 RUN apt-get update -qq \
  && apt-get install --no-install-recommends -qqy ca-certificates gnupg2 binutils apt-utils \
  && cat /tmp/llvm-snapshot.gpg.key | apt-key add - \
- && echo "deb http://apt.llvm.org/buster/ llvm-toolchain-buster-10 main" >> /etc/apt/sources.list.d/llvm-toolchain.list \
+ && echo "deb http://apt.llvm.org/buster/ llvm-toolchain-buster-11 main" >> /etc/apt/sources.list.d/llvm-toolchain.list \
  && apt-get update -qq \
  && apt-get install -qqy --no-install-recommends \
-        clang-10 \
-        lld-10 \
+        clang-11 \
+        lld-11 \
         libreadline-dev \
         libsqlite3-dev \
         libssl-dev \

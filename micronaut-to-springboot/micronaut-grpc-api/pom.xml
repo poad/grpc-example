@@ -13,7 +13,7 @@
     <exec.mainClass>micronaut.grpc.api.Application</exec.mainClass>
     <maven-surefire-plugin.version>2.22.2</maven-surefire-plugin.version>
     <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
-    <grpc.version>1.32.1</grpc.version>
+    <grpc.version>1.33.0</grpc.version>
     <protobuf.version>3.13.0</protobuf.version>
   </properties>
 
