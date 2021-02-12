@@ -301,7 +301,7 @@
     </dependencies>
   </dependencyManagement>
   <properties>
-    <micronaut.version>2.3.0</micronaut.version>
+    <micronaut.version>2.3.1</micronaut.version>
     <maven.compiler.target>${jdk.version}</maven.compiler.target>
     <exec.mainClass>micronaut.grpc.api.Application</exec.mainClass>
     <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
