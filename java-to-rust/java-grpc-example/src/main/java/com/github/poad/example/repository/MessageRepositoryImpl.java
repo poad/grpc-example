@@ -54,6 +54,11 @@ public class MessageRepositoryImpl implements MessageRepository {
     }
 
     @Override
+    public void deleteAllById(Iterable<? extends String> iterable) {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
     public <S extends MessageEntity> Iterable<S> saveAll(Iterable<S> iterable) {
         throw new UnsupportedOperationException();
     }
