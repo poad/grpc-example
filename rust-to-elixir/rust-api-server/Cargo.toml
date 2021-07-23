@@ -11,7 +11,7 @@ publish = false
 grpcio = { version = "*", default-features = false, features = ["protobuf-codec"] }
 grpcio-sys = "*"
 libc = "*"
-protobuf = "^2.*"
+protobuf = "*"
 futures = "*"
 futures-cpupool = "*"
 prost = "*"
