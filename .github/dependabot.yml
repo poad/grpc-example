@@ -1,0 +1,122 @@
+version: 2
+updates:
+  - package-ecosystem: mix
+    directory: '/elixir-to-java/elixir_api_server/'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad
+  - package-ecosystem: maven
+    directory: '/elixir-to-java/java-grpc-elixir-server/'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad
+  - package-ecosystem: maven
+    directory: '/java-to-elixir/elixir-grpc-java'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad
+  - package-ecosystem: maven
+    directory: '/java-to-elixir/grpc_server/'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad
+  - package-ecosystem: maven
+    directory: '/java-to-java/java-api-server/'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad
+  - package-ecosystem: maven
+    directory: '/java-to-java/java-grpc-server/'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad
+  - package-ecosystem: maven
+    directory: '/java-to-rust/java-grpc-example/'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad
+  - package-ecosystem: cargp
+    directory: '/java-to-rust/rust-grpc-server/'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad
+  - package-ecosystem: maven
+    directory: '/micronaut-to-springboot/java-micronaut-grpc-server/'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad
+  - package-ecosystem: maven
+    directory: '/micronaut-to-springboot/micronaut-grpc-api/'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad
+  - package-ecosystem: mix
+    directory: '/rust-to-elixir/grpc_server/'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad
+  - package-ecosystem: cargo
+    directory: '/rust-to-elixir/rust-api-server/'
+    schedule:
+      interval: daily
+      timezone: Asia/Tokyo
+    allow:
+      - dependency-type: all
+    rebase-strategy: auto
+    assignees:
+      - poad

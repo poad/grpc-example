@@ -1,6 +1,9 @@
 name: Build test
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -84,8 +87,11 @@ jobs:
         ${{ matrix.targets.build[1] }} && \
         cd ${CUR}
 
+  configure:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request' && github.actor != 'dependabot[bot]'
+    steps:
     - name: Pull request auto merge enabler
-      if: github.event_name == 'pull_request'
       uses: poad/github-pull-request-auto-merge-enable-action@v1.0.0
       with:
         pull_request_id: ${{ github.event.pull_request.node_id }}
