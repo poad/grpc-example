@@ -5,14 +5,14 @@ import com.github.poad.example.java.grpc.entity.Message;
 import com.github.poad.example.java.grpc.exception.NotFoundException;
 import com.github.poad.example.java.grpc.repository.MessageRepository;
 import io.grpc.stub.StreamObserver;
-import org.lognet.springboot.grpc.GRpcService;
+import net.devh.boot.grpc.server.service.GrpcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.stream.Collectors;
 
-@GRpcService
+@GrpcService
 public class MessageService extends MessengerGrpc.MessengerImplBase {
     private static final Logger logger = LoggerFactory.getLogger(HelloService.class);
     private final MessageRepository repository;

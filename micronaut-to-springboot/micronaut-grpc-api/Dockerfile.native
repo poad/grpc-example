@@ -1,11 +1,11 @@
-FROM docker.pkg.github.com/graalvm/container/community:21.0.0.2-java11-amd64 as graalvm
+FROM ghcr.io/graalvm/graalvm-ce:java11 as graalvm
 
 RUN gu install native-image
 COPY micronaut-grpc-api /home/app/micronaut-grpc-api
 COPY proto /home/app/proto
 WORKDIR /home/app/micronaut-grpc-api
 RUN mkdir -p /tmp/condig
-RUN ./mvnw package
+RUN ./gradlew clean jar
 RUN native-image --no-server \
                  --allow-incomplete-classpath \
                  -H:+ReportExceptionStackTraces \
@@ -13,7 +13,7 @@ RUN native-image --no-server \
                  --initialize-at-run-time=io.netty.handler.codec.http2.Http2CodecUtil \
                  --initialize-at-run-time=io.netty.handler.ssl.JettyAlpnSslEngine$ServerEngine \
                  -H:ConfigurationFileDirectories=/tmp/condig \
-                 -cp target/micronaut-grpc-api-0.1.jar
+                 -cp build/libs/micronaut-grpc-api-0.1.jar
 
 FROM ubuntu:focal
 EXPOSE 8080

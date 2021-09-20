@@ -4,33 +4,20 @@
 
 ### Install sdkman.io
 
-```$sh
+```sh
 curl -s "https://get.sdkman.io" | sh
 ```
 
 ### Install OpenJDK
 
-```$sh
-sdk i java 11.0.5-zulu
+```sh
+sdk i java 11.0.12-zulu
 ```
 
-### Install Apache Maven
+### Install Gradle
 
-```$sh
-sdk i maven 3.6.3
-```
-
-## create Java project
-
-```$sh
-mvn archetype:generate -B \
-        -DarchetypeGroupId=org.apache.maven.archetypes \
-        -DarchetypeArtifactId=maven-archetype-quickstart \
-        -DarchetypeVersion=1.1 \
-        -DgroupId=com.github.poad.example \
-        -DartifactId=elixir-grpc-java \
-        -Dversion=1.0-SNAPSHOT \
-        -Dpackage=com.github.poad.example.elixir.grpc
+```sh
+sdk i gradle 7.2
 ```
 
 ## Install elixir
@@ -39,20 +26,20 @@ mvn archetype:generate -B \
 
 ## create project
 
-```$sh
+```sh
 mix new grpc_server
 ```
 
 ## Install protobuf-elixir
 
-```$sh
+```sh
 mix escript.install hex protobuf
 ```
 
 ## Generate Code
 
-```$sh
-protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java/src/main/java --proto_path=./proto message.proto
+```sh
+protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java/src/main/java --proto_path=./proto message.proto && \
 protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java/src/main/java --proto_path=./proto hello.proto
 ```
 
@@ -62,13 +49,13 @@ protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java
 
 #### MySQL
 
-```$sh
+```sh
 docker run --name mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=test -it -d mysql:latest
 ```
 
 #### migrate
 
-```$sh
+```sh
 cd grpc_server && \
 mix deps.get && \
 mix ecto.migrate && \
@@ -77,21 +64,21 @@ cd ..
 
 #### Boot
 
-```$sh
+```sh
 cd grpc_server && \
 mix grpc.server
 ```
 
-```$sh
+```sh
 cd elixir-grpc-java && \
-mvn spring-boot:run
+./gradlew bootRun
 ```
 
 ### docker-compose を使用する場合
 
-```$sh
+```sh
 cd elixir-grpc-java && \
-mvn clean install spring-boot:build-image && \
+./gradlew bootBuildImage && \
 cd .. && \
 docker-compose build && \
 docker-compose up -d mysql && \
@@ -104,7 +91,7 @@ docker-compose up -d frontend
 
 mix を使ったパッケージのアップデート
 
-```$sh
+```sh
 cd grpc_server && \
 mix deps.update --all mix.ex
 ```

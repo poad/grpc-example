@@ -1,8 +1,6 @@
 package com.github.poad.example.elixir.grpc.client;
 
-import com.github.poad.example.grpc.GreeterGrpc;
-import com.github.poad.example.grpc.HelloReply;
-import com.github.poad.example.grpc.HelloRequest;
+import com.github.poad.example.grpc.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.config.ConfigurableBeanFactory;

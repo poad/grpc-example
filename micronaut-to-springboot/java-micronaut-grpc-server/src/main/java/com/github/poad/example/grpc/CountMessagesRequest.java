@@ -6,7 +6,7 @@ package com.github.poad.example.grpc;
 /**
  * Protobuf type {@code message.CountMessagesRequest}
  */
-public  final class CountMessagesRequest extends
+public final class CountMessagesRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:message.CountMessagesRequest)
     CountMessagesRequestOrBuilder {

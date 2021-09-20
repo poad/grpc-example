@@ -100,4 +100,4 @@ fabric.properties
 /java-api-server.iml
 /target/
 
-!.mvn/wrapper/maven-wrapper.jar
+!gradle/wrapper/gradle-wrapper.jar

@@ -1,24 +1,11 @@
 package com.github.poad.example.grpc;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
-import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncUnaryCall;
-import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
-import static io.grpc.stub.ClientCalls.blockingUnaryCall;
-import static io.grpc.stub.ClientCalls.futureUnaryCall;
-import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncUnaryCall;
-import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.26.0)",
+    value = "by gRPC proto compiler (version 1.39.0)",
     comments = "Source: message.proto")
 public final class UUIDGeneratorGrpc {
 
@@ -110,14 +97,14 @@ public final class UUIDGeneratorGrpc {
      */
     public void generateUUID(com.github.poad.example.grpc.GenerateUUIDRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.UUIDEntity> responseObserver) {
-      asyncUnimplementedUnaryCall(getGenerateUUIDMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGenerateUUIDMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getGenerateUUIDMethod(),
-            asyncUnaryCall(
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 com.github.poad.example.grpc.GenerateUUIDRequest,
                 com.github.poad.example.grpc.UUIDEntity>(
@@ -144,7 +131,7 @@ public final class UUIDGeneratorGrpc {
      */
     public void generateUUID(com.github.poad.example.grpc.GenerateUUIDRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.UUIDEntity> responseObserver) {
-      asyncUnaryCall(
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGenerateUUIDMethod(), getCallOptions()), request, responseObserver);
     }
   }
@@ -166,7 +153,7 @@ public final class UUIDGeneratorGrpc {
     /**
      */
     public com.github.poad.example.grpc.UUIDEntity generateUUID(com.github.poad.example.grpc.GenerateUUIDRequest request) {
-      return blockingUnaryCall(
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGenerateUUIDMethod(), getCallOptions(), request);
     }
   }
@@ -189,7 +176,7 @@ public final class UUIDGeneratorGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.github.poad.example.grpc.UUIDEntity> generateUUID(
         com.github.poad.example.grpc.GenerateUUIDRequest request) {
-      return futureUnaryCall(
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGenerateUUIDMethod(), getCallOptions()), request);
     }
   }

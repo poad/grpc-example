@@ -5,10 +5,10 @@ import com.github.poad.example.grpc.UUIDEntity;
 import com.github.poad.example.grpc.UUIDGeneratorGrpc;
 import com.github.poad.example.micronaut.grpc.repository.MessageRepository;
 import io.grpc.stub.StreamObserver;
-import org.lognet.springboot.grpc.GRpcService;
+import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@GRpcService
+@GrpcService
 public class UuidService extends UUIDGeneratorGrpc.UUIDGeneratorImplBase {
     private final MessageRepository repository;
 

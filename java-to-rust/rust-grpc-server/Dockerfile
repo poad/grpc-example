@@ -1,3 +1,5 @@
+ARG LLVM_VERSION=12
+
 FROM buildpack-deps:stable-curl AS download
 
 WORKDIR /tmp
@@ -18,6 +20,7 @@ RUN cargo build --release
 
 FROM rust:slim
 
+ARG LLVM_VERSION
 # ARG PROTOCOL_BUFFERS_VERSION
 
 COPY --from=download /tmp/llvm-snapshot.gpg.key /tmp/llvm-snapshot.gpg.key
@@ -25,18 +28,27 @@ COPY --from=download /tmp/llvm-snapshot.gpg.key /tmp/llvm-snapshot.gpg.key
 WORKDIR /tmp
 
 RUN apt-get update -qq \
- && apt-get install --no-install-recommends -qqy ca-certificates gnupg2 binutils apt-utils \
- && cat /tmp/llvm-snapshot.gpg.key | apt-key add - \
- && echo "deb http://apt.llvm.org/buster/ llvm-toolchain-buster-11 main" >> /etc/apt/sources.list.d/llvm-toolchain.list \
+ && apt-get install --no-install-recommends -qqy lsb-release ca-certificates gnupg2 binutils apt-utils \
+ && cat /tmp/llvm-snapshot.gpg.key | gpg --no-default-keyring --keyring "gnupg-ring:/usr/share/keyrings/llvm-snapshot.gpg" --import - \
+ && chmod 644 /usr/share/keyrings/llvm-snapshot.gpg \
+ && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/llvm-snapshot.gpg] http://apt.llvm.org/$(lsb_release -cs)/ llvm-toolchain-$(lsb_release -cs)-${LLVM_VERSION} main" > /etc/apt/sources.list.d/llvm-toolchain.list \
  && apt-get update -qq \
  && apt-get install -qqy --no-install-recommends \
-        clang-11 \
-        lld-11 \
+        libtool \
+        clang-${LLVM_VERSION} \
+        lld-${LLVM_VERSION} \
         libreadline-dev \
         libsqlite3-dev \
         libssl-dev \
+        unzip \
         zlib1g-dev \
+        pkg-config \
+        unzip \
+        cmake \
         libpq-dev \
+        libodbc1 \
+        libssl1.1 \
+        libsctp1 \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /var/log/apt/* /var/log/alternatives.log /var/log/dpkg.log /var/log/faillog /var/log/lastlog \
  && rm -rf /tmp/*

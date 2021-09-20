@@ -6,7 +6,7 @@ package com.github.poad.example.grpc;
 /**
  * Protobuf type {@code message.GetMessagesRequest}
  */
-public  final class GetMessagesRequest extends
+public final class GetMessagesRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:message.GetMessagesRequest)
     GetMessagesRequestOrBuilder {

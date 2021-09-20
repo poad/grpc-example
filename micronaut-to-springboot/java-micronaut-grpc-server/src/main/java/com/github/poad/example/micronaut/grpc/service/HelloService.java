@@ -4,11 +4,11 @@ import com.github.poad.example.grpc.GreeterGrpc;
 import com.github.poad.example.grpc.HelloReply;
 import com.github.poad.example.grpc.HelloRequest;
 import io.grpc.stub.StreamObserver;
-import org.lognet.springboot.grpc.GRpcService;
+import net.devh.boot.grpc.server.service.GrpcService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@GRpcService
+@GrpcService
 public class HelloService extends GreeterGrpc.GreeterImplBase {
     private static final Logger logger = LoggerFactory.getLogger(HelloService.class);
 
