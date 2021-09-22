@@ -6,7 +6,7 @@ package com.github.poad.example.grpc;
 /**
  * Protobuf type {@code message.MessagesResponse}
  */
-public  final class MessagesResponse extends
+public final class MessagesResponse extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:message.MessagesResponse)
     MessagesResponseOrBuilder {
@@ -99,12 +99,14 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .message.MessageEntity messages = 1;</code>
    */
+  @java.lang.Override
   public java.util.List<com.github.poad.example.grpc.MessageEntity> getMessagesList() {
     return messages_;
   }
   /**
    * <code>repeated .message.MessageEntity messages = 1;</code>
    */
+  @java.lang.Override
   public java.util.List<? extends com.github.poad.example.grpc.MessageEntityOrBuilder> 
       getMessagesOrBuilderList() {
     return messages_;
@@ -112,18 +114,21 @@ private static final long serialVersionUID = 0L;
   /**
    * <code>repeated .message.MessageEntity messages = 1;</code>
    */
+  @java.lang.Override
   public int getMessagesCount() {
     return messages_.size();
   }
   /**
    * <code>repeated .message.MessageEntity messages = 1;</code>
    */
+  @java.lang.Override
   public com.github.poad.example.grpc.MessageEntity getMessages(int index) {
     return messages_.get(index);
   }
   /**
    * <code>repeated .message.MessageEntity messages = 1;</code>
    */
+  @java.lang.Override
   public com.github.poad.example.grpc.MessageEntityOrBuilder getMessagesOrBuilder(
       int index) {
     return messages_.get(index);

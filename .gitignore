@@ -139,3 +139,7 @@ Temporary Items
 
 mysql_data
 target
+
+!gradle-wrapper.jar
+build
+.gradle

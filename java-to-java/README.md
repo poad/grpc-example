@@ -4,48 +4,26 @@
 
 ### Install sdkman.io
 
-```$sh
+```sh
 curl -s "https://get.sdkman.io" | sh
 ```
 
 ### Install OpenJDK
 
-```$sh
-sdk i java 11.0.5-zulu
+```sh
+sdk i java 11.0.12-zulu
 ```
 
-### Install Apache Maven
+### Install Gradle
 
-```$sh
-sdk i maven 3.6.3
-```
-
-## create Java project
-
-```$sh
-mvn archetype:generate -B \
-        -DarchetypeGroupId=org.apache.maven.archetypes \
-        -DarchetypeArtifactId=maven-archetype-quickstart \
-        -DarchetypeVersion=1.1 \
-        -DgroupId=com.github.poad.example \
-        -DartifactId=java-api-server \
-        -Dversion=1.0-SNAPSHOT \
-        -Dpackage=com.github.poad.example.elixir.grpc
-
-mvn archetype:generate -B \
-        -DarchetypeGroupId=org.apache.maven.archetypes \
-        -DarchetypeArtifactId=maven-archetype-quickstart \
-        -DarchetypeVersion=1.1 \
-        -DgroupId=com.github.poad.example \
-        -DartifactId=java-grpc-server \
-        -Dversion=1.0-SNAPSHOT \
-        -Dpackage=com.github.poad.example.elixir.grpc
+```sh
+sdk i gradle 7.2
 ```
 
 ## Generate Code
 
-```$sh
-protoc --java_out=./java-api-server/src/main/java --java_out=./java-grpc-server/src/main/java --proto_path=./proto message.proto
+```sh
+protoc --java_out=./java-api-server/src/main/java --java_out=./java-grpc-server/src/main/java --proto_path=./proto message.proto && \
 protoc --java_out=./java-api-server/src/main/java --java_out=./java-grpc-server/src/main/java --proto_path=./proto hello.proto
 ```
 
@@ -53,30 +31,30 @@ protoc --java_out=./java-api-server/src/main/java --java_out=./java-grpc-server/
 
 ### MySQL の起動
 
-```$sh
+```sh
 docker run --name mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=test -v "$(pwd)/mysql_ddl":/docker-entrypoint-initdb.d -it -d mysql:latest
 ```
 
 ### Run
 
-```$sh
+```sh
 cd java-api-server && \
-mvn spring-boot:run
+./gradlew bootRun
 ```
 
-```$sh
+```sh
 cd java-grpc-server && \
-mvn spring-boot:run
+./gradlew bootRun
 ```
 
 ## docker-compose を使用する場合
 
-```$sh
+```sh
 cd java-api-server && \
-mvn clean install spring-boot:build-image && \
+./gradlew bootBuildImage && \
 cd .. && \
 cd java-grpc-server && \
-mvn clean install spring-boot:build-image && \
+./gradlew bootBuildImage && \
 cd .. && \
 docker-compose build && \
 docker-compose up -d mysql && \

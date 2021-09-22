@@ -11,10 +11,27 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  latest_versions:
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      llvm_version: ${{ steps.llvm.outputs.version }}
+    steps:
+    - name: prepare
+      run: |
+        sudo apt-get update -qq && \
+        sudo apt-get install --no-install-recommends -qqy \
+          jq
+    - name: find latest vrersions (llvm)
+      id: llvm
+      run: |
+        LLVM_VERSION="$(curl -sSL https://api.github.com/repos/llvm/llvm-project/releases/latest | jq -r .tag_name | cut -d'-' -f2)" && \
+        echo "::set-output name=version::${LLVM_VERSION}"
+
+  build-java11:
     runs-on: ubuntu-latest
     container: 
-      image: poad/docker-grpc:compose
+      image: poad/docker-grpc:compose-java11
       options: --privileged
     strategy:
       matrix:
@@ -26,7 +43,7 @@ jobs:
               'protoc --elixir_out=plugins=grpc:./elixir_api_server/lib --java_out=./java-grpc-elixir-server/src/main/java --proto_path=./proto message.proto',
               'protoc --elixir_out=plugins=grpc:./elixir_api_server/lib --java_out=./java-grpc-elixir-server/src/main/java --proto_path=./proto hello.proto'
             ],
-            build: [ 'cd java-grpc-elixir-server && ./mvnw clean install spring-boot:build-image', 'docker-compose build' ]
+            build: [ 'cd java-grpc-elixir-server && echo "" && echo Building Java Application && ./gradlew bootBuildImage', 'docker-compose build' ]
           },
           {
             dir: 'java-to-elixir',
@@ -35,7 +52,7 @@ jobs:
               'protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java/src/main/java --proto_path=./proto message.proto',
               'protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java/src/main/java --proto_path=./proto hello.proto'
             ],
-            build: [ 'cd elixir-grpc-java && ./mvnw clean install spring-boot:build-image', 'docker-compose build' ]
+            build: [ 'cd elixir-grpc-java && echo "" && echo Building Java Application && ./gradlew bootBuildImage', 'docker-compose build' ]
           },
           {
             dir: 'java-to-java',
@@ -44,7 +61,7 @@ jobs:
               'protoc --java_out=./java-api-server/src/main/java --java_out=./java-grpc-server/src/main/java --proto_path=./proto message.proto',
               'protoc --java_out=./java-api-server/src/main/java --java_out=./java-grpc-server/src/main/java --proto_path=./proto hello.proto'
             ],
-            build: [ 'cd java-api-server && ./mvnw clean install spring-boot:build-image', 'cd java-grpc-server && ./mvnw clean install spring-boot:build-image' ]
+            build: [ 'cd java-api-server && ./gradlew bootBuildImage', 'cd java-grpc-server && ./gradlew bootBuildImage' ]
           },
           {
             dir: 'java-to-rust',
@@ -53,7 +70,7 @@ jobs:
               'protoc --rust_out=./rust-grpc-server/src/ --grpc_out=./rust-grpc-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --java_out=./java-grpc-example/src/main/java --proto_path=./proto message.proto',
               'protoc --rust_out=./rust-grpc-server/src/ --grpc_out=./rust-grpc-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --java_out=./java-grpc-example/src/main/java --proto_path=./proto hello.proto'
             ],
-            build: [ 'cd java-grpc-example && ./mvnw spring-boot:build-image', 'docker-compose build' ]
+            build: [ 'cd java-grpc-example && echo "" && echo Building Java Application && ./gradlew bootBuildImage', 'docker-compose build' ]
           },
           {
             dir: 'micronaut-to-springboot',
@@ -62,7 +79,7 @@ jobs:
               'protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut-grpc-server/src/main/java --proto_path=./proto message.proto',
               'protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut-grpc-server/src/main/java --proto_path=./proto hello.proto'
             ],
-            build: [ 'cd java-micronaut-grpc-server && ./mvnw spring-boot:build-image', 'docker-compose build' ]
+            build: [ 'cd java-micronaut-grpc-server && echo "" && echo Building Java Application && ./gradlew bootBuildImage', 'echo "" && docker-compose build' ]
           },
           {
             dir: 'rust-to-elixir',
@@ -76,7 +93,9 @@ jobs:
         ]
     steps:
     - uses: actions/checkout@master
-    - run: |
+    - env:
+        LLVM_VERSION: ${{needs.latest_versions.outputs.llvm_version}}
+      run: |
         CUR=$(pwd) && \
         ${{ matrix.targets.pre }} && \
         cd ${{ matrix.targets.dir }} && \

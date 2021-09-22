@@ -6,7 +6,7 @@ package com.github.poad.example.grpc;
 /**
  * Protobuf type {@code message.MessageEntity}
  */
-public  final class MessageEntity extends
+public final class MessageEntity extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:message.MessageEntity)
     MessageEntityOrBuilder {
@@ -106,6 +106,7 @@ private static final long serialVersionUID = 0L;
    * <code>.message.UUIDEntity id = 1;</code>
    * @return Whether the id field is set.
    */
+  @java.lang.Override
   public boolean hasId() {
     return id_ != null;
   }
@@ -113,12 +114,14 @@ private static final long serialVersionUID = 0L;
    * <code>.message.UUIDEntity id = 1;</code>
    * @return The id.
    */
+  @java.lang.Override
   public com.github.poad.example.grpc.UUIDEntity getId() {
     return id_ == null ? com.github.poad.example.grpc.UUIDEntity.getDefaultInstance() : id_;
   }
   /**
    * <code>.message.UUIDEntity id = 1;</code>
    */
+  @java.lang.Override
   public com.github.poad.example.grpc.UUIDEntityOrBuilder getIdOrBuilder() {
     return getId();
   }
@@ -129,6 +132,7 @@ private static final long serialVersionUID = 0L;
    * <code>string message = 2;</code>
    * @return The message.
    */
+  @java.lang.Override
   public java.lang.String getMessage() {
     java.lang.Object ref = message_;
     if (ref instanceof java.lang.String) {
@@ -145,6 +149,7 @@ private static final long serialVersionUID = 0L;
    * <code>string message = 2;</code>
    * @return The bytes for message.
    */
+  @java.lang.Override
   public com.google.protobuf.ByteString
       getMessageBytes() {
     java.lang.Object ref = message_;

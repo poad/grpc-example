@@ -4,55 +4,40 @@
 
 ### Install sdkman.io
 
-```$bash
+```sh
 curl -s "https://get.sdkman.io" | bash
 ```
 
 ### Install OpenJDK
 
-```$bash
-sdk i java 11.0.5-zulu
+```sh
+sdk i java 11.0.12-zulu
 ```
 
-### Install Apache Maven
+### Install Gradle
 
-```$bash
-sdk i maven 3.6.3
-```
-
-## create Java project
-
-```$bash
-mn create-app micronaut-grpc-api --features graal-native-image --build maven
-
-mvn archetype:generate -B \
-        -DarchetypeGroupId=org.apache.maven.archetypes \
-        -DarchetypeArtifactId=maven-archetype-quickstart \
-        -DarchetypeVersion=1.1 \
-        -DgroupId=com.github.poad.example \
-        -DartifactId=java-micronaut-grpc-server \
-        -Dversion=1.0-SNAPSHOT \
-        -Dpackage=com.github.poad.example.micronaut.grpc
+```sh
+sdk i gradle 7.2
 ```
 
 ## Generate Code
 
-```$bash
-protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut-grpc-server/src/main/java --proto_path=./proto message.proto
+```sh
+protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut-grpc-server/src/main/java --proto_path=./proto message.proto && \
 protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut-grpc-server/src/main/java --proto_path=./proto hello.proto
 ```
 
 ## MySQL
 
-```$bash
+```sh
 docker run --name mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=test -v "$(pwd)/mysql_ddl":/docker-entrypoint-initdb.d -it -d mysql:latest
 ```
 
 ## docker-compose を使用する場合
 
-```$bash
+```sh
 cd java-micronaut-grpc-server && \
-mvn clean install spring-boot:build-image && \
+./gradlew bootBuildImage && \
 cd ..
 docker-compose build && \
 docker-compose up -d mysql && \

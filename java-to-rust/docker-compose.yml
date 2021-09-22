@@ -6,7 +6,8 @@ services:
       dockerfile: dockerfile/Dockerfile
     container_name: postgres-grpc-example
     environment: 
-      POSTGRES_PASSWORD: ""
+      POSTGRES_HOST_AUTH_METHOD: "password"
+      POSTGRES_PASSWORD: "postgres"
     ports:
       - 5432:5432
     networks:
@@ -17,7 +18,7 @@ services:
       dockerfile: Dockerfile
     container_name: rust-grpc-server
     environment:
-      DATABASE_URL: "postgres://postgres@postgres/grpc_rust"
+      DATABASE_URL: "postgres://postgres:postgres@postgres/grpc_rust"
       RUST_LOG: info
     ports:
       - 50051:50051
@@ -40,6 +41,4 @@ services:
       - grpc-example-network
 networks:
   grpc-example-network:
-  default:
-    external:
-      name: grpc-example-network
+    name: grpc-example-network

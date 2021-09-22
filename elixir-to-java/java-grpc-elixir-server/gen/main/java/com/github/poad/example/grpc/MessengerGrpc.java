@@ -1,24 +1,11 @@
 package com.github.poad.example.grpc;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
-import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ClientCalls.asyncUnaryCall;
-import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
-import static io.grpc.stub.ClientCalls.blockingUnaryCall;
-import static io.grpc.stub.ClientCalls.futureUnaryCall;
-import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncUnaryCall;
-import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
-import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
 
 /**
  */
 @javax.annotation.Generated(
-    value = "by gRPC proto compiler (version 1.26.0)",
+    value = "by gRPC proto compiler (version 1.39.0)",
     comments = "Source: message.proto")
 public final class MessengerGrpc {
 
@@ -265,84 +252,84 @@ public final class MessengerGrpc {
      */
     public void getMessage(com.github.poad.example.grpc.GetMessageRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.MessageEntity> responseObserver) {
-      asyncUnimplementedUnaryCall(getGetMessageMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getGetMessageMethod(), responseObserver);
     }
 
     /**
      */
     public void listMessages(com.github.poad.example.grpc.GetMessagesRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.MessagesResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getListMessagesMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getListMessagesMethod(), responseObserver);
     }
 
     /**
      */
     public void putMessage(com.github.poad.example.grpc.MessageEntity request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.MessageEntity> responseObserver) {
-      asyncUnimplementedUnaryCall(getPutMessageMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getPutMessageMethod(), responseObserver);
     }
 
     /**
      */
     public void deleteMessage(com.github.poad.example.grpc.DeleteMessageRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.MessageEntity> responseObserver) {
-      asyncUnimplementedUnaryCall(getDeleteMessageMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteMessageMethod(), responseObserver);
     }
 
     /**
      */
     public void deleteMessages(com.github.poad.example.grpc.DeleteMessagesRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.DeleteMessagesResponse> responseObserver) {
-      asyncUnimplementedUnaryCall(getDeleteMessagesMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getDeleteMessagesMethod(), responseObserver);
     }
 
     /**
      */
     public void countMessages(com.github.poad.example.grpc.CountMessagesRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.MessageCount> responseObserver) {
-      asyncUnimplementedUnaryCall(getCountMessagesMethod(), responseObserver);
+      io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall(getCountMessagesMethod(), responseObserver);
     }
 
     @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
       return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
           .addMethod(
             getGetMessageMethod(),
-            asyncUnaryCall(
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 com.github.poad.example.grpc.GetMessageRequest,
                 com.github.poad.example.grpc.MessageEntity>(
                   this, METHODID_GET_MESSAGE)))
           .addMethod(
             getListMessagesMethod(),
-            asyncUnaryCall(
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 com.github.poad.example.grpc.GetMessagesRequest,
                 com.github.poad.example.grpc.MessagesResponse>(
                   this, METHODID_LIST_MESSAGES)))
           .addMethod(
             getPutMessageMethod(),
-            asyncUnaryCall(
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 com.github.poad.example.grpc.MessageEntity,
                 com.github.poad.example.grpc.MessageEntity>(
                   this, METHODID_PUT_MESSAGE)))
           .addMethod(
             getDeleteMessageMethod(),
-            asyncUnaryCall(
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 com.github.poad.example.grpc.DeleteMessageRequest,
                 com.github.poad.example.grpc.MessageEntity>(
                   this, METHODID_DELETE_MESSAGE)))
           .addMethod(
             getDeleteMessagesMethod(),
-            asyncUnaryCall(
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 com.github.poad.example.grpc.DeleteMessagesRequest,
                 com.github.poad.example.grpc.DeleteMessagesResponse>(
                   this, METHODID_DELETE_MESSAGES)))
           .addMethod(
             getCountMessagesMethod(),
-            asyncUnaryCall(
+            io.grpc.stub.ServerCalls.asyncUnaryCall(
               new MethodHandlers<
                 com.github.poad.example.grpc.CountMessagesRequest,
                 com.github.poad.example.grpc.MessageCount>(
@@ -369,7 +356,7 @@ public final class MessengerGrpc {
      */
     public void getMessage(com.github.poad.example.grpc.GetMessageRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.MessageEntity> responseObserver) {
-      asyncUnaryCall(
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getGetMessageMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -377,7 +364,7 @@ public final class MessengerGrpc {
      */
     public void listMessages(com.github.poad.example.grpc.GetMessagesRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.MessagesResponse> responseObserver) {
-      asyncUnaryCall(
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getListMessagesMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -385,7 +372,7 @@ public final class MessengerGrpc {
      */
     public void putMessage(com.github.poad.example.grpc.MessageEntity request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.MessageEntity> responseObserver) {
-      asyncUnaryCall(
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getPutMessageMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -393,7 +380,7 @@ public final class MessengerGrpc {
      */
     public void deleteMessage(com.github.poad.example.grpc.DeleteMessageRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.MessageEntity> responseObserver) {
-      asyncUnaryCall(
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getDeleteMessageMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -401,7 +388,7 @@ public final class MessengerGrpc {
      */
     public void deleteMessages(com.github.poad.example.grpc.DeleteMessagesRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.DeleteMessagesResponse> responseObserver) {
-      asyncUnaryCall(
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getDeleteMessagesMethod(), getCallOptions()), request, responseObserver);
     }
 
@@ -409,7 +396,7 @@ public final class MessengerGrpc {
      */
     public void countMessages(com.github.poad.example.grpc.CountMessagesRequest request,
         io.grpc.stub.StreamObserver<com.github.poad.example.grpc.MessageCount> responseObserver) {
-      asyncUnaryCall(
+      io.grpc.stub.ClientCalls.asyncUnaryCall(
           getChannel().newCall(getCountMessagesMethod(), getCallOptions()), request, responseObserver);
     }
   }
@@ -431,42 +418,42 @@ public final class MessengerGrpc {
     /**
      */
     public com.github.poad.example.grpc.MessageEntity getMessage(com.github.poad.example.grpc.GetMessageRequest request) {
-      return blockingUnaryCall(
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getGetMessageMethod(), getCallOptions(), request);
     }
 
     /**
      */
     public com.github.poad.example.grpc.MessagesResponse listMessages(com.github.poad.example.grpc.GetMessagesRequest request) {
-      return blockingUnaryCall(
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getListMessagesMethod(), getCallOptions(), request);
     }
 
     /**
      */
     public com.github.poad.example.grpc.MessageEntity putMessage(com.github.poad.example.grpc.MessageEntity request) {
-      return blockingUnaryCall(
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getPutMessageMethod(), getCallOptions(), request);
     }
 
     /**
      */
     public com.github.poad.example.grpc.MessageEntity deleteMessage(com.github.poad.example.grpc.DeleteMessageRequest request) {
-      return blockingUnaryCall(
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getDeleteMessageMethod(), getCallOptions(), request);
     }
 
     /**
      */
     public com.github.poad.example.grpc.DeleteMessagesResponse deleteMessages(com.github.poad.example.grpc.DeleteMessagesRequest request) {
-      return blockingUnaryCall(
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getDeleteMessagesMethod(), getCallOptions(), request);
     }
 
     /**
      */
     public com.github.poad.example.grpc.MessageCount countMessages(com.github.poad.example.grpc.CountMessagesRequest request) {
-      return blockingUnaryCall(
+      return io.grpc.stub.ClientCalls.blockingUnaryCall(
           getChannel(), getCountMessagesMethod(), getCallOptions(), request);
     }
   }
@@ -489,7 +476,7 @@ public final class MessengerGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.github.poad.example.grpc.MessageEntity> getMessage(
         com.github.poad.example.grpc.GetMessageRequest request) {
-      return futureUnaryCall(
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getGetMessageMethod(), getCallOptions()), request);
     }
 
@@ -497,7 +484,7 @@ public final class MessengerGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.github.poad.example.grpc.MessagesResponse> listMessages(
         com.github.poad.example.grpc.GetMessagesRequest request) {
-      return futureUnaryCall(
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getListMessagesMethod(), getCallOptions()), request);
     }
 
@@ -505,7 +492,7 @@ public final class MessengerGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.github.poad.example.grpc.MessageEntity> putMessage(
         com.github.poad.example.grpc.MessageEntity request) {
-      return futureUnaryCall(
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getPutMessageMethod(), getCallOptions()), request);
     }
 
@@ -513,7 +500,7 @@ public final class MessengerGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.github.poad.example.grpc.MessageEntity> deleteMessage(
         com.github.poad.example.grpc.DeleteMessageRequest request) {
-      return futureUnaryCall(
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getDeleteMessageMethod(), getCallOptions()), request);
     }
 
@@ -521,7 +508,7 @@ public final class MessengerGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.github.poad.example.grpc.DeleteMessagesResponse> deleteMessages(
         com.github.poad.example.grpc.DeleteMessagesRequest request) {
-      return futureUnaryCall(
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getDeleteMessagesMethod(), getCallOptions()), request);
     }
 
@@ -529,7 +516,7 @@ public final class MessengerGrpc {
      */
     public com.google.common.util.concurrent.ListenableFuture<com.github.poad.example.grpc.MessageCount> countMessages(
         com.github.poad.example.grpc.CountMessagesRequest request) {
-      return futureUnaryCall(
+      return io.grpc.stub.ClientCalls.futureUnaryCall(
           getChannel().newCall(getCountMessagesMethod(), getCallOptions()), request);
     }
   }

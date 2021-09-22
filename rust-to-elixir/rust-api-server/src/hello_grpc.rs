@@ -5,8 +5,6 @@
 #![allow(unknown_lints)]
 #![allow(clippy::all)]
 
-#![cfg_attr(rustfmt, rustfmt_skip)]
-
 #![allow(box_pointers)]
 #![allow(dead_code)]
 #![allow(missing_docs)]
@@ -58,7 +56,9 @@ impl GreeterClient {
 }
 
 pub trait Greeter {
-    fn say_hello(&mut self, ctx: ::grpcio::RpcContext, req: super::hello::HelloRequest, sink: ::grpcio::UnarySink<super::hello::HelloReply>);
+    fn say_hello(&mut self, ctx: ::grpcio::RpcContext, _req: super::hello::HelloRequest, sink: ::grpcio::UnarySink<super::hello::HelloReply>) {
+        grpcio::unimplemented_call!(ctx, sink)
+    }
 }
 
 pub fn create_greeter<S: Greeter + Send + Clone + 'static>(s: S) -> ::grpcio::Service {

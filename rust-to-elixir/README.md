@@ -1,15 +1,15 @@
 # elixir-grpc-example
 
-```$sh
+```sh
 brew install protobuf
 ```
 
-```$sh
+```sh
 cargo install protobuf-codegen
 cargo install grpcio-compiler
 ```
 
-```$sh
+```sh
 cargo new rust-api-server
 ```
 
@@ -19,19 +19,19 @@ cargo new rust-api-server
 
 ## create project
 
-```$sh
+```sh
 mix new grpc_server
 ```
 
 ## Install protobuf-elixir
 
-```$sh
+```sh
 mix escript.install hex protobuf
 ```
 
 ## Generate Code
 
-```$sh
+```sh
 protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto message.proto && \
 protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto hello.proto
 ```
@@ -40,13 +40,13 @@ protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plu
 
 ### MySQL
 
-```$sh
+```sh
 docker run --name mysql -p 3306:3306 -e MYSQL_ALLOW_EMPTY_PASSWORD=yes -e MYSQL_DATABASE=test -it -d mysql:latest
 ```
 
 ### migrate
 
-```$sh
+```sh
 cd grpc_server && \
 mix deps.get && \
 mix deps.update --all && \
@@ -56,19 +56,19 @@ cd ..
 
 ### Boot
 
-```$sh
+```sh
 cd grpc_server && \
 mix grpc.server
 ```
 
-```$sh
+```sh
 cd rust-api-server
 cargo run
 ```
 
 ## docker-compose を使用する場合
 
-```$sh
+```sh
 docker-compose build && \
 docker-compose up -d mysql && \
 docker exec -it -e MIX_ENV=prod elixir-grpc-server mix ecto.migrate && \

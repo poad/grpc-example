@@ -6,7 +6,7 @@ package com.github.poad.example.grpc;
 /**
  * Protobuf type {@code message.GetMessageRequest}
  */
-public  final class GetMessageRequest extends
+public final class GetMessageRequest extends
     com.google.protobuf.GeneratedMessageV3 implements
     // @@protoc_insertion_point(message_implements:message.GetMessageRequest)
     GetMessageRequestOrBuilder {
@@ -99,6 +99,7 @@ private static final long serialVersionUID = 0L;
    * <code>.message.UUIDEntity id = 1;</code>
    * @return Whether the id field is set.
    */
+  @java.lang.Override
   public boolean hasId() {
     return id_ != null;
   }
@@ -106,12 +107,14 @@ private static final long serialVersionUID = 0L;
    * <code>.message.UUIDEntity id = 1;</code>
    * @return The id.
    */
+  @java.lang.Override
   public com.github.poad.example.grpc.UUIDEntity getId() {
     return id_ == null ? com.github.poad.example.grpc.UUIDEntity.getDefaultInstance() : id_;
   }
   /**
    * <code>.message.UUIDEntity id = 1;</code>
    */
+  @java.lang.Override
   public com.github.poad.example.grpc.UUIDEntityOrBuilder getIdOrBuilder() {
     return getId();
   }
