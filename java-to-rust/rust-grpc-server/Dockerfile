@@ -1,4 +1,4 @@
-ARG LLVM_VERSION=12
+ARG LLVM_VERSION=13
 
 FROM buildpack-deps:stable-curl AS download
 
