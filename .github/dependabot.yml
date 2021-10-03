@@ -70,7 +70,7 @@ updates:
     rebase-strategy: auto
     assignees:
       - poad
-  - package-ecosystem: cargp
+  - package-ecosystem: cargo
     directory: '/java-to-rust/rust-grpc-server/'
     schedule:
       interval: daily
