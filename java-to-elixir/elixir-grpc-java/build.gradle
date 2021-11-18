@@ -3,6 +3,8 @@
  */
 buildscript {
     ext {
+        springBootVersion = '2.5.7'
+        springDependencyManagementVersion = '1.0.11.RELEASE'
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
         protobufVersion = '3.17.3'
         protobufPluginVersion = '0.8.17'
