@@ -3,13 +3,27 @@
  */
 buildscript {
     ext {
-        springBootVersion = '2.5.7'
+        // https://mvnrepository.com/artifact/net.devh/grpc-server-spring-boot-starter
+        grpcSpringBootVersion = '2.13.0.RELEASE'
+        springBootVersion = '2.6.1'
         springDependencyManagementVersion = '1.0.11.RELEASE'
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
-        protobufVersion = '3.17.3'
-        protobufPluginVersion = '0.8.17'
+        protobufVersion = '3.19.1'
+        // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
+        protobufPluginVersion = '0.8.18'
         // https://mvnrepository.com/artifact/io.grpc/grpc-bom
-        grpcVersion = '1.41.0'
+        grpcVersion = '1.42.1'
+        // https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
+        jakartaValidationApiVersion = '3.0.1'
+        // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
+        tomcatAnnotationsApi = '10.0.13'
+        // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-joda
+        jacksonDatatypeJodaVersion = '2.13.0'
+        // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
+        // jaxbApiVersion = '2.3.1'
+        // https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api/3.0.1
+        jaxbApiVersion = '3.0.1'
+        mockitoVersion = '4.+'
     }
 }
 
@@ -44,25 +58,25 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'jakarta.validation:jakarta.validation-api:3.0.0'
+    implementation "jakarta.validation:jakarta.validation-api:${jakartaValidationApiVersion}"
 
-    implementation 'net.devh:grpc-client-spring-boot-starter:2.12.0.RELEASE'
+    implementation "net.devh:grpc-server-spring-boot-starter:${grpcSpringBootVersion}"
     implementation "io.grpc:grpc-netty-shaded"
     // https://mvnrepository.com/artifact/io.grpc/grpc-protobuf
     implementation "io.grpc:grpc-protobuf"
     implementation "io.grpc:grpc-stub"
-    compileOnly 'org.apache.tomcat:annotations-api:6.0.53' // necessary for Java 9+
+    compileOnly "org.apache.tomcat:tomcat-annotations-api:${tomcatAnnotationsApi}" // necessary for Java 9+
 
     implementation "com.google.protobuf:protobuf-java-util"
     implementation 'io.micrometer:micrometer-registry-prometheus'
     implementation 'io.micrometer:micrometer-registry-jmx'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.12.5'
-    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonDatatypeJodaVersion}"
+    // implementation "javax.xml.bind:jaxb-api:${jaxbApiVersion}"
+    implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbApiVersion}"
     runtimeOnly 'io.micrometer:micrometer-registry-cloudwatch'
     testImplementation "io.grpc:grpc-testing"
-    testImplementation 'org.junit.vintage:junit-vintage-engine:5.8.0'
-    testImplementation 'org.powermock:powermock-api-mockito2:2.0.9'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 group = 'com.github.poad.example'

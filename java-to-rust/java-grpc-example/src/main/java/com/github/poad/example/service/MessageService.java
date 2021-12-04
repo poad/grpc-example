@@ -1,9 +1,9 @@
 package com.github.poad.example.service;
 
 import com.github.poad.example.model.Message;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 

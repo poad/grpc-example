@@ -3,9 +3,9 @@ package micronaut.grpc.api.client;
 import com.github.poad.example.grpc.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import jakarta.inject.Singleton;
 import micronaut.grpc.api.model.MessageModel;
 
-import javax.inject.Singleton;
 import javax.validation.constraints.NotBlank;
 import java.util.List;
 import java.util.Map;

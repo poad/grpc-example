@@ -3,13 +3,13 @@ package com.github.poad.example.controller;
 import com.github.poad.example.exception.NotFoundException;
 import com.github.poad.example.model.Message;
 import com.github.poad.example.service.MessageService;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 
 @Validated

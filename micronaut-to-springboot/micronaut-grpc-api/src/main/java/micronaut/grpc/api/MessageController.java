@@ -4,10 +4,10 @@ import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MediaType;
 import io.micronaut.http.annotation.*;
 import io.micronaut.validation.Validated;
+import jakarta.inject.Inject;
 import micronaut.grpc.api.client.MessageClient;
 import micronaut.grpc.api.model.MessageModel;
 
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 

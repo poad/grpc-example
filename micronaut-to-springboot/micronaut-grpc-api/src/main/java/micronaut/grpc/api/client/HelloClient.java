@@ -4,9 +4,9 @@ import com.github.poad.example.grpc.GreeterGrpc;
 import com.github.poad.example.grpc.HelloRequest;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import jakarta.inject.Named;
+import jakarta.inject.Singleton;
 
-import javax.inject.Named;
-import javax.inject.Singleton;
 import javax.validation.constraints.NotBlank;
 import java.util.Map;
 import java.util.Optional;

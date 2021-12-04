@@ -15,13 +15,13 @@ curl -s "https://get.sdkman.io" | sh
 ### Install OpenJDK
 
 ```sh
-sdk i java 11.0.12-zulu
+sdk i java 11.0.13.fx-librca
 ```
 
 ### Install Gradle
 
 ```sh
-sdk i gradle 7.2
+sdk i gradle 7.3.1
 ```
 
 ## Install elixir
