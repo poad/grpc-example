@@ -45,13 +45,6 @@ repositories {
     }
 }
 
-configurations {
-    all {
-        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
-    }
-}
-
-
 dependencies {
     implementation platform("com.google.protobuf:protobuf-bom:${protobufVersion}")
     implementation platform("io.grpc:grpc-bom:${grpcVersion}")
@@ -60,7 +53,6 @@ dependencies {
         exclude group: 'com.zaxxer', module: 'HikariCP'
     }
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'org.springframework.boot:spring-boot-starter-log4j2'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "jakarta.validation:jakarta.validation-api:${jakartaValidationApiVersion}"
 
