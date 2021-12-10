@@ -24,6 +24,8 @@ buildscript {
         // https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api/3.0.1
         jaxbApiVersion = '3.0.1'
         mockitoVersion = '4.+'
+
+        log4j2Version = '2.15.0'
     }
 }
 
@@ -41,7 +43,17 @@ repositories {
     }
 }
 
+configurations {
+    all {
+        exclude group: 'org.apache.logging.log4j', module: 'log4j-core'
+    }
+}
+
 dependencies {
+    implementation platform("org.apache.logging.log4j:log4j-bom:${log4j2Version}")
+    // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-to-slf4j
+    runtimeOnly "org.apache.logging.log4j:log4j-to-slf4j:${log4j2Version}"
+
     implementation platform("com.google.protobuf:protobuf-bom:${protobufVersion}")
     implementation platform("io.grpc:grpc-bom:${grpcVersion}")
 
