@@ -6,7 +6,7 @@ buildscript {
     ext {
         // https://mvnrepository.com/artifact/net.devh/grpc-server-spring-boot-starter
         grpcSpringBootVersion = '2.13.1.RELEASE'
-        springBootVersion = '2.6.1'
+        springBootVersion = '2.6.3'
         springDependencyManagementVersion = '1.0.11.RELEASE'
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
         protobufVersion = '3.19.1'
@@ -17,7 +17,7 @@ buildscript {
         // https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
         jakartaValidationApiVersion = '3.0.1'
         // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
-        tomcatAnnotationsApi = '10.0.13'
+        tomcatAnnotationsApi = '10.0.16'
         // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-joda
         jacksonDatatypeJodaVersion = '2.13.0'
         // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
