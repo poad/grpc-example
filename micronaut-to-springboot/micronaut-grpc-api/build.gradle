@@ -12,7 +12,7 @@ buildscript {
         // https://mvnrepository.com/artifact/io.micronaut/micronaut-bom
         micronautVersion = '3.2.0'
         // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
-        logbackVersion = "1.2.7"
+        logbackVersion = "1.2.10"
         // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
         // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
         junitJupiterVersion = "5.8.2"
