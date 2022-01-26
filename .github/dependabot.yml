@@ -20,7 +20,7 @@ updates:
     rebase-strategy: auto
     assignees:
       - poad
-  - package-ecosystem: maven
+  - package-ecosystem: gradle
     directory: '/elixir-to-java/java-grpc-elixir-server/'
     schedule:
       interval: daily
@@ -30,7 +30,7 @@ updates:
     rebase-strategy: auto
     assignees:
       - poad
-  - package-ecosystem: maven
+  - package-ecosystem: gradle
     directory: '/java-to-elixir/elixir-grpc-java'
     schedule:
       interval: daily
@@ -40,7 +40,7 @@ updates:
     rebase-strategy: auto
     assignees:
       - poad
-  - package-ecosystem: maven
+  - package-ecosystem: gradle
     directory: '/java-to-elixir/grpc_server/'
     schedule:
       interval: daily
@@ -50,7 +50,7 @@ updates:
     rebase-strategy: auto
     assignees:
       - poad
-  - package-ecosystem: maven
+  - package-ecosystem: gradle
     directory: '/java-to-java/java-api-server/'
     schedule:
       interval: daily
@@ -60,7 +60,7 @@ updates:
     rebase-strategy: auto
     assignees:
       - poad
-  - package-ecosystem: maven
+  - package-ecosystem: gradle
     directory: '/java-to-java/java-grpc-server/'
     schedule:
       interval: daily
@@ -70,7 +70,7 @@ updates:
     rebase-strategy: auto
     assignees:
       - poad
-  - package-ecosystem: maven
+  - package-ecosystem: gradle
     directory: '/java-to-rust/java-grpc-example/'
     schedule:
       interval: daily
@@ -90,7 +90,7 @@ updates:
     rebase-strategy: auto
     assignees:
       - poad
-  - package-ecosystem: maven
+  - package-ecosystem: gradle
     directory: '/micronaut-to-springboot/java-micronaut-grpc-server/'
     schedule:
       interval: daily
@@ -100,7 +100,7 @@ updates:
     rebase-strategy: auto
     assignees:
       - poad
-  - package-ecosystem: maven
+  - package-ecosystem: gradle
     directory: '/micronaut-to-springboot/micronaut-grpc-api/'
     schedule:
       interval: daily
