@@ -10,7 +10,7 @@ buildscript {
         // https://mvnrepository.com/artifact/io.grpc/grpc-bom
         grpcVersion = '1.44.0'
         // https://mvnrepository.com/artifact/io.micronaut/micronaut-bom
-        micronautVersion = '3.3.2'
+        micronautVersion = '3.3.3'
         // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
         logbackVersion = "1.2.10"
         // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
