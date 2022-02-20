@@ -8,7 +8,7 @@ buildscript {
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
         protobufPluginVersion = '0.8.18'
         // https://mvnrepository.com/artifact/io.grpc/grpc-bom
-        grpcVersion = '1.44.0'
+        grpcVersion = '1.44.1'
         // https://mvnrepository.com/artifact/io.micronaut/micronaut-bom
         micronautVersion = '3.3.3'
         // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
