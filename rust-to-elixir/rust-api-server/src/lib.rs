@@ -64,7 +64,7 @@ pub mod handlers {
         let client = MessengerClient::new(ch);
         let mut request = GetMessageRequest::new();
         let mut id = UUIDEntity::new();
-        let id_value = req.0;
+        let id_value = req.into_inner();
         id.set_value(id_value.0.clone());
         request.set_id(id);
         let message = client
@@ -145,8 +145,8 @@ pub mod handlers {
         let mut request = MessageEntity::new();
         let message = &req.message;
         let mut id = UUIDEntity::new();
-        let id_value = path.0;
-        id.set_value(id_value.0.clone());
+        let id_value = path;
+        id.set_value(id_value.into_inner().0.clone());
 
         request.set_id(id.borrow().to_owned());
         request.set_message(message.to_string());
@@ -173,7 +173,7 @@ pub mod handlers {
 
         let mut request = DeleteMessageRequest::new();
         let mut id = UUIDEntity::new();
-        let id_value = req.0;
+        let id_value = req.into_inner();
         id.set_value(id_value.0);
         request.set_id(id);
         let message = client
