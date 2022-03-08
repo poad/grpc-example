@@ -17,7 +17,7 @@ buildscript {
         // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
         junitJupiterVersion = "5.8.2"
         // https://mvnrepository.com/artifact/io.micronaut.test/micronaut-test-junit5
-        micronautJunit5Version = '3.0.5'
+        micronautJunit5Version = '3.1.0'
     }
 }
 
