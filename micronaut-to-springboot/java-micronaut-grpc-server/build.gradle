@@ -17,7 +17,7 @@ buildscript {
         jakartaValidationApiVersion = '3.0.1'
         // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
         tomcatAnnotationsApi = '10.0.18'
-        // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc/10.0.13
+        // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc
         tomcatJdbcVersion = '10.0.18'
         // https://mvnrepository.com/artifact/mysql/mysql-connector-java
         mysqlConnectorVersion = '8.0.28'
@@ -25,10 +25,10 @@ buildscript {
         jacksonDatatypeJodaVersion = '2.13.2'
         // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
         // jaxbApiVersion = '2.3.1'
-        // https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api/3.0.1
+        // https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api
         jaxbApiVersion = '3.0.1'
         mockitoVersion = '4.+'
-
+        // https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-bom
         log4j2Version = '2.17.2'
     }
 }
