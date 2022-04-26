@@ -28,7 +28,7 @@ pub fn generate_uuid(_conn: &PgConnection) -> String {
 //    let uuid: &uuid::Uuid = diesel::sql_query("SELECT uuid_generate_v4();").load(_conn).expect("").first().unwrap();
 //    // TODO SQLで生成するように変更する
     let uuid = Uuid::new_v4();
-    uuid.to_hyphenated_ref().to_string().clone()
+    uuid.hyphenated().as_ref().to_string().clone()
 }
 
 pub fn create_message(conn: &PgConnection, id: &str, content: &str) -> Message {
