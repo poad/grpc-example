@@ -32,8 +32,8 @@ mix escript.install hex protobuf
 ## Generate Code
 
 ```sh
-protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto message.proto && \
-protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto hello.proto
+protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=$(which grpc_rust_plugin) --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto message.proto && \
+protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=$(which grpc_rust_plugin) --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto hello.proto
 ```
 
 ## docker-compose を使用しない場合

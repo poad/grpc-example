@@ -37,6 +37,7 @@ pub mod handlers {
     use crate::{Hello, HelloResponse, Message};
     use actix_web::{web, HttpResponse, Responder};
     use grpcio::{ChannelBuilder, EnvBuilder};
+    use protobuf::MessageField;
     use std::borrow::Borrow;
     use std::env;
     use std::sync::Arc;
@@ -47,11 +48,11 @@ pub mod handlers {
         let ch = ChannelBuilder::new(env).connect(format!("{}:{}", host, 50050).as_str());
         let client = GreeterClient::new(ch);
         let mut request = HelloRequest::new();
-        request.set_name((&req).name.to_string());
+        request.name = (&req).name.to_string();
         let result = client.say_hello(&request);
         let message = result
             .expect("Failed to gRPC call")
-            .get_message()
+            .message
             .to_string();
         HttpResponse::Ok()
             .body(serde_json::to_string(&HelloResponse { message }).expect("serialize failed"))
@@ -65,12 +66,12 @@ pub mod handlers {
         let mut request = GetMessageRequest::new();
         let mut id = UUIDEntity::new();
         let id_value = req.into_inner();
-        id.set_value(id_value.0.clone());
-        request.set_id(id);
+        id.value = id_value.0.clone();
+        request.id = MessageField::from(MessageField::some(id));
         let message = client
             .get_message(request.borrow())
             .expect("Failed to gRPC call")
-            .get_message()
+            .message
             .to_string();
         HttpResponse::Ok().body(
             serde_json::to_string(&Message {
@@ -90,11 +91,11 @@ pub mod handlers {
         let result = client.list_messages(&request);
         let messages = result
             .expect("Failed to gRPC call")
-            .get_messages()
+            .messages
             .iter()
             .map(|m| Message {
-                id: Some((&m).get_id().get_value().to_string()),
-                message: (&m).get_message().to_string(),
+                id: Some((&m).id.value.to_string()),
+                message: (&m).message.to_string(),
             })
             .collect::<Vec<Message>>();
         HttpResponse::Ok().body(serde_json::to_string(&messages).expect("serialize failed"))
@@ -117,16 +118,16 @@ pub mod handlers {
         let mut request = MessageEntity::new();
         let message = &req.message;
 
-        request.set_id(id.borrow().to_owned());
-        request.set_message(message.to_string());
+        request.id = MessageField::from(MessageField::some(id.borrow().to_owned()));
+        request.message = message.to_string();
         let message = client
             .put_message(request.borrow())
             .expect("Failed to gRPC call")
-            .get_message()
+            .message
             .to_string();
         HttpResponse::Ok().body(
             serde_json::to_string(&Message {
-                id: Some(id.get_value().parse().unwrap()),
+                id: Some(id.value.parse().unwrap()),
                 message,
             })
             .expect("serialize failed"),
@@ -146,19 +147,19 @@ pub mod handlers {
         let message = &req.message;
         let mut id = UUIDEntity::new();
         let id_value = path;
-        id.set_value(id_value.into_inner().0.clone());
+        id.value = id_value.into_inner().0.clone();
 
-        request.set_id(id.borrow().to_owned());
-        request.set_message(message.to_string());
+        request.id = MessageField::from(MessageField::some(id.borrow().to_owned()));
+        request.message = message.to_string();
         let message = client
             .put_message(request.borrow())
             .expect("Failed to gRPC call")
-            .get_message()
+            .message
             .to_string();
 
         HttpResponse::Ok().body(
             serde_json::to_string(&Message {
-                id: Some(id.get_value().parse().unwrap()),
+                id: Some(id.value.parse().unwrap()),
                 message,
             })
             .expect("serialize failed"),
@@ -174,16 +175,16 @@ pub mod handlers {
         let mut request = DeleteMessageRequest::new();
         let mut id = UUIDEntity::new();
         let id_value = req.into_inner();
-        id.set_value(id_value.0);
-        request.set_id(id);
+        id.value = id_value.0;
+        request.id = MessageField::from(MessageField::some(id));
         let message = client
             .delete_message(request.borrow())
             .expect("Failed to gRPC call");
 
         HttpResponse::Ok().body(
             serde_json::to_string(&Message {
-                id: Some((&message.get_id().get_value()).to_string()),
-                message: message.get_message().to_string(),
+                id: Some((&message.id.value).to_string()),
+                message: message.message.to_string(),
             })
             .expect("serialize failed"),
         )
