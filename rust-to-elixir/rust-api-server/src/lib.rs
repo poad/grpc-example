@@ -37,7 +37,7 @@ pub mod handlers {
     use crate::{Hello, HelloResponse, Message};
     use actix_web::{web, HttpResponse, Responder};
     use grpcio::{ChannelBuilder, EnvBuilder};
-    use protobuf::MessageField;
+    use protobuf::*;
     use std::borrow::Borrow;
     use std::env;
     use std::sync::Arc;
@@ -67,7 +67,7 @@ pub mod handlers {
         let mut id = UUIDEntity::new();
         let id_value = req.into_inner();
         id.value = id_value.0.clone();
-        request.id = MessageField::from(MessageField::some(id));
+        request.id = SingularPtrField::from(SingularPtrField::some(id));
         let message = client
             .get_message(request.borrow())
             .expect("Failed to gRPC call")
@@ -94,7 +94,7 @@ pub mod handlers {
             .messages
             .iter()
             .map(|m| Message {
-                id: Some((&m).id.value.to_string()),
+                id: Some((&m).get_id().get_value().to_string()),
                 message: (&m).message.to_string(),
             })
             .collect::<Vec<Message>>();
@@ -118,7 +118,7 @@ pub mod handlers {
         let mut request = MessageEntity::new();
         let message = &req.message;
 
-        request.id = MessageField::from(MessageField::some(id.borrow().to_owned()));
+        request.id = SingularPtrField::from(SingularPtrField::some((&id).to_owned()));
         request.message = message.to_string();
         let message = client
             .put_message(request.borrow())
@@ -149,7 +149,7 @@ pub mod handlers {
         let id_value = path;
         id.value = id_value.into_inner().0.clone();
 
-        request.id = MessageField::from(MessageField::some(id.borrow().to_owned()));
+        request.id = SingularPtrField::from(SingularPtrField::some((&id).to_owned()));
         request.message = message.to_string();
         let message = client
             .put_message(request.borrow())
@@ -176,14 +176,14 @@ pub mod handlers {
         let mut id = UUIDEntity::new();
         let id_value = req.into_inner();
         id.value = id_value.0;
-        request.id = MessageField::from(MessageField::some(id));
+        request.id = SingularPtrField::from(SingularPtrField::some(id));
         let message = client
             .delete_message(request.borrow())
             .expect("Failed to gRPC call");
 
         HttpResponse::Ok().body(
             serde_json::to_string(&Message {
-                id: Some((&message.id.value).to_string()),
+                id: Some(message.get_id().get_value().to_string()),
                 message: message.message.to_string(),
             })
             .expect("serialize failed"),

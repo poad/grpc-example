@@ -3,14 +3,18 @@ name = "rust-grpc-server"
 version = "0.1.0"
 authors = ["Kenji Saito <ken-yo@mbr.nifty.com>"]
 edition = "2021"
-#build = "build.rs"
 
 [dependencies]
-grpcio = { version = "*", default-features = false, features = ["protobuf-codec"] }
+grpcio = { version = "*", default-features = true, features = ["protobuf-codec","boringssl"] }
+grpcio-sys = { version = "*", default-features = true }
 libc = "*"
-protobuf = "*"
-futures = "*"
-futures-cpupool = "*"
+protobuf = "^2.0"
+futures = "~0.3"
+futures-cpupool = "~0.1"
+futures-channel = { version = "~0.3", features = ["sink"] }
+futures-executor = "~0.3"
+futures-util = { version = "~0.3", features = ["sink"] }
+futures-timer = "*"
 prost = "*"
 bytes = "*"
 log = "*"

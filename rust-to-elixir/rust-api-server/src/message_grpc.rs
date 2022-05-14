@@ -50,15 +50,13 @@ impl UuidGeneratorClient {
     pub fn generate_uuid_async(&self, req: &super::message::GenerateUUIDRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::message::UUIDEntity>> {
         self.generate_uuid_async_opt(req, ::grpcio::CallOption::default())
     }
-    pub fn spawn<F>(&self, f: F) where F: ::std::future::Future<Output = ()> + Send + 'static {
+    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Output = ()> + Send + 'static {
         self.client.spawn(f)
     }
 }
 
 pub trait UuidGenerator {
-    fn generate_uuid(&mut self, ctx: ::grpcio::RpcContext, _req: super::message::GenerateUUIDRequest, sink: ::grpcio::UnarySink<super::message::UUIDEntity>) {
-        grpcio::unimplemented_call!(ctx, sink)
-    }
+    fn generate_uuid(&mut self, ctx: ::grpcio::RpcContext, req: super::message::GenerateUUIDRequest, sink: ::grpcio::UnarySink<super::message::UUIDEntity>);
 }
 
 pub fn create_uuid_generator<S: UuidGenerator + Send + Clone + 'static>(s: S) -> ::grpcio::Service {
@@ -219,30 +217,18 @@ impl MessengerClient {
     pub fn count_messages_async(&self, req: &super::message::CountMessagesRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::message::MessageCount>> {
         self.count_messages_async_opt(req, ::grpcio::CallOption::default())
     }
-    pub fn spawn<F>(&self, f: F) where F: ::std::future::Future<Output = ()> + Send + 'static {
+    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Output = ()> + Send + 'static {
         self.client.spawn(f)
     }
 }
 
 pub trait Messenger {
-    fn get_message(&mut self, ctx: ::grpcio::RpcContext, _req: super::message::GetMessageRequest, sink: ::grpcio::UnarySink<super::message::MessageEntity>) {
-        grpcio::unimplemented_call!(ctx, sink)
-    }
-    fn list_messages(&mut self, ctx: ::grpcio::RpcContext, _req: super::message::GetMessagesRequest, sink: ::grpcio::UnarySink<super::message::MessagesResponse>) {
-        grpcio::unimplemented_call!(ctx, sink)
-    }
-    fn put_message(&mut self, ctx: ::grpcio::RpcContext, _req: super::message::MessageEntity, sink: ::grpcio::UnarySink<super::message::MessageEntity>) {
-        grpcio::unimplemented_call!(ctx, sink)
-    }
-    fn delete_message(&mut self, ctx: ::grpcio::RpcContext, _req: super::message::DeleteMessageRequest, sink: ::grpcio::UnarySink<super::message::MessageEntity>) {
-        grpcio::unimplemented_call!(ctx, sink)
-    }
-    fn delete_messages(&mut self, ctx: ::grpcio::RpcContext, _req: super::message::DeleteMessagesRequest, sink: ::grpcio::UnarySink<super::message::DeleteMessagesResponse>) {
-        grpcio::unimplemented_call!(ctx, sink)
-    }
-    fn count_messages(&mut self, ctx: ::grpcio::RpcContext, _req: super::message::CountMessagesRequest, sink: ::grpcio::UnarySink<super::message::MessageCount>) {
-        grpcio::unimplemented_call!(ctx, sink)
-    }
+    fn get_message(&mut self, ctx: ::grpcio::RpcContext, req: super::message::GetMessageRequest, sink: ::grpcio::UnarySink<super::message::MessageEntity>);
+    fn list_messages(&mut self, ctx: ::grpcio::RpcContext, req: super::message::GetMessagesRequest, sink: ::grpcio::UnarySink<super::message::MessagesResponse>);
+    fn put_message(&mut self, ctx: ::grpcio::RpcContext, req: super::message::MessageEntity, sink: ::grpcio::UnarySink<super::message::MessageEntity>);
+    fn delete_message(&mut self, ctx: ::grpcio::RpcContext, req: super::message::DeleteMessageRequest, sink: ::grpcio::UnarySink<super::message::MessageEntity>);
+    fn delete_messages(&mut self, ctx: ::grpcio::RpcContext, req: super::message::DeleteMessagesRequest, sink: ::grpcio::UnarySink<super::message::DeleteMessagesResponse>);
+    fn count_messages(&mut self, ctx: ::grpcio::RpcContext, req: super::message::CountMessagesRequest, sink: ::grpcio::UnarySink<super::message::MessageCount>);
 }
 
 pub fn create_messenger<S: Messenger + Send + Clone + 'static>(s: S) -> ::grpcio::Service {

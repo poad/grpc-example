@@ -85,8 +85,8 @@ jobs:
             dir: 'rust-to-elixir',
             pre: 'cd rust-to-elixir && cd grpc_server && mix local.hex --force && mix escript.install hex --force protobuf && cd ../..',
             gen: [
-              'protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto message.proto',
-              'protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=`which grpc_rust_plugin` --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./proto hello.proto'
+              'protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=$(which grpc_rust_plugin) --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./rust-api-server/src/proto message.proto',
+              'protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=$(which grpc_rust_plugin) --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./rust-api-server/src/proto hello.proto'
             ],
             build: [ 'docker-compose build', 'echo ""' ]
           }

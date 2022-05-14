@@ -50,15 +50,13 @@ impl GreeterClient {
     pub fn say_hello_async(&self, req: &super::hello::HelloRequest) -> ::grpcio::Result<::grpcio::ClientUnaryReceiver<super::hello::HelloReply>> {
         self.say_hello_async_opt(req, ::grpcio::CallOption::default())
     }
-    pub fn spawn<F>(&self, f: F) where F: ::std::future::Future<Output = ()> + Send + 'static {
+    pub fn spawn<F>(&self, f: F) where F: ::futures::Future<Output = ()> + Send + 'static {
         self.client.spawn(f)
     }
 }
 
 pub trait Greeter {
-    fn say_hello(&mut self, ctx: ::grpcio::RpcContext, _req: super::hello::HelloRequest, sink: ::grpcio::UnarySink<super::hello::HelloReply>) {
-        grpcio::unimplemented_call!(ctx, sink)
-    }
+    fn say_hello(&mut self, ctx: ::grpcio::RpcContext, req: super::hello::HelloRequest, sink: ::grpcio::UnarySink<super::hello::HelloReply>);
 }
 
 pub fn create_greeter<S: Greeter + Send + Clone + 'static>(s: S) -> ::grpcio::Service {

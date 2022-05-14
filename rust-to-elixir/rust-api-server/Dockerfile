@@ -10,6 +10,7 @@ WORKDIR /root
 
 COPY src /root/rust-api-server/src
 COPY Cargo.toml /root/rust-api-server/Cargo.toml
+COPY build.rs /root/rust-api-server/build.rs
 
 WORKDIR /root/rust-api-server/
 
