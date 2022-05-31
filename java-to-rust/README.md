@@ -15,8 +15,8 @@ cargo install grpcio-compiler
 ```
 
 ```sh
-protoc --rust_out=./rust-grpc-server/src/ --grpc_out=./rust-grpc-server/src/ --plugin=protoc-gen-grpc=$(which grpc_rust_plugin) --java_out=./java-grpc-example/src/main/java --proto_path=./proto message.proto && \
-protoc --proto_path=./proto --rust_out=./rust-grpc-server/src/ --grpc_out=./rust-grpc-server/src/ --plugin=protoc-gen-grpc=$(which grpc_rust_plugin) --java_out=./java-grpc-example/src/main/java --proto_path=./proto hello.proto
+protoc --rust_out=./rust-grpc-server/src/ --grpc_out=./rust-grpc-server/src/ --plugin=protoc-gen-grpc=$(which grpc_rust_plugin) --java_out=./java-grpc-example/src/main/java --proto_path=./rust-grpc-server/src/proto message.proto && \
+protoc --rust_out=./rust-grpc-server/src/ --grpc_out=./rust-grpc-server/src/ --plugin=protoc-gen-grpc=$(which grpc_rust_plugin) --java_out=./java-grpc-example/src/main/java --proto_path=./rust-grpc-server/src/proto hello.proto
 ```
 
 ## Build and run by docker-compose

@@ -12,6 +12,7 @@ mod hello_grpc;
 mod message;
 mod message_grpc;
 
+use protobuf::SingularPtrField;
 use std::sync::Arc;
 
 use futures::channel::oneshot;
@@ -39,9 +40,9 @@ struct MessageService;
 
 impl Greeter for GreeterService {
     fn say_hello(&mut self, ctx: RpcContext<'_>, req: HelloRequest, sink: UnarySink<HelloReply>) {
-        let msg = format!("Hello {}", req.get_name());
+        let msg = format!("Hello {}", req.name);
         let mut resp = HelloReply::new();
-        resp.set_message(msg.clone());
+        resp.message = msg.clone();
 
         let f = sink
             .success(resp)
@@ -74,11 +75,11 @@ impl Messenger for MessageService {
         info!("connected to database");
 
         let id = req.get_id();
-        let message = get_message(&connection, id.get_value());
+        let message = get_message(&connection, &id.get_value());
 
         let mut entity = MessageEntity::new();
-        entity.set_id(id.clone());
-        entity.set_message(message.content.clone());
+        entity.id = SingularPtrField::from(SingularPtrField::some(id.to_owned()));
+        entity.message = message.content.clone();
 
         let f = sink
             .success(entity)
@@ -92,19 +93,18 @@ impl Messenger for MessageService {
         info!("connected to database");
 
         let mut resp = MessagesResponse::new();
-        resp.set_messages(
+        resp.messages =
             list_massages(&connection)
                 .iter()
                 .map(|message| {
                     let mut entity = MessageEntity::new();
                     let mut uuid = UUIDEntity::new();
-                    uuid.set_value(message.id.clone());
-                    entity.set_id(uuid);
-                    entity.set_message(message.content.clone());
+                    uuid.value = message.id.clone();
+                    entity.id = SingularPtrField::from(SingularPtrField::some(uuid));
+                    entity.message = message.content.clone();
                     entity
                 })
-                .collect()
-        );
+                .collect();
         let f = sink
             .success(resp)
             .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
@@ -116,8 +116,8 @@ impl Messenger for MessageService {
         let connection = establish_connection();
         info!("connected to database");
 
-        let id = req.get_id().get_value();
-        let message = req.get_message();
+        let id = &req.get_id().get_value();
+        let message = req.message.as_str();
 
         let entity = if exists_message(&connection, id) {
             update_message(&connection, id, message)
@@ -127,9 +127,9 @@ impl Messenger for MessageService {
 
         let mut resp = MessageEntity::new();
         let mut uuid = UUIDEntity::new();
-        uuid.set_value(entity.id.clone());
-        resp.set_id(uuid);
-        resp.set_message(entity.content.clone());
+        uuid.value = entity.id.clone();
+        resp.id = SingularPtrField::from(SingularPtrField::some(uuid));
+        resp.message = entity.content.clone();
 
         let f = sink
             .success(resp)
@@ -142,16 +142,16 @@ impl Messenger for MessageService {
         let connection = establish_connection();
         info!("connected to database");
 
-        let id = req.get_id().get_value();
+        let id = req.get_id();
 
-        let entity = get_message(&connection, id);
-        delete_message(&connection, id);
+        let entity = get_message(&connection, &id.get_value());
+        delete_message(&connection, &id.get_value());
 
         let mut resp = MessageEntity::new();
         let mut uuid = UUIDEntity::new();
-        uuid.set_value(entity.id.clone());
-        resp.set_id(uuid);
-        resp.set_message(entity.content.clone());
+        uuid.value = entity.id.clone();
+        resp.id = SingularPtrField::from(SingularPtrField::some(uuid));
+        resp.message = entity.content.clone();
 
         let f = sink
             .success(resp)
@@ -180,7 +180,7 @@ impl Messenger for MessageService {
         let count = count_massages(&connection);
 
         let mut resp = MessageCount::new();
-        resp.set_count(count);
+        resp.count = count;
 
         let f = sink
             .success(resp)

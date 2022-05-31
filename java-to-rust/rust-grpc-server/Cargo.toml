@@ -25,3 +25,6 @@ dotenv = "*"
 uuid = { version = "*", features = ["v4", "v5"] }
 
 ctrlc = "*"
+
+[build-dependencies]
+protoc-grpcio = "*"

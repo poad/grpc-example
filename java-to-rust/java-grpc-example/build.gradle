@@ -95,7 +95,7 @@ tasks.withType(JavaCompile) {
 sourceSets {
     main {
         proto {
-            srcDir "$rootDir/../proto"
+            srcDir "$rootDir/../rust-grpc-server/src/proto"
         }
     }
 }
