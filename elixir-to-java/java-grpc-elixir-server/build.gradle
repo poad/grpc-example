@@ -13,7 +13,7 @@ buildscript {
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
         protobufPluginVersion = '0.8.18'
         // https://mvnrepository.com/artifact/io.grpc/grpc-bom
-        grpcVersion = '1.46.0'
+        grpcVersion = '1.47.0'
         // https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
         jakartaValidationApiVersion = '3.0.2'
         // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
