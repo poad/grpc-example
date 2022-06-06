@@ -1,21 +1,19 @@
 [package]
 name = "rust-grpc-server"
-version = "0.1.0"
+version = "0.0.0"
 authors = ["Kenji Saito <ken-yo@mbr.nifty.com>"]
 edition = "2021"
 
 [dependencies]
-grpcio = { version = "*", default-features = true, features = ["protobuf-codec","boringssl"] }
-grpcio-sys = { version = "*", default-features = true }
-libc = "*"
-protobuf = "^2.0"
-futures = "~0.3"
-futures-cpupool = "~0.1"
-futures-channel = { version = "~0.3", features = ["sink"] }
-futures-executor = "~0.3"
-futures-util = { version = "~0.3", features = ["sink"] }
-futures-timer = "*"
+tonic = "*"
+tonic-web = "*"
+futures = "*"
+tokio = { version = "*", features = ["rt", "rt-multi-thread", "macros"] }
+tokio-stream = "*"
 prost = "*"
+rand = "*"
+
+libc = "*"
 bytes = "*"
 log = "*"
 env_logger = "*"
@@ -23,8 +21,8 @@ env_logger = "*"
 diesel = { version = "*", features = ["postgres", "uuid"] }
 dotenv = "*"
 uuid = { version = "*", features = ["v4", "v5"] }
-
 ctrlc = "*"
 
+
 [build-dependencies]
-protoc-grpcio = "*"
+tonic-build = "*"

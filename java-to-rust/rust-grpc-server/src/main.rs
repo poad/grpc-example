@@ -1,5 +1,3 @@
-
-#[macro_use]
 extern crate log;
 extern crate env_logger;
 extern crate rust_grpc_server;
@@ -7,117 +5,121 @@ extern crate diesel;
 extern crate ctrlc;
 
 mod hello;
-mod hello_grpc;
-
 mod message;
-mod message_grpc;
 
-use protobuf::SingularPtrField;
-use std::sync::Arc;
+use log::info;
 
-use futures::channel::oneshot;
-use futures::{TryFutureExt, FutureExt};
-use grpcio::{Environment, RpcContext, ServerBuilder, UnarySink};
+use tonic::{transport::Server, Request, Response, Status};
 
-use hello_grpc::{Greeter};
-use hello::{HelloReply, HelloRequest};
-
-use message_grpc::*;
-use message::*;
+use crate::hello::{greeter_server::*, *};
+use crate::message::{uuid_generator_server::*, messenger_server::*, *};
 
 use self::rust_grpc_server::*;
-use futures::channel::oneshot::{Sender, Receiver};
-use futures::executor::block_on;
 
-#[derive(Clone)]
+#[derive(Default)]
 struct GreeterService;
 
-#[derive(Clone)]
+#[derive(Default)]
 struct UuidService;
 
-#[derive(Clone)]
-struct MessageService;
+#[derive(Default)]
+struct MessagerService;
 
+#[tonic::async_trait]
 impl Greeter for GreeterService {
-    fn say_hello(&mut self, ctx: RpcContext<'_>, req: HelloRequest, sink: UnarySink<HelloReply>) {
-        let msg = format!("Hello {}", req.name);
-        let mut resp = HelloReply::new();
-        resp.message = msg.clone();
+    async fn say_hello(
+            &self,
+            request: Request<HelloRequest>,
+        ) -> Result<Response<HelloReply>, Status> {
+        let msg = format!("Hello {}", request.get_ref().name);
+        let reply = HelloReply{
+            message: msg.clone()
+        };
 
-        let f = sink
-            .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
-            .map(move |_| println!("Responded {{ {:?} }}", msg));
-        ctx.spawn(f);
+        Ok(Response::new(reply))
     }
 }
 
+#[tonic::async_trait]
 impl UuidGenerator for UuidService {
-    fn generate_uuid(&mut self, ctx: RpcContext<'_>, req: GenerateUUIDRequest, sink: UnarySink<UUIDEntity>) {
+    async fn generate_uuid(
+            &self,
+            _request: Request<GenerateUuidRequest>,
+        ) -> Result<Response<UuidEntity>, Status> {
+
         let connection = establish_connection();
         info!("connected to database");
 
-        let mut resp = UUIDEntity::new();
-        let uuid = generate_uuid(&connection);
-        resp.value = uuid.clone();
+        let reply = UuidEntity{
+            value: generate_uuid(&connection)
+        };
 
-        let f = sink
-            .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
-            .map(move |_| println!("Responded {{ {:?} }}", uuid));
-        ctx.spawn(f)
+        Ok(Response::new(reply))
     }
 }
 
-impl Messenger for MessageService {
-    fn get_message(&mut self, ctx: RpcContext, req: GetMessageRequest, sink: UnarySink<MessageEntity>) {
-        let connection = establish_connection();
+#[tonic::async_trait]
+impl Messenger for MessagerService {
+    async fn get_message(
+            &self,
+            request: Request<GetMessageRequest>,
+        ) -> Result<Response<MessageEntity>, Status> {
+
+            let connection = establish_connection();
         info!("connected to database");
 
-        let id = req.get_id();
-        let message = get_message(&connection, &id.get_value());
+        let uuid = request.get_ref().id.as_ref();
+        let id = &(uuid).expect("").value;
 
-        let mut entity = MessageEntity::new();
-        entity.id = SingularPtrField::from(SingularPtrField::some(id.to_owned()));
-        entity.message = message.content.clone();
+        let message = get_message(&connection, &id.as_str());
+        let content = message.content;
 
-        let f = sink
-            .success(entity)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
-            .map(move |_| println!("Responded {{ {:?} }}", message.content));
-        ctx.spawn(f)
+        let reply = MessageEntity{
+            id: Some(UuidEntity{value: id.to_string()}),
+            message: content
+
+        };
+
+        Ok(Response::new(reply))
     }
 
-    fn list_messages(&mut self, ctx: RpcContext, req: GetMessagesRequest, sink: UnarySink<MessagesResponse>) {
+    async fn list_messages(
+            &self,
+            _request: Request<GetMessagesRequest>,
+        ) -> Result<Response<MessagesResponse>, Status> {
+
         let connection= establish_connection();
         info!("connected to database");
 
-        let mut resp = MessagesResponse::new();
-        resp.messages =
+        let reply = MessagesResponse {
+        messages:
             list_massages(&connection)
                 .iter()
                 .map(|message| {
-                    let mut entity = MessageEntity::new();
-                    let mut uuid = UUIDEntity::new();
-                    uuid.value = message.id.clone();
-                    entity.id = SingularPtrField::from(SingularPtrField::some(uuid));
-                    entity.message = message.content.clone();
+                    let entity = MessageEntity{
+                        id: Some(UuidEntity{
+                        value: message.id.clone()
+                    }),
+                        message: message.content.clone()
+                    };
                     entity
                 })
-                .collect();
-        let f = sink
-            .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
-            .map(move |resp| println!("Responded {{ {:?} }}", resp));
-        ctx.spawn(f)
+                .collect()
+            };
+
+        Ok(Response::new(reply))
     }
 
-    fn put_message(&mut self, ctx: RpcContext, req: MessageEntity, sink: UnarySink<MessageEntity>) {
+    async fn put_message(
+            &self,
+            request: Request<MessageEntity>,
+        ) -> Result<Response<MessageEntity>, Status> {
         let connection = establish_connection();
         info!("connected to database");
 
-        let id = &req.get_id().get_value();
-        let message = req.message.as_str();
+        let uuid = request.get_ref().id.as_ref();
+        let id = &(uuid).expect("").value;
+        let message = request.get_ref().message.as_str();
 
         let entity = if exists_message(&connection, id) {
             update_message(&connection, id, message)
@@ -125,96 +127,89 @@ impl Messenger for MessageService {
             create_message(&connection, id, message)
         };
 
-        let mut resp = MessageEntity::new();
-        let mut uuid = UUIDEntity::new();
-        uuid.value = entity.id.clone();
-        resp.id = SingularPtrField::from(SingularPtrField::some(uuid));
-        resp.message = entity.content.clone();
+        let reply = MessageEntity{
+            id: Some(UuidEntity {
+                value: entity.id.clone(),
+            }),
+            message: entity.content.clone()
+        };
 
-        let f = sink
-            .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
-            .map(move |resp| println!("Responded {{ {:?} }}", resp));
-        ctx.spawn(f)
+        Ok(Response::new(reply))
     }
 
-    fn delete_message(&mut self, ctx: RpcContext, req: DeleteMessageRequest, sink: UnarySink<MessageEntity>) {
+    async fn delete_message(
+            &self,
+            request: Request<DeleteMessageRequest>,
+        ) -> Result<Response<MessageEntity>, Status> {
+
         let connection = establish_connection();
         info!("connected to database");
 
-        let id = req.get_id();
+        let uuid = request.get_ref().id.as_ref();
+        let id = &(uuid).expect("").value;
 
-        let entity = get_message(&connection, &id.get_value());
-        delete_message(&connection, &id.get_value());
+        let entity = get_message(&connection, &id);
+        delete_message(&connection, &id);
 
-        let mut resp = MessageEntity::new();
-        let mut uuid = UUIDEntity::new();
-        uuid.value = entity.id.clone();
-        resp.id = SingularPtrField::from(SingularPtrField::some(uuid));
-        resp.message = entity.content.clone();
+        let reply = MessageEntity {
+            id: Some(UuidEntity {
+                value: entity.id.clone()
+            }),
+            message: entity.content.clone()
+        };
 
-        let f = sink
-            .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
-            .map(move |resp| println!("Responded {{ {:?} }}", resp));
-        ctx.spawn(f)
+        Ok(Response::new(reply))
     }
 
-    fn delete_messages(&mut self, ctx: RpcContext, req: DeleteMessagesRequest, sink: UnarySink<DeleteMessagesResponse>) {
+    async fn delete_messages(
+            &self,
+            _request: Request<DeleteMessagesRequest>,
+        ) -> Result<Response<DeleteMessagesResponse>, Status> {
+
         let connection = establish_connection();
         info!("connected to database");
 
         delete_messages(&connection);
 
-        let f = sink
-            .success(DeleteMessagesResponse::new())
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
-            .map(move |resp| println!("Responded {{ {:?} }}", resp));
-        ctx.spawn(f)
+        Ok(Response::new(DeleteMessagesResponse{}))
     }
 
-    fn count_messages(&mut self, ctx: RpcContext, req: CountMessagesRequest, sink: UnarySink<MessageCount>) {
+    async fn count_messages(
+            &self,
+            _request: Request<CountMessagesRequest>,
+        ) -> Result<Response<MessageCount>, Status> {
+
         let connection = establish_connection();
         info!("connected to database");
 
         let count = count_massages(&connection);
 
-        let mut resp = MessageCount::new();
-        resp.count = count;
+        let reply = MessageCount{
+            count
+        };
 
-        let f = sink
-            .success(resp)
-            .map_err(move |e| error!("failed to reply {:?}: {:?}", req, e))
-            .map(move |resp| println!("Responded {{ {:?} }}", resp));
-        ctx.spawn(f)
+        Ok(Response::new(reply))
     }
 }
 
-fn main() {
-    let env = Arc::new(Environment::new(1));
-    let service = hello_grpc::create_greeter(GreeterService);
-    let uuid_service = message_grpc::create_uuid_generator(UuidService);
-    let message_service = message_grpc::create_messenger(MessageService);
-    let mut server = ServerBuilder::new(env)
-        .register_service(service)
-        .register_service(uuid_service)
-        .register_service(message_service)
-        .bind("0.0.0.0", 50_051)
-        .build()
-        .unwrap();
-    env_logger::init();
-    server.start();
-    for (ref host, port) in server.bind_addrs() {
-        info!("listening on {}:{}", host, port);
-    }
+#[tokio::main]
+async fn main()  -> Result<(), Box<dyn std::error::Error>> {
+    let addr = "[::1]:50051".parse().unwrap();
 
-    let (_tx, rx): (Sender<()>, Receiver<()>) = oneshot::channel();
-//    let (tx, rx) = oneshot::channel();
-//    thread::spawn(move || {
-//        info!("Press ENTER to exit...");
-//        let _ = io::stdin().read(&mut [0]).unwrap();
-//        tx.send(())
-//    });
-    let _ = block_on(rx);
-    let _ = block_on(server.shutdown());
+    let greeter_service = tonic_web::config()
+        .allow_origins(vec!["127.0.0.1"])
+        .enable(GreeterServer::new(GreeterService::default()));
+
+    let message_service = tonic_web::config()
+        .allow_origins(vec!["127.0.0.1"])
+        .enable(MessengerServer::new(MessagerService::default()));
+
+    env_logger::init();
+    Server::builder()
+        .add_service(greeter_service)
+        .add_service(message_service)
+        .serve(addr)
+        .await?;
+
+    Ok(())
 }

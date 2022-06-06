@@ -1,9 +1,3 @@
-FROM buildpack-deps:stable-curl AS download
-
-WORKDIR /tmp
-
-RUN curl -sSLo /tmp/llvm-snapshot.gpg.key https://apt.llvm.org/llvm-snapshot.gpg.key
-
 FROM poad/docker-grpc:debian-buster AS build
 
 WORKDIR /root
