@@ -5,7 +5,6 @@ defmodule Hello.HelloRequest do
   @type t :: %__MODULE__{
           name: String.t()
         }
-
   defstruct [:name]
 
   field :name, 1, type: :string
@@ -18,7 +17,6 @@ defmodule Hello.HelloReply do
   @type t :: %__MODULE__{
           message: String.t()
         }
-
   defstruct [:message]
 
   field :message, 1, type: :string
