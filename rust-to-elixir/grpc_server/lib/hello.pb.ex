@@ -1,30 +1,18 @@
 defmodule Hello.HelloRequest do
   @moduledoc false
-  use Protobuf, syntax: :proto3
-
-  @type t :: %__MODULE__{
-          name: String.t()
-        }
-  defstruct [:name]
+  use Protobuf, protoc_gen_elixir_version: "0.10.0", syntax: :proto3
 
   field :name, 1, type: :string
 end
-
 defmodule Hello.HelloReply do
   @moduledoc false
-  use Protobuf, syntax: :proto3
-
-  @type t :: %__MODULE__{
-          message: String.t()
-        }
-  defstruct [:message]
+  use Protobuf, protoc_gen_elixir_version: "0.10.0", syntax: :proto3
 
   field :message, 1, type: :string
 end
-
 defmodule Hello.Greeter.Service do
   @moduledoc false
-  use GRPC.Service, name: "hello.Greeter"
+  use GRPC.Service, name: "hello.Greeter", protoc_gen_elixir_version: "0.10.0"
 
   rpc :SayHello, Hello.HelloRequest, Hello.HelloReply
 end

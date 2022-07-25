@@ -2,7 +2,6 @@
 extern crate serde_derive;
 extern crate futures;
 extern crate grpcio;
-extern crate protobuf;
 
 pub mod hello;
 pub mod hello_grpc;
@@ -27,6 +26,15 @@ pub struct Message {
 }
 
 pub mod handlers {
+
+    use actix_web::{web, HttpResponse, Responder};
+    use grpcio::{ChannelBuilder, EnvBuilder};
+    use std::env;
+    use std::sync::Arc;
+
+    use std::borrow::Borrow;
+    use protobuf::SingularPtrField;
+
     use crate::hello::HelloRequest;
     use crate::hello_grpc::GreeterClient;
     use crate::message::{
@@ -35,13 +43,7 @@ pub mod handlers {
     };
     use crate::message_grpc::{MessengerClient, UuidGeneratorClient};
     use crate::{Hello, HelloResponse, Message};
-    use actix_web::{web, HttpResponse, Responder};
-    use grpcio::{ChannelBuilder, EnvBuilder};
-    use protobuf::*;
-    use std::borrow::Borrow;
-    use std::env;
-    use std::sync::Arc;
-
+    
     pub async fn hello(req: web::Query<Hello>) -> impl Responder {
         let env = Arc::new(EnvBuilder::new().build());
         let host = env::var("HELLO_GRPC_ENDPOINT").unwrap_or("127.0.0.1".to_owned());
