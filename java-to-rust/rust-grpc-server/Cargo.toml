@@ -10,7 +10,9 @@ tonic-web = "*"
 futures = "*"
 tokio = { version = "*", features = ["rt", "rt-multi-thread", "macros"] }
 tokio-stream = "*"
+protobuf = "*"
 prost = "*"
+prost-types = "*"
 rand = "*"
 
 libc = "*"
