@@ -47,7 +47,7 @@ impl UuidGenerator for UuidService {
             _request: Request<GenerateUuidRequest>,
         ) -> Result<Response<UuidEntity>, Status> {
 
-        let connection = establish_connection();
+        let mut connection = establish_connection();
         info!("connected to database");
 
         let reply = UuidEntity{
@@ -65,7 +65,7 @@ impl Messenger for MessagerService {
             request: Request<GetMessageRequest>,
         ) -> Result<Response<MessageEntity>, Status> {
 
-            let connection = establish_connection();
+        let mut connection = establish_connection();
         info!("connected to database");
 
         let uuid = request.get_ref().id.as_ref();
@@ -114,7 +114,7 @@ impl Messenger for MessagerService {
             &self,
             request: Request<MessageEntity>,
         ) -> Result<Response<MessageEntity>, Status> {
-        let connection = establish_connection();
+        let mut connection = establish_connection();
         info!("connected to database");
 
         let uuid = request.get_ref().id.as_ref();
@@ -142,7 +142,7 @@ impl Messenger for MessagerService {
             request: Request<DeleteMessageRequest>,
         ) -> Result<Response<MessageEntity>, Status> {
 
-        let connection = establish_connection();
+        let mut connection = establish_connection();
         info!("connected to database");
 
         let uuid = request.get_ref().id.as_ref();
@@ -166,7 +166,7 @@ impl Messenger for MessagerService {
             _request: Request<DeleteMessagesRequest>,
         ) -> Result<Response<DeleteMessagesResponse>, Status> {
 
-        let connection = establish_connection();
+        let mut connection = establish_connection();
         info!("connected to database");
 
         delete_messages(&connection);
@@ -179,7 +179,7 @@ impl Messenger for MessagerService {
             _request: Request<CountMessagesRequest>,
         ) -> Result<Response<MessageCount>, Status> {
 
-        let connection = establish_connection();
+        let mut connection = establish_connection();
         info!("connected to database");
 
         let count = count_massages(&connection);
