@@ -22,7 +22,7 @@ buildscript {
         // https://mvnrepository.com/artifact/mysql/mysql-connector-java
         mysqlConnectorVersion = '8.0.30'
         // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-joda
-        jacksonDatatypeJodaVersion = '2.13.3'
+        jacksonDatatypeJodaVersion = '2.13.4'
         // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
         // jaxbApiVersion = '2.3.1'
         // https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api
