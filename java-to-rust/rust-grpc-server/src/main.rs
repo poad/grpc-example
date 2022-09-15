@@ -51,7 +51,7 @@ impl UuidGenerator for UuidService {
         info!("connected to database");
 
         let reply = UuidEntity{
-            value: generate_uuid(&connection)
+            value: generate_uuid(&mut connection)
         };
 
         Ok(Response::new(reply))
@@ -71,7 +71,7 @@ impl Messenger for MessagerService {
         let uuid = request.get_ref().id.as_ref();
         let id = &(uuid).expect("").value;
 
-        let message = get_message(&connection, &id.as_str());
+        let message = get_message(&mut connection, &id.as_str());
         let content = message.content;
 
         let reply = MessageEntity{
@@ -88,12 +88,12 @@ impl Messenger for MessagerService {
             _request: Request<GetMessagesRequest>,
         ) -> Result<Response<MessagesResponse>, Status> {
 
-        let connection= establish_connection();
+        let mut connection= establish_connection();
         info!("connected to database");
 
         let reply = MessagesResponse {
         messages:
-            list_massages(&connection)
+            list_massages(&mut connection)
                 .iter()
                 .map(|message| {
                     let entity = MessageEntity{
@@ -121,10 +121,10 @@ impl Messenger for MessagerService {
         let id = &(uuid).expect("").value;
         let message = request.get_ref().message.as_str();
 
-        let entity = if exists_message(&connection, id) {
-            update_message(&connection, id, message)
+        let entity = if exists_message(&mut connection, id) {
+            update_message(&mut connection, id, message)
         } else {
-            create_message(&connection, id, message)
+            create_message(&mut connection, id, message)
         };
 
         let reply = MessageEntity{
@@ -148,8 +148,8 @@ impl Messenger for MessagerService {
         let uuid = request.get_ref().id.as_ref();
         let id = &(uuid).expect("").value;
 
-        let entity = get_message(&connection, &id);
-        delete_message(&connection, &id);
+        let entity = get_message(&mut connection, &id);
+        delete_message(&mut connection, &id);
 
         let reply = MessageEntity {
             id: Some(UuidEntity {
@@ -169,7 +169,7 @@ impl Messenger for MessagerService {
         let mut connection = establish_connection();
         info!("connected to database");
 
-        delete_messages(&connection);
+        delete_messages(&mut connection);
 
         Ok(Response::new(DeleteMessagesResponse{}))
     }
@@ -182,7 +182,7 @@ impl Messenger for MessagerService {
         let mut connection = establish_connection();
         info!("connected to database");
 
-        let count = count_massages(&connection);
+        let count = count_massages(&mut connection);
 
         let reply = MessageCount{
             count

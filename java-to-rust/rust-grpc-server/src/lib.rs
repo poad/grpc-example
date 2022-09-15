@@ -23,7 +23,7 @@ pub fn establish_connection() -> PgConnection {
         .expect(&format!("Error connecting to {}", database_url))
 }
 
-pub fn generate_uuid(_conn: &PgConnection) -> String {
+pub fn generate_uuid(_conn: &mut PgConnection) -> String {
 
 //    let uuid: &uuid::Uuid = diesel::sql_query("SELECT uuid_generate_v4();").load(_conn).expect("").first().unwrap();
 //    // TODO SQLで生成するように変更する
@@ -31,7 +31,7 @@ pub fn generate_uuid(_conn: &PgConnection) -> String {
     uuid.hyphenated().to_string().clone()
 }
 
-pub fn create_message(conn: &PgConnection, id: &str, content: &str) -> Message {
+pub fn create_message(conn: &mut PgConnection, id: &str, content: &str) -> Message {
     use self::schema::message;
 
     let entity = Message { id: id.to_string(), content: content.to_string() };
@@ -42,7 +42,7 @@ pub fn create_message(conn: &PgConnection, id: &str, content: &str) -> Message {
         .expect("Error saving new message")
 }
 
-pub fn update_message(conn: &PgConnection, id: &str, content: &str) -> Message {
+pub fn update_message(conn: &mut PgConnection, id: &str, content: &str) -> Message {
     use self::schema::message::dsl::message;
 
     diesel::update(message)
@@ -53,7 +53,7 @@ pub fn update_message(conn: &PgConnection, id: &str, content: &str) -> Message {
 
 }
 
-pub fn get_message(conn: &PgConnection, id: &str) -> Message {
+pub fn get_message(conn: &mut PgConnection, id: &str) -> Message {
     use self::schema::message::dsl::message;
 
     message.find(id)
@@ -61,7 +61,7 @@ pub fn get_message(conn: &PgConnection, id: &str) -> Message {
         .expect(&format!("Unable to find message {}", id))
 }
 
-pub fn list_massages(conn: &PgConnection) -> Vec<Message> {
+pub fn list_massages(conn: &mut PgConnection) -> Vec<Message> {
     use self::schema::message::dsl::*;
 
     message.select((id, content))
@@ -69,7 +69,7 @@ pub fn list_massages(conn: &PgConnection) -> Vec<Message> {
         .expect("Error listing messages")
 }
 
-pub fn count_massages(conn: &PgConnection) -> i64 {
+pub fn count_massages(conn: &mut PgConnection) -> i64 {
     use diesel::dsl::*;
     use self::schema::message::dsl::*;
 
@@ -80,7 +80,7 @@ pub fn count_massages(conn: &PgConnection) -> i64 {
     count
 }
 
-pub fn exists_message(conn: &PgConnection, id: &str) -> bool {
+pub fn exists_message(conn: &mut PgConnection, id: &str) -> bool {
     use diesel::dsl::*;
     use self::schema::message::dsl::message;
 
@@ -90,7 +90,7 @@ pub fn exists_message(conn: &PgConnection, id: &str) -> bool {
         .expect("Error listing messages") > 0
 }
 
-pub fn delete_message(conn: &PgConnection, id: &str) -> () {
+pub fn delete_message(conn: &mut PgConnection, id: &str) -> () {
     use self::schema::message::dsl::message;
 
     diesel::delete(message)
@@ -100,7 +100,7 @@ pub fn delete_message(conn: &PgConnection, id: &str) -> () {
 }
 
 
-pub fn delete_messages(conn: &PgConnection) -> () {
+pub fn delete_messages(conn: &mut PgConnection) -> () {
     use self::schema::message::dsl::message;
 
     diesel::delete(message)
