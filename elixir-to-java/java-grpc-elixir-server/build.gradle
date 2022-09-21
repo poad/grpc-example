@@ -7,7 +7,7 @@ buildscript {
         // https://mvnrepository.com/artifact/net.devh/grpc-server-spring-boot-starter
         grpcSpringBootVersion = '2.13.1.RELEASE'
         springBootVersion = '2.7.3'
-        springDependencyManagementVersion = '1.0.13.RELEASE'
+        springDependencyManagementVersion = '1.0.14.RELEASE'
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
         protobufVersion = '3.21.6'
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
