@@ -18,7 +18,7 @@ buildscript {
         // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
         tomcatAnnotationsApi = '10.0.23'
         // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc
-        tomcatJdbcVersion = '10.0.23'
+        tomcatJdbcVersion = '10.1.0'
         // https://mvnrepository.com/artifact/mysql/mysql-connector-java
         mysqlConnectorVersion = '8.0.30'
         // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-joda
