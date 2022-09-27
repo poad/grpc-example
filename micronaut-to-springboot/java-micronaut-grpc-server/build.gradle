@@ -16,7 +16,7 @@ buildscript {
         // https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
         jakartaValidationApiVersion = '3.0.1'
         // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
-        tomcatAnnotationsApi = '10.0.23'
+        tomcatAnnotationsApi = '10.1.0'
         // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc
         tomcatJdbcVersion = '10.1.0'
         // https://mvnrepository.com/artifact/mysql/mysql-connector-java
