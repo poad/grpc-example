@@ -10,7 +10,7 @@ buildscript {
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
         protobufVersion = '3.21.7'
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
-        protobufPluginVersion = '0.9.0'
+        protobufPluginVersion = '0.9.1'
         // https://mvnrepository.com/artifact/io.grpc/grpc-bom
         grpcVersion = '1.49.2'
         // https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
