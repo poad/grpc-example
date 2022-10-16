@@ -20,7 +20,7 @@ buildscript {
         // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc
         tomcatJdbcVersion = '10.1.1'
         // https://mvnrepository.com/artifact/mysql/mysql-connector-java
-        mysqlConnectorVersion = '8.0.30'
+        mysqlConnectorVersion = '8.0.31'
         // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-joda
         jacksonDatatypeJodaVersion = '2.13.4'
         // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
