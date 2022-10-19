@@ -4,7 +4,7 @@
   "cowlib": {:hex, :cowlib, "2.11.0", "0b9ff9c346629256c42ebe1eeb769a83c6cb771a6ee5960bd110ab0b9b872063", [:make, :rebar3], [], "hexpm", "2b3e9da0b21c4565751a6d4901c20d1b4cc25cbb7fd50d91d2ab6dd287bc86a9"},
   "gettext": {:hex, :gettext, "0.20.0", "75ad71de05f2ef56991dbae224d35c68b098dd0e26918def5bb45591d5c8d429", [:mix], [], "hexpm", "1c03b177435e93a47441d7f681a7040bd2a816ece9e2666d1c9001035121eb3d"},
   "google_protos": {:hex, :google_protos, "0.3.0", "15faf44dce678ac028c289668ff56548806e313e4959a3aaf4f6e1ebe8db83f4", [:mix], [{:protobuf, "~> 0.10", [hex: :protobuf, repo: "hexpm", optional: false]}], "hexpm", "1f6b7fb20371f72f418b98e5e48dae3e022a9a6de1858d4b254ac5a5d0b4035f"},
-  "grpc": {:git, "https://github.com/elixir-grpc/grpc.git", "4f3c47665897f9d7cb605fdaf14778f757e310d0", []},
+  "grpc": {:git, "https://github.com/elixir-grpc/grpc.git", "ff166c1003fe2daf54c17009c7621bbbc7dc0ec5", []},
   "gun": {:hex, :grpc_gun, "2.0.1", "221b792df3a93e8fead96f697cbaf920120deacced85c6cd3329d2e67f0871f8", [:rebar3], [{:cowlib, "~> 2.11", [hex: :cowlib, repo: "hexpm", optional: false]}], "hexpm", "795a65eb9d0ba16697e6b0e1886009ce024799e43bb42753f0c59b029f592831"},
   "jason": {:hex, :jason, "1.4.0", "e855647bc964a44e2f67df589ccf49105ae039d4179db7f6271dfd3843dc27e6", [:mix], [{:decimal, "~> 1.0 or ~> 2.0", [hex: :decimal, repo: "hexpm", optional: true]}], "hexpm", "79a3791085b2a0f743ca04cec0f7be26443738779d09302e01318f97bdb82121"},
   "mime": {:hex, :mime, "2.0.3", "3676436d3d1f7b81b5a2d2bd8405f412c677558c81b1c92be58c00562bb59095", [:mix], [], "hexpm", "27a30bf0db44d25eecba73755acf4068cbfe26a4372f9eb3e4ea3a45956bff6b"},
