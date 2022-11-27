@@ -92,7 +92,7 @@ dependencies {
 group = 'com.github.poad.example'
 version = '0.1'
 description = 'java-micronaut-grpc-server'
-java.sourceCompatibility = JavaVersion.VERSION_11
+java.sourceCompatibility = JavaVersion.VERSION_17
 
 sourceSets {
     main {

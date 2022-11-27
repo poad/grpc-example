@@ -1,6 +1,6 @@
 # Java to Java Example
 
-## Install OpenJDK 11
+## Install OpenJDK 17
 
 ### Install sdkman.io
 
@@ -11,13 +11,13 @@ curl -s "https://get.sdkman.io" | bash
 ### Install OpenJDK
 
 ```sh
-sdk i java 11.0.13.fx-librca
+sdk i java 17.0.5.fx-librca
 ```
 
 ### Install Gradle
 
 ```sh
-sdk i gradle 7.3.1
+sdk i gradle 7.6
 ```
 
 ## Generate Code
