@@ -1,4 +1,5 @@
-ARG LLVM_VERSION=14
+
+ARG LLVM_VERSION=15
 
 FROM buildpack-deps:stable-curl AS download
 
@@ -6,11 +7,12 @@ WORKDIR /tmp
 
 RUN curl -sSLo /tmp/llvm-snapshot.gpg.key https://apt.llvm.org/llvm-snapshot.gpg.key
 
-FROM poad/docker-grpc:debian-buster AS build
+FROM poad/docker-grpc:debian-bullseye AS build
 
 WORKDIR /root
 
 COPY src /root/rust-grpc-server/src
+COPY build.rs /root/rust-grpc-server/build.rs
 COPY Cargo.toml /root/rust-grpc-server/Cargo.toml
 COPY diesel.toml /root/rust-grpc-server/diesel.toml
 

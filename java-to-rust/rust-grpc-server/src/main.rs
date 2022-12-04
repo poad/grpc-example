@@ -11,6 +11,8 @@ use log::info;
 
 use tonic::{transport::Server, Request, Response, Status};
 
+use tonic_web::GrpcWebLayer;
+
 use crate::hello::{greeter_server::*, *};
 use crate::message::{uuid_generator_server::*, messenger_server::*, *};
 
@@ -196,14 +198,12 @@ impl Messenger for MessagerService {
 async fn main()  -> Result<(), Box<dyn std::error::Error>> {
     let addr = "[::1]:50051".parse().unwrap();
 
-    let greeter_service = tonic_web
-        .enable(GreeterServer::new(GreeterService::default()));
-
-    let message_service = tonic_web
-        .enable(MessengerServer::new(MessagerService::default()));
+    let greeter_service = GreeterServer::new(GreeterService::default());
+    let message_service = MessengerServer::new(MessagerService::default());
 
     env_logger::init();
     Server::builder()
+        .layer(GrpcWebLayer::new())
         .add_service(greeter_service)
         .add_service(message_service)
         .serve(addr)
