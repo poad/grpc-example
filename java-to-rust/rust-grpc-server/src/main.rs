@@ -196,12 +196,10 @@ impl Messenger for MessagerService {
 async fn main()  -> Result<(), Box<dyn std::error::Error>> {
     let addr = "[::1]:50051".parse().unwrap();
 
-    let greeter_service = tonic_web::config()
-        .allow_origins(vec!["127.0.0.1"])
+    let greeter_service = tonic_web
         .enable(GreeterServer::new(GreeterService::default()));
 
-    let message_service = tonic_web::config()
-        .allow_origins(vec!["127.0.0.1"])
+    let message_service = tonic_web
         .enable(MessengerServer::new(MessagerService::default()));
 
     env_logger::init();
