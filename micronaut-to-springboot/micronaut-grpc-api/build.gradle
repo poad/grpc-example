@@ -15,7 +15,7 @@ buildscript {
         logbackVersion = "1.4.5"
         // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
         // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-        junitJupiterVersion = "5.9.1"
+        junitJupiterVersion = "5.9.2"
         // https://mvnrepository.com/artifact/io.micronaut.test/micronaut-test-junit5
         micronautJunit5Version = '3.8.0'
     }
