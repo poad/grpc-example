@@ -36,75 +36,59 @@ jobs:
     strategy:
       matrix:
         targets: [
-          # {
-          #   dir: 'elixir-to-java',
-          #   pre: 'cd elixir-to-java && cd elixir_api_server && mix local.hex --force && mix local.hex --force && mix escript.install hex --force protobuf && cd ../..',
-          #   gen: [
-          #     'protoc --elixir_out=plugins=grpc:./elixir_api_server/lib --java_out=./java-grpc-elixir-server/src/main/java --proto_path=./proto message.proto',
-          #     'protoc --elixir_out=plugins=grpc:./elixir_api_server/lib --java_out=./java-grpc-elixir-server/src/main/java --proto_path=./proto hello.proto'
-          #   ],
-          #   build: [ 'cd java-grpc-elixir-server && echo "" && echo Building Java Application && ./gradlew bootBuildImage', 'docker-compose build' ]
-          # },
-          # {
-          #   dir: 'java-to-elixir',
-          #   pre: 'cd java-to-elixir && cd grpc_server && mix local.hex --force && mix escript.install hex --force protobuf && cd ../..',
-          #   gen: [
-          #     'protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java/src/main/java --proto_path=./proto message.proto',
-          #     'protoc --elixir_out=plugins=grpc:./grpc_server/lib --java_out=./elixir-grpc-java/src/main/java --proto_path=./proto hello.proto'
-          #   ],
-          #   build: [ 'cd elixir-grpc-java && echo "" && echo Building Java Application && ./gradlew bootBuildImage', 'docker-compose build' ]
-          # },
-          # {
-          #   dir: 'rust-to-elixir',
-          #   pre: 'cd rust-to-elixir && cd grpc_server && mix local.hex --force && mix escript.install hex --force protobuf && cd ../..',
-          #   gen: [
-          #     'protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=$(which grpc_rust_plugin) --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./rust-api-server/src/proto message.proto',
-          #     'protoc --rust_out=./rust-api-server/src/ --grpc_out=./rust-api-server/src/ --plugin=protoc-gen-grpc=$(which grpc_rust_plugin) --elixir_out=plugins=grpc:./grpc_server/lib --proto_path=./rust-api-server/src/proto hello.proto'
-          #   ],
-          #   build: [ 'docker-compose build', 'echo ""' ]
-          # },
           {
-            dir: 'java-to-java',
-            pre: 'echo ""',
-            gen: [
-              'protoc --java_out=./java-api-server/src/main/java --java_out=./java-grpc-server/src/main/java --proto_path=./proto message.proto',
-              'protoc --java_out=./java-api-server/src/main/java --java_out=./java-grpc-server/src/main/java --proto_path=./proto hello.proto'
-            ],
-            build: [ 'cd java-api-server && ./gradlew bootBuildImage', 'cd java-grpc-server && ./gradlew bootBuildImage' ]
+            base: 'java-to-java',
+            cmd: [
+              {
+                dir: 'java-api-server',
+                build: './gradlew bootBuildImage'
+              },
+              {
+                dir: 'java-grpc-server',
+                build: './gradlew bootBuildImage'
+              }
+            ]
           },
           {
-            dir: 'java-to-rust',
-            pre: 'echo ""',
-            gen: [
-              'protoc --java_out=./java-grpc-example/src/main/java --proto_path=./rust-grpc-server/src/proto message.proto',
-              'protoc --java_out=./java-grpc-example/src/main/java --proto_path=./rust-grpc-server/src/proto hello.proto'
-            ],
-            build: [ 'cd java-grpc-example && echo "" && echo Building Java Application && ./gradlew bootBuildImage', 'docker-compose build' ]
+            base: 'java-to-rust',
+            cmd: [
+              {
+                dir: 'java-grpc-example',
+                build: './gradlew bootBuildImage'
+              },
+              {
+                dir: '',
+                build: 'protoc --proto_path=./rust-grpc-server/src/proto message.proto && protoc --proto_path=./rust-grpc-server/src/proto hello.proto && docker-compose build'
+              }
+            ]
           },
           {
-            dir: 'micronaut-to-springboot',
-            pre: 'echo ""',
-            gen: [
-              'protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut-grpc-server/src/main/java --proto_path=./proto message.proto',
-              'protoc --java_out=./micronaut-grpc-api/src/main/java --java_out=./java-micronaut-grpc-server/src/main/java --proto_path=./proto hello.proto'
-            ],
-            build: [ 'cd java-micronaut-grpc-server && echo "" && echo Building Java Application && ./gradlew bootBuildImage', 'echo "" && docker-compose build' ]
+            base: 'micronaut-to-springboot',
+            cmd: [
+              {
+                dir: 'java-micronaut-grpc-server',
+                build: './gradlew bootBuildImage'
+              },
+              {
+                dir: '',
+                build: 'docker-compose build'
+              }
+            ]
           }
         ]
     steps:
     - uses: actions/checkout@v3
+    - name: Build (${{ matrix.targets.base }}/${{ matrix.targets.cmd[0].dir }})
+      env:
+        LLVM_VERSION: ${{needs.latest_versions.outputs.llvm_version}}
+      working-directory: ${{ matrix.targets.base }}/${{ matrix.targets.cmd[0].dir }}
+      run: |
+        ${{ matrix.targets.cmd[0].build }}
     - env:
         LLVM_VERSION: ${{needs.latest_versions.outputs.llvm_version}}
+      working-directory: ${{ matrix.targets.dir }}
       run: |
-        CUR=$(pwd) && \
-        ${{ matrix.targets.pre }} && \
-        cd ${{ matrix.targets.dir }} && \
-        ${{ matrix.targets.gen[0] }} && \
-        ${{ matrix.targets.gen[1] }} && \
-        ${{ matrix.targets.build[0] }} && \
-        cd .. && \
-        ${{ matrix.targets.build[1] }} && \
-        cd ${CUR}
+        ${{ matrix.targets.build[1] }}
 
   configure:
     runs-on: ubuntu-latest
