@@ -19,7 +19,7 @@ buildscript {
         tomcatAnnotationsApi = '10.1.5'
         // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc
         tomcatJdbcVersion = '10.1.5'
-        // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+        // https://mvnrepository.com/artifact/com.mysql/mysql-connector-j
         mysqlConnectorVersion = '8.0.32'
         // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-joda
         jacksonDatatypeJodaVersion = '2.14.2'
@@ -65,7 +65,7 @@ dependencies {
         exclude group: 'com.zaxxer', module: 'HikariCP'
     }
     implementation "org.apache.tomcat:tomcat-jdbc:${tomcatJdbcVersion}"
-    implementation "mysql:mysql-connector-java:${mysqlConnectorVersion}"
+    implementation "com.mysql:mysql-connector-j:${mysqlConnectorVersion}"
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbApiVersion}"
@@ -101,9 +101,6 @@ sourceSets {
         proto {
             srcDir "$rootDir/../proto"
         }
-        java {
-            srcDirs = ['src', 'grpc', 'gen']
-        }
     }
 }
 
@@ -116,7 +113,6 @@ protobuf {
             artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
         }
     }
-    generatedFilesBaseDir = "$projectDir/src"
     generateProtoTasks {
         all().each { task ->
             task.plugins {

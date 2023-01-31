@@ -112,7 +112,6 @@ protobuf {
             artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
         }
     }
-    generatedFilesBaseDir = "$projectDir/src"
     generateProtoTasks {
         all().each { task ->
             task.plugins {
