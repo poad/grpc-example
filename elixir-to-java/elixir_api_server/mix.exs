@@ -40,7 +40,7 @@ defmodule ElixirApiServer.MixProject do
 #      {:cowboy, github: "elixir-grpc/cowboy", override: true},
 #      {:cowlib, github: "elixir-grpc/cowlib", override: true},
       {:grpc, github: "elixir-grpc/grpc"},
-      {:protobuf, "~> 0.11.0"},
+      {:protobuf, "~> 0.12.0"},
       {:google_protos, "~> 0.1"},
     ]
   end
