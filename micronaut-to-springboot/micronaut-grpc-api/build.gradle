@@ -4,7 +4,7 @@
 buildscript {
     ext {
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
-        protobufVersion = '3.22.4'
+        protobufVersion = '3.23.0'
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
         protobufPluginVersion = '0.9.3'
         // https://mvnrepository.com/artifact/io.grpc/grpc-bom
