@@ -77,7 +77,7 @@ jobs:
           }
         ]
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
     - name: Build (${{ matrix.targets.base }}/${{ matrix.targets.cmd[0].dir }})
       env:
         LLVM_VERSION: ${{needs.latest_versions.outputs.llvm_version}}
