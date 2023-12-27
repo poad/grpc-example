@@ -26,7 +26,7 @@ buildscript {
         jaxbApiVersion = '4.0.1'
         mockitoVersion = '4.+'
 
-        log4j2Version = '2.22.0'
+        log4j2Version = '2.22.1'
     }
 }
 
