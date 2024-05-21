@@ -15,7 +15,7 @@ buildscript {
         // https://mvnrepository.com/artifact/io.grpc/grpc-bom
         grpcVersion = '1.64.0'
         // https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
-        jakartaValidationApiVersion = '3.0.2'
+        jakartaValidationApiVersion = '3.1.0'
         // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
         tomcatAnnotationsApi = '10.1.24'
         // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-joda
