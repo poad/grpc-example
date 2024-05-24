@@ -84,7 +84,6 @@ dependencies {
     implementation "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonDatatypeJodaVersion}"
     // implementation "javax.xml.bind:jaxb-api:${jaxbApiVersion}"
     implementation "jakarta.xml.bind:jakarta.xml.bind-api:${jaxbApiVersion}"
-    runtimeOnly 'io.micrometer:micrometer-registry-cloudwatch'
     testImplementation "io.grpc:grpc-testing"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
