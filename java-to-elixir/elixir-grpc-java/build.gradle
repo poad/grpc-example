@@ -5,7 +5,7 @@ buildscript {
     ext {
         // https://mvnrepository.com/artifact/net.devh/grpc-server-spring-boot-starter
         grpcSpringBootVersion = '3.1.0.RELEASE'
-        springBootVersion = '3.3.1'
+        springBootVersion = '3.3.2'
         springDependencyManagementVersion = '1.1.6'
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
         protobufVersion = '4.27.2'
