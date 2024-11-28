@@ -8,17 +8,17 @@ buildscript {
         springBootVersion = '3.4.0'
         springDependencyManagementVersion = '1.1.6'
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-bom
-        protobufVersion = '4.28.3'
+        protobufVersion = '4.29.0'
         // https://mvnrepository.com/artifact/com.google.protobuf/protobuf-gradle-plugin
         protobufPluginVersion = '0.9.4'
         // https://mvnrepository.com/artifact/io.grpc/grpc-bom
-        grpcVersion = '1.68.1'
+        grpcVersion = '1.68.2'
         // https://mvnrepository.com/artifact/jakarta.validation/jakarta.validation-api
         jakartaValidationApiVersion = '3.1.0'
         // https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-annotations-api
         tomcatAnnotationsApi = '11.0.1'
         // https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-joda
-        jacksonDatatypeJodaVersion = '2.18.1'
+        jacksonDatatypeJodaVersion = '2.18.2'
         // https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api
         // jaxbApiVersion = '2.3.1'
         // https://mvnrepository.com/artifact/jakarta.xml.bind/jakarta.xml.bind-api/3.0.1
