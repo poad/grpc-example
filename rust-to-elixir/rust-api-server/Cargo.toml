@@ -15,7 +15,7 @@ path = "src/lib.rs"
 grpcio = { version = "*", default-features = true, features = ["protobuf-codec","boringssl"] }
 grpcio-sys = { version = "*", default-features = true }
 libc = "*"
-protobuf = "^2"
+protobuf = "^3"
 futures = "*"
 futures-cpupool = "*"
 futures-channel = { version = "*", features = ["sink"] }
